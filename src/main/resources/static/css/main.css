@@ -84,7 +84,7 @@ html {
 }
 
 body {
-    font-family: var(--font-family);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
     font-size: var(--font-size-base);
     line-height: 1.6;
     color: var(--text-dark);
@@ -92,6 +92,8 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    margin: 0;
+    padding: 0;
 }
 
 /* ============================================
@@ -1633,3 +1635,249 @@ main > section h2 {
         flex-direction: column;
     }
 }
+
+/* ============================================
+   APPLE-INSPIRED PERSONAL SITE THEME
+   ============================================ */
+
+.nav-container {
+    background: rgba(251, 251, 253, 0.8);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+header {
+    height: 44px !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    border: none !important;
+}
+
+header #links {
+    display: flex !important;
+    gap: 2rem !important;
+    align-items: center !important;
+    max-width: 1024px !important;
+    width: 100% !important;
+    padding: 0 22px !important;
+    margin: 0 !important;
+}
+
+header #links a {
+    color: rgba(0, 0, 0, 0.8) !important;
+    font-size: 12px !important;
+    font-weight: 400 !important;
+    text-decoration: none !important;
+    transition: opacity 0.3s !important;
+    opacity: 0.8 !important;
+}
+
+#links a:hover {
+    opacity: 1;
+}
+
+.nav-logo {
+    font-size: 18px !important;
+}
+
+.nav-icon {
+    font-size: 14px !important;
+}
+
+/* Hero Sections */
+.homepage-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-top: 12px;
+}
+
+.hero {
+    height: auto;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 55px;
+    position: relative;
+    overflow: hidden;
+}
+
+.dev-hero {
+    background-color: #ffffff;
+}
+
+.photo-hero {
+    background-color: #f5f5f7;
+}
+
+.hero-content {
+    max-width: 800px;
+    width: 100%;
+}
+
+.hero-title {
+    font-size: 56px;
+    font-weight: 600;
+    letter-spacing: -0.005em;
+    margin-bottom: 6px;
+    color: #1d1d1f;
+}
+
+.hero-subtitle {
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 15px;
+    color: #1d1d1f;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.btn-apple-blue {
+    background-color: #0071e3;
+    color: white !important;
+    padding: 8px 16px;
+    border-radius: 980px;
+    font-size: 17px;
+    text-decoration: none;
+    transition: background 0.3s;
+}
+
+.btn-apple-blue:hover {
+    background-color: #0077ed;
+}
+
+.btn-apple-link {
+    color: #06c;
+    font-size: 21px;
+    text-decoration: none;
+}
+
+.btn-apple-link:hover {
+    text-decoration: underline;
+}
+
+.hero-image-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+}
+
+/* Photography text color adjustments if needed */
+.photo-title {
+    color: #1d1d1f;
+}
+
+.photo-subtitle {
+    color: #1d1d1f;
+}
+
+/* Hide Easyshop UI elements that might interfere */
+main {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    flex: 1;
+    width: 100%;
+}
+
+main.no-sidebar {
+    display: block !important;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+/* Ensure footer is clean */
+#footer-placeholder {
+    background: #f5f5f7;
+    padding: 50px 0;
+}
+
+
+/* Footer Styles */
+.apple-footer {
+    background: #f5f5f7;
+    color: rgba(0,0,0,0.56);
+    padding: 20px 0 40px;
+    font-size: 12px;
+}
+
+.footer-content {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 22px;
+}
+
+.footer-sections {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 20px;
+}
+
+.footer-column h6 {
+    color: rgba(0,0,0,0.88);
+    margin-bottom: 10px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.footer-links {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-links li {
+    margin-bottom: 6px;
+}
+
+.footer-links a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.footer-links a:hover {
+    text-decoration: underline;
+}
+
+.footer-legal {
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding-top: 15px;
+    margin-top: 15px;
+}
+
+
+/* Hero Image Fallbacks */
+.hero-image-container {
+    background: #fbfbfd;
+    min-height: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    margin-top: 40px;
+}
+
+.hero-image:not([src]) {
+    display: none;
+}
+

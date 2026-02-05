@@ -1,46 +1,25 @@
-{{#loggedin}}
-<div id="links">
-    <img src="images/logo.svg" alt="EasyShop logo" title="Go to home page" onclick="loadHome()" style="cursor: pointer;">
-    <a href="#" onclick="loadHome(); return false;" title="Browse all products">
-        <i class="fas fa-home" style="margin-right: 0.5rem;"></i>Home
-    </a>
-    <a href="#" onclick="editProfile(); return false;" title="Edit your profile">
-        <i class="fas fa-user-circle" style="margin-right: 0.5rem;"></i>Profile
-    </a>
-    <a href="#" onclick="showWishlist(); return false;" title="View your wishlist">
-        <i class="fas fa-heart" style="margin-right: 0.5rem;"></i>Wishlist
-    </a>
-    {{#isAdmin}}
-    <a href="#" onclick="loadAdminProducts(); return false;" title="Admin: manage products">
-        <i class="fas fa-tools" style="margin-right: 0.5rem;"></i>Admin
-    </a>
-    {{/isAdmin}}
-</div>
-
-<div>
-    <span style="color: var(--text-dark); font-weight: 500;">Welcome, <strong>{{username}}</strong></span>
-    <span style="color: var(--text-lighter); margin: 0 0.5rem;">|</span>
-    <a href="#" onclick="userService.logout(); return false;" style="color: var(--primary-color); font-weight: 500; text-decoration: none; transition: all var(--transition-base);" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">
-        <i class="fas fa-sign-out-alt" style="margin-right: 0.25rem;"></i>Logout
-    </a>
-    <div class="cart" onclick="showCart()" title="View cart">
-        <i class="fa-solid fa-cart-shopping"></i>
-        <div id="cart-items">0</div>
+<nav class="portfolio-nav">
+    <div class="nav-inner">
+        <a href="#" onclick="loadHome(); return false;" class="nav-brand">
+            <img src="images/lol0cHx_logo.png" alt="lol0cHx" class="brand-logo">
+        </a>
+        <div class="nav-links">
+            <a href="#" onclick="showProjects(); return false;">Projects</a>
+            <a href="#" onclick="showPhotography(); return false;">Photography</a>
+            <a href="#" onclick="showPrints(); return false;">Prints</a>
+            <a href="#" onclick="showAbout(); return false;">About</a>
+            <a href="#" onclick="showContact(); return false;">Contact</a>
+        </div>
+        <div class="nav-actions">
+            <a href="https://github.com" target="_blank" class="nav-social" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="nav-social" title="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="nav-social" title="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
     </div>
-</div>
-{{/loggedin}}
-
-{{#loggedout}}
-<div id="links">
-    <img src="images/logo.svg" alt="EasyShop logo" title="Go to home page" onclick="loadHome()" style="cursor: pointer;">
-    <a href="#" onclick="loadHome(); return false;" title="Browse all products">
-        <i class="fas fa-home" style="margin-right: 0.5rem;"></i>Home
-    </a>
-</div>
-
-<div>
-    <a href="#" onclick="showLoginForm(); return false;" style="color: var(--primary-color); font-weight: 600; text-decoration: none; padding: 0.5rem 1rem; border: 2px solid var(--primary-color); border-radius: var(--radius-md); transition: all var(--transition-base);" onmouseover="this.style.backgroundColor='var(--primary-color)'; this.style.color='white'" onmouseout="this.style.backgroundColor='transparent'; this.style.color='var(--primary-color)'">
-        <i class="fas fa-sign-in-alt" style="margin-right: 0.5rem;"></i>Login / Register
-    </a>
-</div>
-{{/loggedout}}
+</nav>

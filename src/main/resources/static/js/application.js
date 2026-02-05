@@ -49,13 +49,33 @@ function loadHome()
 {
     templateBuilder.build('home',{},'main');
     const mainEl = document.querySelector('main');
-    if (mainEl) mainEl.classList.remove('no-sidebar');
-    
-    setTimeout(() => {
-        if (productService && productService.computePageSize) { productService.computePageSize(); }
-        productService.search();
-        categoryService.getAllCategories(loadCategories);
-    }, 100);
+    if (mainEl) mainEl.classList.add('no-sidebar');
+}
+
+function showProjects() {
+    console.log("Showing projects...");
+    // Future: implement projects view
+}
+
+function showPhotography() {
+    console.log("Showing photography...");
+    // Future: implement photography view
+}
+
+function showPortfolio() {
+    console.log("Showing portfolio...");
+}
+
+function showPrints() {
+    console.log("Showing prints...");
+}
+
+function showAbout() {
+    console.log("Showing about...");
+}
+
+function showContact() {
+    console.log("Showing contact...");
 }
 
 // toggleFilters removed; filters remain visible in left sidebar
@@ -206,16 +226,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if (appInitialized) return;
     appInitialized = true;
     
+    // Load header immediately
+    templateBuilder.build('header', { loggedout: true }, 'header-user');
+    
     // Initialize footer
     initializeFooter();
     
+    // Load home page directly (personal portfolio site)
     setTimeout(() => {
+        loadHome();
+        // Check if logged in for admin features
         if (userService && userService.isLoggedIn()) {
-            if (wishlistService) { wishlistService.load(); }
-            loadHome();
             userService.setHeaderLogin();
-        } else {
-            showLoginForm();
+            if (wishlistService) { wishlistService.load(); }
         }
     }, 100);
 });
