@@ -2052,7 +2052,7 @@ body {
     transform: none !important;
     width: 100% !important;
     height: 80px !important;
-    padding: 0 60px !important;
+    padding: 0 30px !important;
     background: rgba(255, 255, 255, 0.98) !important;
     backdrop-filter: blur(20px) !important;
     -webkit-backdrop-filter: blur(20px) !important;
@@ -2073,12 +2073,81 @@ body {
 .nav-brand {
     display: flex !important;
     align-items: center !important;
+    gap: 16px !important;
 }
 
 .brand-logo {
     height: 55px !important;
     filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1)) !important;
     transition: all 0.3s ease !important;
+}
+
+/* Fancy name styling */
+.brand-name {
+    display: flex !important;
+    flex-direction: column !important;
+    line-height: 1.1 !important;
+    font-family: 'Playfair Display', 'Georgia', serif !important;
+}
+
+.brand-name .name-first {
+    font-size: 22px !important;
+    font-weight: 600 !important;
+    letter-spacing: 2px !important;
+    text-transform: uppercase !important;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    background-size: 200% auto !important;
+    animation: shimmer 3s ease-in-out infinite !important;
+}
+
+.brand-name .name-last {
+    font-size: 13px !important;
+    font-weight: 400 !important;
+    letter-spacing: 6px !important;
+    text-transform: uppercase !important;
+    color: #666 !important;
+    margin-top: 2px !important;
+}
+
+.brand-name .name-alias {
+    font-family: 'Courier New', 'Fira Code', monospace !important;
+    font-size: 10px !important;
+    font-weight: 500 !important;
+    letter-spacing: 3px !important;
+    margin-top: 3px !important;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+    opacity: 0.5 !important;
+    transition: all 0.4s ease !important;
+}
+
+.nav-brand:hover .brand-name .name-alias {
+    opacity: 1 !important;
+    letter-spacing: 5px !important;
+}
+
+@keyframes shimmer {
+    0%, 100% {
+        background-position: 0% center;
+    }
+    50% {
+        background-position: 100% center;
+    }
+}
+
+.nav-brand:hover .brand-name .name-first {
+    animation-duration: 1.5s !important;
+}
+
+.nav-brand:hover .brand-name .name-last {
+    color: #764ba2 !important;
+    letter-spacing: 8px !important;
+    transition: all 0.4s ease !important;
 }
 
 .brand-logo:hover {
