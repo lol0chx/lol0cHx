@@ -2091,8 +2091,8 @@ body {
 }
 
 .brand-name .name-first {
-    font-size: 22px !important;
-    font-weight: 600 !important;
+    font-size: 28px !important;
+    font-weight: 700 !important;
     letter-spacing: 2px !important;
     text-transform: uppercase !important;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #667eea 100%) !important;
@@ -2104,9 +2104,9 @@ body {
 }
 
 .brand-name .name-last {
-    font-size: 13px !important;
+    font-size: 15px !important;
     font-weight: 400 !important;
-    letter-spacing: 6px !important;
+    letter-spacing: 7px !important;
     text-transform: uppercase !important;
     color: #666 !important;
     margin-top: 2px !important;
@@ -2256,10 +2256,10 @@ body {
     z-index: 10 !important;
 }
 
-/* Even bigger logo */
+/* Adjusted logo size */
 .brand-logo {
-    height: 110px !important;
-    margin: -25px 0 !important;
+    height: 75px !important;
+    margin: -10px 0 !important;
 }
 
 /* Updated header background - light off-white */
