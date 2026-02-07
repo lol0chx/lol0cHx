@@ -2368,3 +2368,26 @@ body {
 .homepage-container .photo-right {
     padding: 0 40px !important;
 }
+
+/* Bigger name without changing header size */
+.brand-name {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.1;
+}
+
+.name-first {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #2d2d2d !important;
+}
+
+.name-last {
+    font-size: 28px !important;
+    font-weight: 700 !important;
+    color: #667eea !important;
+}
+
+.nav-brand {
+    margin: -10px 0 !important;
+}
