@@ -80,62 +80,54 @@
         </div>
     </section>
 
-    <!-- Photography Section (Bottom Split) - Warm Artistic Vibe -->
+    <!-- Photography Section (Bottom Split) -->
     <section class="hero-section photo-section">
         <div class="hero-bg-pattern photo-pattern"></div>
         
-        <!-- Floating decorative elements -->
-        <div class="floating-shapes photo-shapes">
-            <div class="shape photo-shape-1"></div>
-            <div class="shape photo-shape-2"></div>
-            <div class="shape photo-shape-3"></div>
-            <div class="camera-float"><i class="fas fa-camera"></i></div>
-            <div class="aperture-float"><i class="fas fa-aperture"></i></div>
-        </div>
+        <!-- Floating decorative orbs -->
+        <div class="floating-orb orb-1"></div>
+        <div class="floating-orb orb-2"></div>
+        <div class="floating-orb orb-3"></div>
         
-        <!-- Three Column Layout -->
-        <div class="hero-layout fade-in-up delay-1" style="display: flex; justify-content: center; align-items: center; gap: 50px; padding: 20px 40px;">
-            <!-- Left: Text Content -->
-            <div class="hero-left" style="text-align: left; flex: 0 0 auto;">
-                <div class="text-decorator">
-                    <span class="line-accent photo-accent"></span>
-                    <span class="hero-eyebrow photo-eyebrow">
-                        <i class="fas fa-camera-retro"></i> Visual Storyteller
-                    </span>
-                </div>
-                <h1 class="hero-title photo-title">
-                    Capturing<br>Beautiful<br>
-                    <span class="warm-gradient-text animated-gradient">Moments</span>
-                </h1>
-                <p class="hero-subtitle photo-subtitle">Street photography, portraits,<br>and urban landscapes</p>
-                <div class="scroll-indicator">
-                    <span class="scroll-line"></span>
-                    <span class="scroll-text">Explore</span>
+        <div class="photo-layout">
+            <!-- Left: Photo Grid Preview -->
+            <div class="photo-preview">
+                <div class="photo-grid">
+                    <div class="photo-card card-1"><img src="images/01.jpg" alt="Photo 01"></div>
+                    <div class="photo-card card-2"><img src="images/02.jpg" alt="Photo 02"></div>
+                    <div class="photo-card card-3"><img src="images/03.jpg" alt="Photo 03"></div>
+                    <div class="photo-card card-4"><img src="images/04.jpg" alt="Photo 04"></div>
                 </div>
             </div>
             
-            <!-- Center: Actions -->
-            <div class="hero-center">
-                <div class="center-decoration photo-decoration">
-                    <div class="orbit-ring photo-orbit"></div>
-                    <div class="center-icon photo-icon">
-                        <i class="fas fa-camera-retro"></i>
+            <!-- Center: Content & Buttons -->
+            <div class="photo-content">
+                <div class="photo-center-content">
+                    <div class="camera-icon-wrap">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h2 class="photo-tagline">Capturing Moments</h2>
+                    <p class="photo-description">Street photography, portraits, and urban exploration through my lens</p>
+                    <div class="hero-actions photo-actions">
+                        <a href="#" class="btn-primary photo-btn" onclick="showGallery(); return false;">
+                            <i class="fas fa-images"></i> View Gallery
+                        </a>
+                        <a href="#" class="btn-secondary photo-btn-secondary" onclick="showPrints(); return false;">
+                            Shop Prints <i class="fas fa-arrow-right"></i>
+                        </a>
+                    </div>
+                    <div class="photo-social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-flickr"></i></a>
+                        <a href="#" class="social-icon"><i class="fas fa-globe"></i></a>
                     </div>
                 </div>
-                <div class="hero-actions-vertical">
-                    <a href="#" class="btn-primary photo-btn pulse-hover" onclick="showPhotography(); return false;">
-                        <i class="fas fa-images"></i> View Gallery
-                    </a>
-                    <a href="#" class="btn-secondary photo-btn-secondary" onclick="showPrints(); return false;">
-                        Shop Prints <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
             </div>
             
-            <!-- Right: Categories -->
-            <div class="hero-right">
+            <!-- Right: Categories & Stats -->
+            <div class="photo-info">
                 <span class="stack-label photo-label">Categories</span>
-                <div class="photo-categories-vertical">
+                <div class="photo-categories">
                     <span class="category-tag" style="--delay: 0">
                         <i class="fas fa-road"></i> Street
                     </span>
@@ -152,6 +144,11 @@
                 <div class="photo-count-badge">
                     <span class="badge-number">200+</span>
                     <span class="badge-text">Photos<br>Captured</span>
+                </div>
+                <div class="photo-equipment">
+                    <span class="equip-label">Shot With</span>
+                    <div class="equip-item"><i class="fas fa-camera-retro"></i> Sony A7III</div>
+                    <div class="equip-item"><i class="fas fa-circle"></i> 35mm f/1.4</div>
                 </div>
             </div>
         </div>
