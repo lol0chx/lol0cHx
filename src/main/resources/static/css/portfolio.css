@@ -12,7 +12,7 @@
     align-items: center !important;
     justify-content: center !important;
     padding: 0 !important;
-    overflow: hidden !important;
+    overflow: visible !important;
     position: relative !important;
 }
 
@@ -58,7 +58,7 @@
     background: linear-gradient(135deg, #f5576c, #ff9a56);
     top: -100px;
     right: 10%;
-    animation: floatOrb 20s ease-in-out infinite;
+    /* animation removed */
 }
 
 .photo-section .orb-2 {
@@ -67,7 +67,7 @@
     background: linear-gradient(135deg, #667eea, #764ba2);
     bottom: -50px;
     left: 5%;
-    animation: floatOrb 18s ease-in-out infinite reverse;
+    /* animation removed */
 }
 
 .photo-section .orb-3 {
@@ -76,7 +76,7 @@
     background: linear-gradient(135deg, #f093fb, #f5576c);
     top: 40%;
     right: -50px;
-    animation: floatOrb 22s ease-in-out infinite 3s;
+    /* animation removed */
 }
 
 @keyframes floatOrb {
@@ -126,7 +126,7 @@
     transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
     cursor: pointer;
     will-change: transform, box-shadow, z-index;
-    animation: cardFloat 6s ease-in-out infinite;
+    /* Animation removed for static positioning */
 }
 
 .photo-card::before {
@@ -144,15 +144,9 @@
     opacity: 1;
 }
 
-.card-1 { animation-delay: 0s; }
-.card-2 { animation-delay: 1.5s; }
-.card-3 { animation-delay: 3s; }
-.card-4 { animation-delay: 4.5s; }
+/* Animation delays removed - static layout */
 
-@keyframes cardFloat {
-    0%, 100% { transform: translateY(0) rotate(var(--rotation, 0deg)); }
-    50% { transform: translateY(-8px) rotate(var(--rotation, 0deg)); }
-}
+/* cardFloat animation removed for static positioning */
 
 .photo-card img {
     width: 100%;
@@ -175,32 +169,47 @@
     transform: scale(1.04);
 }
 
-/* Scattered random arrangement with varied tilts */
+/* Positioned layout matching reference - static cards, LARGER sizes */
 .card-1 { 
-    top: 2%; 
-    left: -25px; 
-    transform: rotate(-8deg); 
+    /* Red - top left, overlaps orange */
+    top: 5%; 
+    left: 80px; 
+    transform: rotate(0deg); 
     z-index: 4;
-    width: 260px;
-    height: 340px;
+    width: 280px;
+    height: 360px;
 }
 .card-2 { 
-    top: 12%; 
-    left: 220px; 
-    transform: rotate(5deg); 
-    z-index: 6; 
+    /* Orange - top right, tall portrait wallpaper style */
+    top: 0px;
+    left: 340px; 
+    transform: rotate(0deg); 
+    z-index: 3;
+    width: 270px;
+    height: 417px;
 }
 .card-3 { 
-    top: 62%; 
-    left: -30px; 
-    transform: rotate(-3deg); 
-    z-index: 5; 
+    /* Green - bottom left, in front */
+    top: 48%; 
+    left: 20px; 
+    transform: rotate(0deg); 
+    z-index: 2;
+    width: 320px;
+    height: 340px;
+}
+
+.card-3 img {
+    object-fit: cover;
+    object-position: center center;
 }
 .card-4 { 
-    top: 48%; 
-    left: 230px; 
-    transform: rotate(7deg); 
-    z-index: 7; 
+    /* Blue - bottom right, behind green */
+    top: 50%; 
+    left: 340px; 
+    transform: rotate(0deg); 
+    z-index: 5;
+    width: 260px;
+    height: 320px;
 }
 
 /* Center content */
@@ -941,13 +950,9 @@
     animation: float 6s ease-in-out infinite;
 }
 
-.photo-card {
-    animation: float 6s ease-in-out infinite;
-}
+/* photo-card animation removed for static layout */
 
-.card-1 { animation-delay: 0s; }
-.card-2 { animation-delay: 2s; }
-.card-3 { animation-delay: 4s; }
+/* card animation delays removed */
 
 /* ============================================
    NAVIGATION BAR
@@ -1967,7 +1972,7 @@ body {
     height: 100vh !important;
     min-height: 100vh !important;
     max-height: 100vh !important;
-    overflow: hidden;
+    overflow: visible;
 }
 
 .hero-section .hero-layout {
@@ -2211,7 +2216,7 @@ body {
 }
 
 .homepage-container {
-    padding-top: 70px;
+    padding-top: 0px;
 }
 
 /* ============================================
