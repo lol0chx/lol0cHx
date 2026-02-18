@@ -219,6 +219,41 @@
     justify-content: center;
 }
 
+/* Responsive fix for photo cards on small screens */
+@media (max-width: 768px) {
+    .photo-grid {
+        position: static;
+        width: 100vw;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .photo-card {
+        position: static !important;
+        width: 90vw !important;
+        max-width: 350px;
+        height: auto !important;
+        margin: 0 auto;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        transform: none !important;
+    }
+    .photo-card img {
+        height: auto;
+        min-height: 180px;
+    }
+    .card-1, .card-2, .card-3, .card-4 {
+        width: 90vw !important;
+        max-width: 350px;
+        height: auto !important;
+        top: auto !important;
+        left: auto !important;
+        z-index: auto !important;
+        transform: none !important;
+    }
+}
+
 .photo-center-content {
     text-align: center;
     display: flex;

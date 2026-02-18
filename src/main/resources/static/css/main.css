@@ -203,6 +203,48 @@ main {
     overflow: visible;
 }
 
+/* Responsive fix for all card/grid/gallery layouts */
+@media (max-width: 768px) {
+    .photo-grid,
+    .gallery,
+    .card-grid,
+    .photo-gallery {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        gap: 20px !important;
+        width: 100vw !important;
+        min-height: 100vh;
+        position: static !important;
+    }
+    .photo-card,
+    .gallery-card,
+    .card,
+    .card-1,
+    .card-2,
+    .card-3,
+    .card-4 {
+        position: static !important;
+        width: 90vw !important;
+        max-width: 350px !important;
+        height: auto !important;
+        margin: 0 auto !important;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        transform: none !important;
+        z-index: auto !important;
+        top: auto !important;
+        left: auto !important;
+    }
+    .photo-card img,
+    .gallery-card img,
+    .card img {
+        height: auto !important;
+        min-height: 180px;
+        width: 100% !important;
+        object-fit: cover;
+    }
+}
+
 main.no-sidebar .filter-box {
     display: none;
 }
