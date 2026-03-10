@@ -1,156 +1,544 @@
-<div class="homepage-container">
-    <!-- Development Section (Top Split) - Dark Tech Vibe -->
-    <section class="hero-section dev-section">
-        <div class="hero-bg-pattern dev-pattern"></div>
-        
-        <!-- Floating decorative elements -->
-        <div class="floating-shapes dev-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-            <div class="code-float code-1">&lt;/&gt;</div>
-            <div class="code-float code-2">{ }</div>
-            <div class="code-float code-3">01</div>
-        </div>
-        
-        <!-- Three Column Layout -->
-        <div class="hero-layout fade-in-up" style="display: flex; justify-content: center; align-items: center; gap: 40px; padding: 20px 40px;">
-            <!-- Left: Text Content -->
-            <div class="hero-left" style="text-align: left; flex: 0 0 auto;">
-                <div class="text-decorator">
-                    <span class="line-accent"></span>
-                    <span class="hero-eyebrow">
-                        <span class="typing-cursor"></span> Developer & Engineer
-                    </span>
-                </div>
-                <h1 class="hero-title dev-title">
-                    Building<br>Digital<br>
-                    <span class="gradient-text animated-gradient">Experiences</span>
-                </h1>
-                <p class="hero-subtitle dev-subtitle">Full-stack development with<br>clean code and modern architecture</p>
-                <div class="scroll-indicator">
-                    <span class="scroll-line"></span>
-                    <span class="scroll-text">Scroll</span>
-                </div>
-            </div>
-            
-            <!-- Center: Actions -->
-            <div class="hero-center">
-                <div class="center-decoration">
-                    <div class="orbit-ring"></div>
-                    <div class="center-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                </div>
-                <div class="hero-actions-vertical">
-                    <a href="#" class="btn-primary pulse-hover" onclick="showProjects(); return false;">
-                        <i class="fas fa-rocket"></i> View Projects
-                    </a>
-                    <a href="#" class="btn-secondary" onclick="showAbout(); return false;">
-                        Learn More <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-            
-            <!-- Right: Tech Stack -->
-            <div class="hero-right">
-                <span class="stack-label">Tech Stack</span>
-                <div class="tech-stack-vertical">
-                    <span class="tech-tag" style="--delay: 0">
-                        <i class="fab fa-java"></i> Java
-                    </span>
-                    <span class="tech-tag" style="--delay: 1">
-                        <i class="fas fa-leaf"></i> Spring
-                    </span>
-                    <span class="tech-tag" style="--delay: 2">
-                        <i class="fab fa-react"></i> React
-                    </span>
-                    <span class="tech-tag" style="--delay: 3">
-                        <i class="fab fa-python"></i> Python
-                    </span>
-                    <span class="tech-tag" style="--delay: 4">
-                        <i class="fab fa-aws"></i> AWS
-                    </span>
-                </div>
-                <div class="experience-badge">
-                    <span class="badge-number">5+</span>
-                    <span class="badge-text">Years<br>Experience</span>
-                </div>
-            </div>
-        </div>
-    </section>
+<style>
+/* ── Home Page ── scoped with .hp prefix ─────────────────────────────────── */
 
-    <!-- Photography Section (Bottom Split) -->
-    <section class="hero-section photo-section">
-        <div class="hero-bg-pattern photo-pattern"></div>
-        
-        <!-- Floating decorative orbs -->
-        <div class="floating-orb orb-1"></div>
-        <div class="floating-orb orb-2"></div>
-        <div class="floating-orb orb-3"></div>
-        
-        <div class="photo-layout">
-            <!-- Left: Photo Grid Preview -->
-            <div class="photo-preview">
-                <div class="photo-grid">
-                    <div class="photo-card card-1"><img src="images/01.jpg" alt="Photo 01"></div>
-                    <div class="photo-card card-2"><img src="images/02.jpg" alt="Photo 02"></div>
-                    <div class="photo-card card-3"><img src="images/03.jpg" alt="Photo 03"></div>
-                    <div class="photo-card card-4"><img src="images/04.jpg" alt="Photo 04"></div>
+.hp {
+    min-height: 100vh;
+    background: #07070f;
+    display: flex;
+    flex-direction: column;
+    padding-top: 80px;
+    box-sizing: border-box;
+}
+
+/* ══════════════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════════════ */
+.hp-hero {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 0;
+    max-width: 1360px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 60px 70px 50px;
+    box-sizing: border-box;
+    align-items: center;
+    position: relative;
+}
+
+/* subtle noise texture on whole page */
+.hp::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: 0.025;
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* ─ Left column ─────────────────────────────────────── */
+.hp-left {
+    position: relative;
+    z-index: 1;
+    padding-right: 60px;
+}
+
+.hp-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 14px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.25);
+    border-radius: 50px;
+    margin-bottom: 32px;
+}
+.hp-badge-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: #10b981;
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.2);
+    animation: hp-blink 2.5s ease-in-out infinite;
+}
+@keyframes hp-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
+}
+.hp-badge-text {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #34d399;
+}
+
+.hp-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(3rem, 5.5vw, 5.2rem);
+    font-weight: 700;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    margin: 0 0 6px;
+    color: #fff;
+}
+.hp-name-last {
+    background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 50%, #c084fc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hp-role {
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+    font-weight: 400;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 0.5px;
+    margin: 0 0 28px;
+}
+.hp-role strong {
+    color: rgba(255,255,255,0.75);
+    font-weight: 500;
+}
+
+.hp-bio {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.38);
+    line-height: 1.7;
+    max-width: 500px;
+    margin: 0 0 36px;
+}
+.hp-bio em {
+    color: rgba(255,255,255,0.55);
+    font-style: normal;
+}
+
+/* tech stack */
+.hp-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 40px;
+}
+.hp-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.55);
+    transition: all 0.25s ease;
+}
+.hp-chip:hover {
+    background: rgba(102,126,234,0.12);
+    border-color: rgba(102,126,234,0.3);
+    color: #a5b4fc;
+    transform: translateY(-2px);
+}
+.hp-chip i { font-size: 11px; }
+
+/* CTAs */
+.hp-ctas {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+}
+
+.hp-cta-main {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 14px 28px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff !important;
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 24px rgba(102,126,234,0.35);
+}
+.hp-cta-main:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 14px 36px rgba(102,126,234,0.5);
+    color: #fff !important;
+}
+
+.hp-cta-sec {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    padding: 13px 26px;
+    background: transparent;
+    color: rgba(255,255,255,0.6) !important;
+    border: 1px solid rgba(255,255,255,0.14);
+    border-radius: 50px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none !important;
+    transition: all 0.3s ease;
+}
+.hp-cta-sec:hover {
+    background: rgba(255,255,255,0.07);
+    border-color: rgba(255,255,255,0.28);
+    color: #fff !important;
+}
+
+/* social row */
+.hp-socials {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.hp-social-label {
+    font-size: 11px;
+    color: rgba(255,255,255,0.22);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-right: 8px;
+}
+.hp-soc {
+    width: 36px; height: 36px;
+    border-radius: 10px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.4) !important;
+    font-size: 15px;
+    text-decoration: none !important;
+    transition: all 0.25s ease;
+}
+.hp-soc:hover {
+    background: rgba(102,126,234,0.15);
+    border-color: rgba(102,126,234,0.35);
+    color: #a5b4fc !important;
+    transform: translateY(-3px);
+}
+.hp-soc[title="LinkedIn"]:hover  { background: rgba(0,119,181,0.15); border-color: rgba(0,119,181,0.35); color: #60a5fa !important; }
+.hp-soc[title="Instagram"]:hover { background: rgba(225,48,108,0.12); border-color: rgba(225,48,108,0.3);  color: #f9a8d4 !important; }
+.hp-soc[title="GitHub"]:hover    { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.22); color: #fff !important; }
+
+/* ─ Right column — photo panel ──────────────────────── */
+.hp-right {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch;
+}
+
+.hp-photo-main {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    aspect-ratio: 3/4;
+    box-shadow:
+        0 30px 80px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(255,255,255,0.06) inset;
+}
+.hp-photo-main img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    transition: transform 0.6s ease;
+}
+.hp-photo-main:hover img { transform: scale(1.04); }
+
+/* overlay label */
+.hp-photo-label {
+    position: absolute;
+    bottom: 14px; left: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 7px 12px;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(12px);
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.8);
+    font-size: 11px;
+    font-weight: 500;
+}
+.hp-photo-label i { color: #f5576c; }
+
+/* small grid below main photo */
+.hp-photo-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+}
+.hp-photo-thumb {
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 1;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+    cursor: pointer;
+    position: relative;
+}
+.hp-photo-thumb img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+.hp-photo-thumb:hover img { transform: scale(1.08); }
+
+/* floating stats card */
+.hp-stats-card {
+    position: absolute;
+    top: 20px; right: -18px;
+    padding: 12px 16px;
+    background: rgba(15,15,30,0.85);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+}
+.hp-stats-num {
+    font-size: 22px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #f5576c, #ff9a56);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+.hp-stats-lbl {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════════════
+   STATS BAR
+══════════════════════════════════════════════════════ */
+.hp-bar {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.02);
+    position: relative;
+    z-index: 1;
+}
+.hp-bar-inner {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 24px 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+.hp-stat {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+.hp-stat-n {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.03em;
+}
+.hp-stat-t {
+    font-size: 12px;
+    color: rgba(255,255,255,0.35);
+    font-weight: 400;
+}
+.hp-bar-divider {
+    width: 1px; height: 36px;
+    background: rgba(255,255,255,0.07);
+}
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════ */
+@media (max-width: 1100px) {
+    .hp-hero { padding: 50px 50px 40px; gap: 50px; }
+    .hp-right { max-width: 360px; }
+    .hp-left  { padding-right: 0; }
+    .hp-stats-card { right: -10px; }
+    .hp-bar-inner  { padding: 22px 50px; }
+}
+
+@media (max-width: 900px) {
+    .hp-hero {
+        grid-template-columns: 1fr;
+        padding: 40px 36px 36px;
+    }
+    .hp-right {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        max-width: 100%;
+        gap: 12px;
+    }
+    .hp-photo-main { aspect-ratio: 4/3; grid-column: span 2; }
+    .hp-photo-row  { display: contents; }
+    .hp-stats-card { top: 14px; right: 14px; }
+    .hp-bar-inner  { padding: 20px 36px; flex-wrap: wrap; gap: 16px 30px; }
+    .hp-bar-divider { display: none; }
+}
+
+@media (max-width: 600px) {
+    .hp { padding-top: 70px; }
+    .hp-hero { padding: 30px 20px 24px; }
+    .hp-name { font-size: 2.6rem; }
+    .hp-bio  { display: none; }
+    .hp-right { grid-template-columns: 1fr; }
+    .hp-photo-main { grid-column: span 1; aspect-ratio: 16/9; }
+    .hp-photo-row  { display: none; }
+    .hp-stats-card { display: none; }
+    .hp-bar-inner  { padding: 18px 20px; gap: 14px 24px; justify-content: flex-start; }
+    .hp-stat-n { font-size: 1.4rem; }
+}
+</style>
+
+<div class="hp">
+
+    <!-- ══ HERO ══════════════════════════════════════════════════════════ -->
+    <div class="hp-hero">
+
+        <!-- ── Left: identity + CTAs ─────────────────────────────── -->
+        <div class="hp-left">
+
+            <div class="hp-badge">
+                <span class="hp-badge-dot"></span>
+                <span class="hp-badge-text">Available for Hire</span>
+            </div>
+
+            <h1 class="hp-name">
+                Henok<br>
+                <span class="hp-name-last">Mekuria</span>
+            </h1>
+
+            <p class="hp-role">
+                <strong>Full-Stack Software Engineer</strong> &nbsp;·&nbsp; Java · Spring · React
+            </p>
+
+            <p class="hp-bio">
+                I build scalable backends and clean frontends — from REST APIs and microservices to
+                responsive UIs. <em>5+ years shipping production software</em>, with a creative eye
+                that comes from also being a photographer.
+            </p>
+
+            <div class="hp-stack">
+                <span class="hp-chip"><i class="fab fa-java"></i> Java</span>
+                <span class="hp-chip"><i class="fas fa-leaf"></i> Spring Boot</span>
+                <span class="hp-chip"><i class="fab fa-react"></i> React</span>
+                <span class="hp-chip"><i class="fab fa-python"></i> Python</span>
+                <span class="hp-chip"><i class="fab fa-aws"></i> AWS</span>
+                <span class="hp-chip"><i class="fab fa-docker"></i> Docker</span>
+                <span class="hp-chip"><i class="fas fa-database"></i> PostgreSQL</span>
+                <span class="hp-chip"><i class="fas fa-gamepad"></i> C++ / SFML</span>
+            </div>
+
+            <div class="hp-ctas">
+                <a href="#" class="hp-cta-main" onclick="showProjects(); return false;">
+                    <i class="fas fa-briefcase"></i> View Projects
+                </a>
+                <a href="#" class="hp-cta-sec" onclick="showContact(); return false;">
+                    <i class="fas fa-paper-plane"></i> Get In Touch
+                </a>
+            </div>
+
+            <div class="hp-socials">
+                <span class="hp-social-label">Find me</span>
+                <a href="https://github.com/lol0chx" target="_blank" class="hp-soc" title="GitHub">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/henokmekuria/" target="_blank" class="hp-soc" title="LinkedIn">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://instagram.com" target="_blank" class="hp-soc" title="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+
+        </div>
+
+        <!-- ── Right: photography personality ───────────────────── -->
+        <div class="hp-right">
+
+            <!-- floating stats chip -->
+            <div class="hp-stats-card">
+                <span class="hp-stats-num">200+</span>
+                <span class="hp-stats-lbl">Photos Shot</span>
+            </div>
+
+            <!-- headshot -->
+            <div class="hp-photo-main">
+                <img src="images/headshot.jpg" alt="Henok Mekuria">
+                <div class="hp-photo-label">
+                    <i class="fas fa-camera"></i> Nikon D7500
                 </div>
             </div>
-            
-            <!-- Center: Content & Buttons -->
-            <div class="photo-content">
-                <div class="photo-center-content">
-                    <div class="camera-icon-wrap">
-                        <i class="fas fa-camera"></i>
-                    </div>
-                    <h2 class="photo-tagline">Capturing Moments</h2>
-                    <p class="photo-description">Street photography, portraits, and urban exploration through my lens</p>
-                    <div class="hero-actions photo-actions">
-                        <a href="#" class="btn-primary photo-btn" onclick="showGallery(); return false;">
-                            <i class="fas fa-images"></i> View Gallery
-                        </a>
-                        <a href="#" class="btn-secondary photo-btn-secondary" onclick="showPrints(); return false;">
-                            Shop Prints <i class="fas fa-arrow-right"></i>
-                        </a>
-                    </div>
-                    <div class="photo-social-links">
-                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-icon"><i class="fab fa-flickr"></i></a>
-                        <a href="#" class="social-icon"><i class="fas fa-globe"></i></a>
-                    </div>
+
+            <!-- wildlife thumbnails -->
+            <div class="hp-photo-row">
+                <div class="hp-photo-thumb">
+                    <img src="images/01.jpg" alt="Wildlife">
+                </div>
+                <div class="hp-photo-thumb">
+                    <img src="images/03.jpg" alt="Duck">
+                </div>
+                <div class="hp-photo-thumb">
+                    <img src="images/04.jpg" alt="Urban sky">
                 </div>
             </div>
-            
-            <!-- Right: Categories & Stats -->
-            <div class="photo-info">
-                <span class="stack-label photo-label">Categories</span>
-                <div class="photo-categories">
-                    <span class="category-tag" style="--delay: 0">
-                        <i class="fas fa-road"></i> Street
-                    </span>
-                    <span class="category-tag" style="--delay: 1">
-                        <i class="fas fa-user"></i> Portrait
-                    </span>
-                    <span class="category-tag" style="--delay: 2">
-                        <i class="fas fa-city"></i> Urban
-                    </span>
-                    <span class="category-tag" style="--delay: 3">
-                        <i class="fas fa-moon"></i> Night
-                    </span>
-                </div>
-                <div class="photo-count-badge">
-                    <span class="badge-number">200+</span>
-                    <span class="badge-text">Photos<br>Captured</span>
-                </div>
-                <div class="photo-equipment">
-                    <span class="equip-label">Shot With</span>
-                    <div class="equip-item"><i class="fas fa-camera-retro"></i> Sony A7III</div>
-                    <div class="equip-item"><i class="fas fa-circle"></i> 35mm f/1.4</div>
-                </div>
+
+        </div>
+
+    </div>
+
+    <!-- ══ STATS BAR ═════════════════════════════════════════════════════ -->
+    <div class="hp-bar">
+        <div class="hp-bar-inner">
+            <div class="hp-stat">
+                <span class="hp-stat-n">5+</span>
+                <span class="hp-stat-t">Years of experience</span>
+            </div>
+            <div class="hp-bar-divider"></div>
+            <div class="hp-stat">
+                <span class="hp-stat-n">6+</span>
+                <span class="hp-stat-t">Projects shipped</span>
+            </div>
+            <div class="hp-bar-divider"></div>
+            <div class="hp-stat">
+                <span class="hp-stat-n">200+</span>
+                <span class="hp-stat-t">Photos captured</span>
+            </div>
+            <div class="hp-bar-divider"></div>
+            <div style="margin-left:auto; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
+                <a href="#" onclick="showProjects();  return false;" style="color:rgba(255,255,255,0.4);font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#a5b4fc'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">
+                    Projects <i class="fas fa-arrow-right" style="font-size:10px;"></i>
+                </a>
+                <a href="#" onclick="showGallery();   return false;" style="color:rgba(255,255,255,0.4);font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#f9a8d4'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">
+                    Gallery <i class="fas fa-arrow-right" style="font-size:10px;"></i>
+                </a>
+                <a href="#" onclick="showAbout();     return false;" style="color:rgba(255,255,255,0.4);font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#6ee7b7'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">
+                    About <i class="fas fa-arrow-right" style="font-size:10px;"></i>
+                </a>
+                <a href="#" onclick="showContact();   return false;" style="color:rgba(255,255,255,0.4);font-size:13px;text-decoration:none;transition:color 0.2s;" onmouseover="this.style.color='#fde68a'" onmouseout="this.style.color='rgba(255,255,255,0.4)'">
+                    Contact <i class="fas fa-arrow-right" style="font-size:10px;"></i>
+                </a>
             </div>
         </div>
-    </section>
+    </div>
+
 </div>
