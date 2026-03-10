@@ -1,279 +1,103 @@
-// Load footer on page initialization
+// ─── Page Navigation ────────────────────────────────────────────────────────
+
+function loadHome() {
+    templateBuilder.build('home', {}, 'main');
+}
+
+function showProjects() {
+    templateBuilder.build('projects', {}, 'main');
+    closeMobileNav();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showGallery() {
+    templateBuilder.build('gallery', {}, 'main');
+    closeMobileNav();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showPhotography() { showGallery(); }
+function showPortfolio()    { showProjects(); }
+function showPrints()       { showGallery(); }
+
+function showAbout() {
+    templateBuilder.build('about', {}, 'main');
+    closeMobileNav();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function showContact() {
+    templateBuilder.build('contact', {}, 'main');
+    closeMobileNav();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── Contact Form ────────────────────────────────────────────────────────────
+
+function handleContactSubmit() {
+    const name    = document.getElementById('contact-name')?.value.trim();
+    const email   = document.getElementById('contact-email')?.value.trim();
+    const message = document.getElementById('contact-message')?.value.trim();
+
+    if (!name || !email || !message) {
+        alert('Please fill in your name, email, and message.');
+        return;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        alert('Please enter a valid email address.');
+        return;
+    }
+
+    // Show success (wire to a backend endpoint when ready)
+    const successEl = document.getElementById('contact-success');
+    if (successEl) {
+        successEl.style.display = 'block';
+        document.getElementById('contact-name').value    = '';
+        document.getElementById('contact-email').value   = '';
+        document.getElementById('contact-subject').value = '';
+        document.getElementById('contact-message').value = '';
+    }
+}
+
+// ─── Gallery Filter ──────────────────────────────────────────────────────────
+
+function filterGallery(category, btn) {
+    document.querySelectorAll('.gallery-filter-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    document.querySelectorAll('#gallery-grid .gallery-item').forEach(item => {
+        const match = category === 'all' || item.dataset.category === category;
+        item.classList.toggle('hidden', !match);
+    });
+}
+
+// ─── Mobile Nav ──────────────────────────────────────────────────────────────
+
+function toggleMobileNav() {
+    const links = document.querySelector('.nav-links');
+    const btn   = document.getElementById('nav-hamburger');
+    if (!links || !btn) return;
+    links.classList.toggle('mobile-open');
+    btn.classList.toggle('active');
+}
+
+function closeMobileNav() {
+    document.querySelector('.nav-links')?.classList.remove('mobile-open');
+    document.getElementById('nav-hamburger')?.classList.remove('active');
+}
+
+// ─── Footer initializer ──────────────────────────────────────────────────────
+
 function initializeFooter() {
     templateBuilder.build('footer', {}, 'footer-placeholder');
 }
 
-function showLoginForm()
-{
-    templateBuilder.build('login-form', {}, 'login');
-    const passwordInput = document.getElementById("password");
-    if (passwordInput) {
-        passwordInput.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                login();
-            }
-        });
-    }
-}
-
-function hideModalForm()
-{
-    templateBuilder.clear('login');
-}
-
-function login()
-{
-    const username = document.getElementById("username").value;
-    const password = document.getElementById("password").value;
-
-    if (!username || !password) {
-        alert('Please enter both username and password');
-        return;
-    }
-
-    userService.login(username, password);
-    hideModalForm()
-}
-
-function showImageDetailForm(product, imageUrl)
-{
-    const imageDetail = {
-        name: product,
-        imageUrl: imageUrl
-    };
-
-    templateBuilder.build('image-detail',imageDetail,'login')
-}
-
-function loadHome()
-{
-    templateBuilder.build('home',{},'main');
-    const mainEl = document.querySelector('main');
-    if (mainEl) mainEl.classList.add('no-sidebar');
-}
-
-function showProjects() {
-    console.log("Showing projects...");
-    // Future: implement projects view
-}
-
-function showPhotography() {
-    console.log("Showing photography...");
-    // Future: implement photography view
-}
-
-function showPortfolio() {
-    console.log("Showing portfolio...");
-}
-
-function showPrints() {
-    console.log("Showing prints...");
-}
-
-function showAbout() {
-    console.log("Showing about...");
-}
-
-function showContact() {
-    console.log("Showing contact...");
-}
-
-// toggleFilters removed; filters remain visible in left sidebar
-
-function editProfile()
-{
-    profileService.loadProfile();
-}
-
-function saveProfile()
-{
-    const firstName = document.getElementById("firstName").value;
-    const lastName = document.getElementById("lastName").value;
-    const company = document.getElementById("company") ? document.getElementById("company").value : "";
-    const dob = document.getElementById("dob") ? document.getElementById("dob").value : "";
-    const gender = document.getElementById("gender") ? document.getElementById("gender").value : "";
-    const phone = document.getElementById("phone").value;
-    const secondaryPhone = document.getElementById("secondaryPhone") ? document.getElementById("secondaryPhone").value : "";
-    const email = document.getElementById("email").value;
-    const preferredContact = document.getElementById("preferredContact") ? document.getElementById("preferredContact").value : "email";
-    const newsletter = document.getElementById("newsletter") ? document.getElementById("newsletter").checked : false;
-    const address = document.getElementById("address").value;
-    const address2 = document.getElementById("address2") ? document.getElementById("address2").value : "";
-    const city = document.getElementById("city").value;
-    const state = document.getElementById("state").value;
-    const zip = document.getElementById("zip").value;
-    const country = document.getElementById("country") ? document.getElementById("country").value : "";
-    const bio = document.getElementById("bio") ? document.getElementById("bio").value : "";
-    const avatarInput = document.getElementById("avatar");
-    let avatarDataUrl = "";
-    // capture current preview if exists
-    const previewEl = document.getElementById("avatarPreview");
-    if (previewEl && previewEl.src && previewEl.style.display !== "none") {
-        avatarDataUrl = previewEl.src;
-    }
-    const language = document.getElementById("language") ? document.getElementById("language").value : "en";
-    const timezone = document.getElementById("timezone") ? document.getElementById("timezone").value : "UTC";
-    const showEmail = document.getElementById("showEmail") ? document.getElementById("showEmail").checked : false;
-    const website = document.getElementById("website") ? document.getElementById("website").value : "";
-    const twitter = document.getElementById("twitter") ? document.getElementById("twitter").value : "";
-    const instagram = document.getElementById("instagram") ? document.getElementById("instagram").value : "";
-    const deliveryInstructions = document.getElementById("deliveryInstructions") ? document.getElementById("deliveryInstructions").value : "";
-
-    if (!firstName || !lastName || !email) {
-        alert('Please fill in required fields (First Name, Last Name, Email)');
-        return;
-    }
-
-    const profile = {
-        firstName,
-        lastName,
-        company,
-        dob,
-        phone,
-        secondaryPhone,
-        email,
-        preferredContact,
-        newsletter,
-        address,
-        address2,
-        city,
-        state,
-        zip,
-        country
-    };
-
-    const extras = {
-        company,
-        dob,
-        gender,
-        secondaryPhone,
-        preferredContact,
-        newsletter,
-        address2,
-        country,
-        bio,
-        avatarDataUrl,
-        language,
-        timezone,
-        showEmail,
-        website,
-        twitter,
-        instagram,
-        deliveryInstructions
-    };
-    profileService.updateProfile(profile, extras);
-}
-
-function showCart()
-{
-    cartService.loadCartPage();
-}
-
-function showWishlist()
-{
-    wishlistService.loadWishlistPage();
-}
-
-function clearCart()
-{
-    if (confirm('Are you sure you want to clear your entire cart?')) {
-        cartService.clearCart();
-    }
-}
-
-function setCategory(control)
-{
-    productService.addCategoryFilter(control.value);
-    productService.search();
-}
-
-function setSubcategory(control)
-{
-    productService.addSubcategoryFilter(control.value);
-    productService.search();
-}
-
-function setMinPrice(control)
-{
-    const label = document.getElementById("min-price-display")
-    label.innerText = control.value;
-
-    const value = control.value != 0 ? control.value : "";
-    productService.addMinPriceFilter(value)
-    productService.search();
-}
-
-function setMaxPrice(control)
-{
-    const label = document.getElementById("max-price-display")
-    label.innerText = control.value;
-
-    const value = control.value != 1500 ? control.value : "";
-    productService.addMaxPriceFilter(value)
-    productService.search();
-}
-
-function closeError(control)
-{
-    setTimeout(() => {
-        control.click();
-    }, 3000);
-}
-
-let appInitialized = false;
+// ─── Boot ────────────────────────────────────────────────────────────────────
 
 document.addEventListener('DOMContentLoaded', () => {
-    if (appInitialized) return;
-    appInitialized = true;
-    
-    // Load header immediately
-    templateBuilder.build('header', { loggedout: true }, 'header-user');
-    
-    // Initialize footer
+    templateBuilder.build('header', {}, 'header-user');
     initializeFooter();
-    
-    // Load home page directly (personal portfolio site)
-    setTimeout(() => {
-        loadHome();
-        // Check if logged in for admin features
-        if (userService && userService.isLoggedIn()) {
-            userService.setHeaderLogin();
-            if (wishlistService) { wishlistService.load(); }
-        }
-    }, 100);
+    loadHome();
 });
-
-// Quick filter helpers for the sidebar
-function applyPricePreset(min, max)
-{
-    const minEl = document.getElementById('min-price');
-    const maxEl = document.getElementById('max-price');
-    if (minEl && maxEl) {
-        minEl.value = min;
-        maxEl.value = max;
-        setMinPrice(minEl);
-        setMaxPrice(maxEl);
-    }
-}
-
-function quickColor(color)
-{
-    const subEl = document.getElementById('subcategory-select');
-    if (subEl) {
-        subEl.value = color;
-        setSubcategory(subEl);
-    }
-}
-
-function resetAllFilters()
-{
-    const catEl = document.getElementById('category-select');
-    const minEl = document.getElementById('min-price');
-    const maxEl = document.getElementById('max-price');
-    const subEl = document.getElementById('subcategory-select');
-
-    if (catEl) { catEl.value = 0; setCategory(catEl); }
-    if (minEl) { minEl.value = 0; setMinPrice(minEl); }
-    if (maxEl) { maxEl.value = 1500; setMaxPrice(maxEl); }
-    if (subEl) { subEl.value = ''; setSubcategory(subEl); }
-}
