@@ -1,0 +1,119 @@
+<div class="page-container">
+    <a href="#" class="page-back" onclick="loadHome(); return false;">
+        <i class="fas fa-arrow-left"></i> Back
+    </a>
+
+    <div class="page-header">
+        <span class="page-eyebrow">Get In Touch</span>
+        <h1 class="page-title">Contact</h1>
+        <p class="page-subtitle">Have a project in mind, want to buy a print, or just want to say hello? I'd love to hear from you.</p>
+    </div>
+
+    <div class="contact-grid">
+        <!-- Contact Info -->
+        <div class="contact-info-section">
+            <div>
+                <h3 class="contact-info-title">Let's work together</h3>
+                <p class="contact-info-text">Whether it's a software project, photography commission, or a print order — reach out and let's make something great. I typically respond within 24 hours.</p>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-item-icon">
+                    <i class="fab fa-github"></i>
+                </div>
+                <div>
+                    <p class="contact-item-label">GitHub</p>
+                    <p class="contact-item-value">github.com/lol0chx</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-item-icon">
+                    <i class="fab fa-linkedin"></i>
+                </div>
+                <div>
+                    <p class="contact-item-label">LinkedIn</p>
+                    <p class="contact-item-value">linkedin.com/in/henokmekuria</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-item-icon" style="background: linear-gradient(135deg, #f5576c, #ff9a56);">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div>
+                    <p class="contact-item-label">Instagram</p>
+                    <p class="contact-item-value">Photography &amp; life</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-item-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                    <p class="contact-item-label">Location</p>
+                    <p class="contact-item-value">United States</p>
+                </div>
+            </div>
+
+            <div class="contact-item">
+                <div class="contact-item-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div>
+                    <p class="contact-item-label">Response Time</p>
+                    <p class="contact-item-value">Usually within 24 hours</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="contact-form">
+            <h3 class="contact-form-title">Send a Message</h3>
+
+            <div class="form-group">
+                <label class="form-label-custom" for="contact-name">Name</label>
+                <input type="text" class="form-input-custom" id="contact-name" placeholder="Your name">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label-custom" for="contact-email">Email</label>
+                <input type="email" class="form-input-custom" id="contact-email" placeholder="your@email.com">
+            </div>
+
+            <div class="form-group">
+                <label class="form-label-custom" for="contact-subject">Subject</label>
+                <select class="form-input-custom" id="contact-subject">
+                    <option value="">Select a topic...</option>
+                    <option value="hire">Hire me for a project</option>
+                    <option value="print">Buy a print</option>
+                    <option value="collab">Collaboration</option>
+                    <option value="other">Just saying hi</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label-custom" for="contact-message">Message</label>
+                <textarea class="form-input-custom form-textarea-custom" id="contact-message" placeholder="Tell me about your project, idea, or question..."></textarea>
+            </div>
+
+            <button class="form-submit-btn" onclick="handleContactSubmit()">
+                <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+
+            <div class="form-success-msg" id="contact-success">
+                <i class="fas fa-check-circle"></i> Message sent! I'll get back to you soon.
+            </div>
+        </div>
+    </div>
+
+    <!-- Availability Banner -->
+    <div style="background: linear-gradient(135deg, rgba(102,126,234,0.07) 0%, rgba(118,75,162,0.07) 100%); border: 1px solid rgba(102,126,234,0.15); border-radius: 16px; padding: 28px 32px; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+        <div style="width: 12px; height: 12px; border-radius: 50%; background: #10b981; box-shadow: 0 0 0 4px rgba(16,185,129,0.2); flex-shrink: 0;"></div>
+        <div>
+            <strong style="color: #1a1a2e; font-size: 1rem;">Currently available</strong>
+            <span style="color: #666; font-size: 0.9rem; margin-left: 8px;">for freelance projects and photography commissions.</span>
+        </div>
+    </div>
+</div>
