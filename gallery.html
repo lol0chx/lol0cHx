@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Photography Gallery — Henok Mekuria">
+    <title>Gallery — Henok Mekuria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/portfolio.css">
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+
+<nav class="portfolio-nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">
+            <span class="brand-name">
+                <span class="name-first">Henok</span>
+                <span class="name-last">Mekuria</span>
+            </span>
+        </a>
+        <div class="nav-links" id="nav-links">
+            <a href="projects.html">Projects</a>
+            <a href="gallery.html">Photography</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-actions">
+            <a href="https://github.com/lol0chx" target="_blank" class="nav-social" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/henokmekuria/" target="_blank" class="nav-social" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://instagram.com" target="_blank" class="nav-social" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main>
+<div class="page-container">
+    <a href="index.html" class="page-back"><i class="fas fa-arrow-left"></i> Back</a>
+
+    <div class="page-header">
+        <span class="page-eyebrow">Photography</span>
+        <h1 class="page-title">Gallery</h1>
+        <p class="page-subtitle">Moments captured through my Nikon D7500. Wildlife, street scenes, urban landscapes, and everything in between.</p>
+    </div>
+
+    <div class="gallery-filters">
+        <button class="gallery-filter-btn active" onclick="filterGallery('all', this)">All</button>
+        <button class="gallery-filter-btn" onclick="filterGallery('wildlife', this)">Wildlife</button>
+        <button class="gallery-filter-btn" onclick="filterGallery('street', this)">Street</button>
+        <button class="gallery-filter-btn" onclick="filterGallery('urban', this)">Urban</button>
+        <button class="gallery-filter-btn" onclick="filterGallery('portrait', this)">Portrait</button>
+    </div>
+
+    <div class="gallery-masonry" id="gallery-grid">
+        <div class="gallery-item" data-category="wildlife">
+            <img src="images/01.jpg" alt="Squirrel on fence" loading="lazy">
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Wildlife · Nikon D7500</span></div>
+        </div>
+        <div class="gallery-item" data-category="wildlife">
+            <img src="images/02.jpg" alt="Colorful bird" loading="lazy">
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Wildlife · Nikon D7500</span></div>
+        </div>
+        <div class="gallery-item" data-category="wildlife">
+            <img src="images/03.jpg" alt="Duck in water" loading="lazy">
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Wildlife · Nikon D7500</span></div>
+        </div>
+        <div class="gallery-item" data-category="urban">
+            <img src="images/04.jpg" alt="Airplane contrail against blue sky" loading="lazy">
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Urban · Nikon D7500</span></div>
+        </div>
+        <div class="gallery-item" data-category="street" style="background:linear-gradient(135deg,#1a1a2e,#2d2d2d); min-height:200px; display:flex; align-items:center; justify-content:center;">
+            <div style="text-align:center; color:rgba(255,255,255,0.4); padding:20px;"><div style="font-size:32px; margin-bottom:8px;">🌆</div><div style="font-size:13px;">Street · Coming soon</div></div>
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Street Photography · Coming Soon</span></div>
+        </div>
+        <div class="gallery-item" data-category="portrait" style="background:linear-gradient(135deg,#667eea,#764ba2); min-height:240px; display:flex; align-items:center; justify-content:center;">
+            <div style="text-align:center; color:rgba(255,255,255,0.5); padding:20px;"><div style="font-size:32px; margin-bottom:8px;">🎭</div><div style="font-size:13px;">Portrait · Coming soon</div></div>
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Portrait · Coming Soon</span></div>
+        </div>
+        <div class="gallery-item" data-category="street" style="background:linear-gradient(135deg,#f5576c,#ff9a56); min-height:180px; display:flex; align-items:center; justify-content:center;">
+            <div style="text-align:center; color:rgba(255,255,255,0.5); padding:20px;"><div style="font-size:32px; margin-bottom:8px;">🚶</div><div style="font-size:13px;">Street · Coming soon</div></div>
+            <div class="gallery-item-overlay"><span class="gallery-item-label">Street Photography · Coming Soon</span></div>
+        </div>
+    </div>
+
+    <div style="margin-top:40px; padding:20px 24px; background:rgba(0,0,0,0.03); border-radius:14px; display:flex; align-items:center; gap:16px; flex-wrap:wrap;">
+        <i class="fas fa-camera" style="font-size:20px; color:#c17f59;"></i>
+        <div>
+            <span style="font-size:13px; font-weight:600; color:#1a1a2e;">Shot with Nikon D7500</span>
+            <span style="font-size:13px; color:#888; margin-left:8px;">· 200+ photos and counting</span>
+        </div>
+    </div>
+
+    <div class="prints-cta">
+        <div class="prints-cta-icon">🖼️</div>
+        <h3>Want to purchase a print?</h3>
+        <p>High-quality archival prints available in multiple sizes. Each photo is carefully edited and printed on premium paper.</p>
+        <a href="contact.html" class="project-link primary" style="display:inline-flex;"><i class="fas fa-envelope"></i> Get in Touch</a>
+    </div>
+</div>
+</main>
+
+<footer class="apple-footer">
+    <div class="footer-content">
+        <div class="footer-sections">
+            <div class="footer-column"><h6>Development</h6><ul class="footer-links"><li><a href="projects.html">Projects</a></li><li><a href="https://github.com/lol0chx" target="_blank">Open Source</a></li></ul></div>
+            <div class="footer-column"><h6>Photography</h6><ul class="footer-links"><li><a href="gallery.html">Gallery</a></li></ul></div>
+            <div class="footer-column"><h6>Connect</h6><ul class="footer-links"><li><a href="about.html">About Me</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+            <div class="footer-column"><h6>Social</h6><ul class="footer-links"><li><a href="https://github.com/lol0chx" target="_blank"><i class="fab fa-github"></i> GitHub</a></li><li><a href="https://www.linkedin.com/in/henokmekuria/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li><li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li></ul></div>
+        </div>
+        <div class="footer-legal"><p>© 2026 Henok Mekuria. All rights reserved.</p></div>
+    </div>
+</footer>
+
+</body>
+</html>

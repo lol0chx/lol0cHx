@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact Henok Mekuria">
+    <title>Contact — Henok Mekuria</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/portfolio.css">
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+
+<nav class="portfolio-nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">
+            <span class="brand-name">
+                <span class="name-first">Henok</span>
+                <span class="name-last">Mekuria</span>
+            </span>
+        </a>
+        <div class="nav-links" id="nav-links">
+            <a href="projects.html">Projects</a>
+            <a href="gallery.html">Photography</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-actions">
+            <a href="https://github.com/lol0chx" target="_blank" class="nav-social" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/henokmekuria/" target="_blank" class="nav-social" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://instagram.com" target="_blank" class="nav-social" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main>
+<div class="page-container">
+    <a href="index.html" class="page-back"><i class="fas fa-arrow-left"></i> Back</a>
+
+    <div class="page-header">
+        <span class="page-eyebrow">Get In Touch</span>
+        <h1 class="page-title">Contact</h1>
+        <p class="page-subtitle">Have a project in mind or want to collaborate? I'd love to hear from you. I typically respond within 24 hours.</p>
+    </div>
+
+    <div class="contact-grid">
+        <div class="contact-info-section">
+            <div>
+                <h3 class="contact-info-title">Let's work together</h3>
+                <p class="contact-info-text">Whether it's a software project, photography commission, or just a hello — reach out.</p>
+            </div>
+            <div class="contact-item">
+                <div class="contact-item-icon"><i class="fab fa-github"></i></div>
+                <div><p class="contact-item-label">GitHub</p><p class="contact-item-value">github.com/lol0chx</p></div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-item-icon"><i class="fab fa-linkedin"></i></div>
+                <div><p class="contact-item-label">LinkedIn</p><p class="contact-item-value">linkedin.com/in/henokmekuria</p></div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-item-icon" style="background:linear-gradient(135deg,#f5576c,#ff9a56);"><i class="fab fa-instagram"></i></div>
+                <div><p class="contact-item-label">Instagram</p><p class="contact-item-value">Photography &amp; life</p></div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-item-icon" style="background:linear-gradient(135deg,#43e97b,#38f9d7);"><i class="fas fa-map-marker-alt"></i></div>
+                <div><p class="contact-item-label">Location</p><p class="contact-item-value">United States</p></div>
+            </div>
+            <div class="contact-item">
+                <div class="contact-item-icon" style="background:linear-gradient(135deg,#667eea,#764ba2);"><i class="fas fa-clock"></i></div>
+                <div><p class="contact-item-label">Response Time</p><p class="contact-item-value">Usually within 24 hours</p></div>
+            </div>
+        </div>
+
+        <div class="contact-form">
+            <h3 class="contact-form-title">Send a Message</h3>
+            <div class="form-group">
+                <label class="form-label-custom" for="contact-name">Name</label>
+                <input type="text" class="form-input-custom" id="contact-name" placeholder="Your name">
+            </div>
+            <div class="form-group">
+                <label class="form-label-custom" for="contact-email">Email</label>
+                <input type="email" class="form-input-custom" id="contact-email" placeholder="your@email.com">
+            </div>
+            <div class="form-group">
+                <label class="form-label-custom" for="contact-subject">Subject</label>
+                <select class="form-input-custom" id="contact-subject">
+                    <option value="">Select a topic...</option>
+                    <option value="hire">Hire me for a project</option>
+                    <option value="collab">Collaboration</option>
+                    <option value="other">Just saying hi</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="form-label-custom" for="contact-message">Message</label>
+                <textarea class="form-input-custom form-textarea-custom" id="contact-message" placeholder="Tell me about your project or idea..."></textarea>
+            </div>
+            <button class="form-submit-btn" onclick="handleContactSubmit()">
+                <i class="fas fa-paper-plane"></i> Send Message
+            </button>
+            <div class="form-success-msg" id="contact-success" style="display:none;">
+                <i class="fas fa-check-circle"></i> Message sent! I'll get back to you soon.
+            </div>
+        </div>
+    </div>
+
+    <div style="background:linear-gradient(135deg,rgba(102,126,234,0.07),rgba(118,75,162,0.07)); border:1px solid rgba(102,126,234,0.15); border-radius:16px; padding:28px 32px; display:flex; align-items:center; gap:20px; flex-wrap:wrap; margin-top:40px;">
+        <div style="width:12px; height:12px; border-radius:50%; background:#10b981; box-shadow:0 0 0 4px rgba(16,185,129,0.2); flex-shrink:0;"></div>
+        <div>
+            <strong style="color:#1a1a2e; font-size:1rem;">Currently available</strong>
+            <span style="color:#666; font-size:0.9rem; margin-left:8px;">for freelance projects and photography commissions.</span>
+        </div>
+    </div>
+</div>
+</main>
+
+<footer class="apple-footer">
+    <div class="footer-content">
+        <div class="footer-sections">
+            <div class="footer-column"><h6>Development</h6><ul class="footer-links"><li><a href="projects.html">Projects</a></li><li><a href="https://github.com/lol0chx" target="_blank">Open Source</a></li></ul></div>
+            <div class="footer-column"><h6>Photography</h6><ul class="footer-links"><li><a href="gallery.html">Gallery</a></li></ul></div>
+            <div class="footer-column"><h6>Connect</h6><ul class="footer-links"><li><a href="about.html">About Me</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+            <div class="footer-column"><h6>Social</h6><ul class="footer-links"><li><a href="https://github.com/lol0chx" target="_blank"><i class="fab fa-github"></i> GitHub</a></li><li><a href="https://www.linkedin.com/in/henokmekuria/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li><li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li></ul></div>
+        </div>
+        <div class="footer-legal"><p>© 2026 Henok Mekuria. All rights reserved.</p></div>
+    </div>
+</footer>
+
+</body>
+</html>

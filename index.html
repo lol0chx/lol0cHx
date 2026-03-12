@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Henok Mekuria — Full-Stack Developer & Photographer">
+    <title>Henok Mekuria — Developer & Photographer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+          integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <link rel="stylesheet" href="css/lib/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/portfolio.css">
+    <script src="js/app.js" defer></script>
+</head>
+<body>
+
+<nav class="portfolio-nav">
+    <div class="nav-inner">
+        <a href="index.html" class="nav-brand">
+            <span class="brand-name">
+                <span class="name-first">Henok</span>
+                <span class="name-last">Mekuria</span>
+            </span>
+        </a>
+        <div class="nav-links" id="nav-links">
+            <a href="projects.html">Projects</a>
+            <a href="gallery.html">Photography</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </div>
+        <div class="nav-actions">
+            <a href="https://github.com/lol0chx" target="_blank" class="nav-social" title="GitHub"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/henokmekuria/" target="_blank" class="nav-social" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+            <a href="https://instagram.com" target="_blank" class="nav-social" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<main>
+<style>
+/* ── Home Page ── scoped with .hp prefix ─────────────────────────────────── */
+
+.hp {
+    background: linear-gradient(160deg, #fff5fb 0%, #f0f4ff 45%, #f0fff8 100%);
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+}
+
+.hp::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background:
+        radial-gradient(ellipse 600px 500px at 5% 15%, rgba(255,150,180,0.22) 0%, transparent 60%),
+        radial-gradient(ellipse 500px 400px at 95% 85%, rgba(130,160,255,0.2) 0%, transparent 60%),
+        radial-gradient(ellipse 400px 350px at 60% 5%, rgba(100,230,170,0.18) 0%, transparent 60%),
+        radial-gradient(ellipse 350px 300px at 80% 40%, rgba(255,200,80,0.12) 0%, transparent 55%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.hp-intro {
+    position: relative;
+    z-index: 1;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 120px 80px 80px;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 64px;
+    align-items: center;
+}
+
+.hp-photo-col { position: relative; }
+.hp-avatar {
+    width: 210px; height: 210px;
+    border-radius: 28px;
+    overflow: hidden;
+    box-shadow: 0 24px 70px rgba(245,87,108,0.2), 0 8px 28px rgba(0,0,0,0.1);
+}
+.hp-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+.hp-avatar-badge {
+    position: absolute; bottom: -8px; right: -8px;
+    width: 44px; height: 44px;
+    background: linear-gradient(135deg, #f5576c, #ff9a56);
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 18px;
+    box-shadow: 0 6px 18px rgba(245,87,108,0.45);
+    border: 4px solid #fff5fb;
+}
+
+.hp-identity { min-width: 0; }
+.hp-name-row {
+    display: flex; align-items: center; gap: 16px;
+    flex-wrap: wrap; margin-bottom: 16px;
+}
+.hp-name {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: clamp(2.6rem, 4.5vw, 5rem);
+    font-weight: 700; line-height: 1;
+    letter-spacing: -0.03em; margin: 0;
+    color: #1a1a2e; white-space: nowrap;
+}
+.hp-name-last {
+    background: linear-gradient(135deg, #f5576c 0%, #ff9a56 40%, #f093fb 90%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+}
+.hp-status {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 4px 12px;
+    background: rgba(16,185,129,0.1); border: 1.5px solid rgba(16,185,129,0.25);
+    border-radius: 50px; font-size: 11px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase; color: #059669; white-space: nowrap;
+}
+.hp-status-dot {
+    width: 6px; height: 6px; border-radius: 50%; background: #10b981;
+    animation: hp-blink 2.5s ease-in-out infinite;
+}
+@keyframes hp-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+.hp-tagline { font-size: clamp(1rem, 1.5vw, 1.2rem); color: rgba(26,26,46,0.52); line-height: 1.65; margin: 0 0 28px; max-width: 620px; }
+.hp-tagline strong { color: rgba(26,26,46,0.78); font-weight: 600; }
+.hp-tagline .hl { color: #f5576c; font-weight: 500; }
+
+.hp-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
+.hp-chip {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 16px;
+    background: rgba(255,255,255,0.85); border: 1.5px solid rgba(0,0,0,0.07);
+    border-radius: 20px; font-size: 13px; font-weight: 500; color: #555;
+    transition: all 0.2s ease; backdrop-filter: blur(6px);
+}
+.hp-chip:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
+.hp-chip i { font-size: 11px; }
+
+.hp-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+.hp-cta-main {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 14px 32px;
+    background: linear-gradient(135deg, #f5576c, #ff9a56);
+    color: #fff !important; border-radius: 50px;
+    font-size: 15px; font-weight: 600; text-decoration: none !important;
+    transition: all 0.3s ease; box-shadow: 0 8px 28px rgba(245,87,108,0.35);
+}
+.hp-cta-main:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(245,87,108,0.5); color: #fff !important; }
+.hp-cta-sec {
+    display: inline-flex; align-items: center; gap: 9px;
+    padding: 13px 28px;
+    background: rgba(255,255,255,0.8); color: #555 !important;
+    border: 1.5px solid rgba(0,0,0,0.1); border-radius: 50px;
+    font-size: 14px; font-weight: 500; text-decoration: none !important;
+    transition: all 0.3s ease;
+}
+.hp-cta-sec:hover { background: #fff; border-color: rgba(0,0,0,0.18); color: #1a1a2e !important; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+
+.hp-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 28px; }
+.hp-socials { display: flex; align-items: center; gap: 8px; }
+.hp-soc {
+    width: 46px; height: 46px; border-radius: 13px;
+    background: rgba(255,255,255,0.8); border: 1.5px solid rgba(0,0,0,0.08);
+    display: flex; align-items: center; justify-content: center;
+    color: #6b7280 !important; font-size: 18px; text-decoration: none !important;
+    transition: all 0.25s ease;
+}
+.hp-soc:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
+.hp-soc[title="LinkedIn"]:hover  { background: rgba(0,119,181,0.1); border-color: rgba(0,119,181,0.3); color: #0077b5 !important; }
+.hp-soc[title="Instagram"]:hover { background: rgba(225,48,108,0.1); border-color: rgba(225,48,108,0.3); color: #e1306c !important; }
+.hp-soc[title="GitHub"]:hover    { background: rgba(36,41,46,0.08); border-color: rgba(36,41,46,0.2);   color: #24292e !important; }
+
+.hp-mini-stats { display: flex; gap: 28px; }
+.hp-mini-stat { text-align: right; }
+.hp-mini-stat-n { font-size: 2.2rem; font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
+.hp-mini-stat:nth-child(1) .hp-mini-stat-n { color: #f5576c; }
+.hp-mini-stat:nth-child(2) .hp-mini-stat-n { color: #667eea; }
+.hp-mini-stat:nth-child(3) .hp-mini-stat-n { color: #10b981; }
+.hp-mini-stat-t { font-size: 11px; color: rgba(26,26,46,0.35); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; margin-top: 2px; }
+
+/* Screenshot gallery */
+.hp-projects { position: relative; z-index: 1; max-width: 1600px; margin: 0 auto; padding: 40px 80px; box-sizing: border-box; }
+.hp-projects-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+.hp-projects-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #1a1a2e; margin: 0; }
+.hp-see-all { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: #f5576c !important; text-decoration: none !important; transition: all 0.25s ease; white-space: nowrap; }
+.hp-see-all:hover { gap: 12px; color: #e0405a !important; }
+.hp-see-all i { font-size: 10px; }
+
+.hp-shots { display: grid; grid-template-columns: 1.8fr 1fr; grid-template-rows: auto auto; gap: 12px; }
+.hp-shot { position: relative; border-radius: 14px; overflow: hidden; cursor: pointer; background: #e8eaf0; aspect-ratio: 16/10; }
+.hp-shot.featured { grid-row: span 2; aspect-ratio: unset; }
+.hp-shot-chrome {
+    position: absolute; top: 0; left: 0; right: 0; height: 26px;
+    background: rgba(255,255,255,0.55); backdrop-filter: blur(4px);
+    display: flex; align-items: center; gap: 5px; padding: 0 10px;
+    z-index: 2; border-bottom: 1px solid rgba(0,0,0,0.07);
+}
+.hp-shot-dot { width: 8px; height: 8px; border-radius: 50%; }
+.hp-shot-dot.r { background: #ff5f57; }
+.hp-shot-dot.y { background: #ffbd2e; }
+.hp-shot-dot.g { background: #28ca42; }
+.hp-shot-chrome-bar { flex: 1; height: 14px; background: rgba(0,0,0,0.07); border-radius: 4px; margin-left: 6px; }
+.hp-shot-img { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 36px; }
+.hp-shot.featured .hp-shot-img { font-size: 56px; }
+.hp-shot-placeholder {
+    position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+    font-size: 10px; font-weight: 500; color: rgba(255,255,255,0.6);
+    letter-spacing: 1px; text-transform: uppercase;
+    background: rgba(0,0,0,0.25); padding: 3px 10px; border-radius: 50px; white-space: nowrap; z-index: 3;
+}
+.hp-shot-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(15,10,40,0.88) 0%, rgba(15,10,40,0.3) 60%, transparent 100%);
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 18px 20px; opacity: 0; transform: translateY(6px);
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1); z-index: 4;
+}
+.hp-shot:hover .hp-shot-overlay { opacity: 1; transform: translateY(0); }
+.hp-shot-name { font-size: 1rem; font-weight: 700; color: #fff; margin: 0 0 4px; }
+.hp-shot.featured .hp-shot-name { font-size: 1.3rem; }
+.hp-shot-tech { font-size: 11px; color: rgba(255,255,255,0.55); margin: 0 0 12px; }
+.hp-shot-cta {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 12px; font-weight: 600; color: #fff !important; text-decoration: none !important;
+    background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3);
+    padding: 6px 14px; border-radius: 50px; backdrop-filter: blur(8px);
+    align-self: flex-start; transition: background 0.2s;
+}
+.hp-shot-cta:hover { background: rgba(255,255,255,0.28); }
+
+/* Photography row */
+.hp-photos { position: relative; z-index: 1; max-width: 1600px; margin: 0 auto; padding: 0 80px 50px; box-sizing: border-box; }
+.hp-photos-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; }
+.hp-photos-title { font-family: 'Playfair Display', Georgia, serif; font-size: 1.5rem; font-weight: 700; color: #1a1a2e; margin: 0; }
+.hp-photos-see { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: #10b981 !important; text-decoration: none !important; transition: all 0.25s ease; }
+.hp-photos-see:hover { gap: 12px; }
+.hp-photos-see i { font-size: 10px; }
+.hp-photo-strip { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 14px; height: 280px; }
+.hp-photo-item { border-radius: 16px; overflow: hidden; position: relative; cursor: pointer; }
+.hp-photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+.hp-photo-item:hover img { transform: scale(1.06); }
+.hp-photo-ov { position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.45), transparent 50%); opacity: 0; transition: opacity 0.3s ease; display: flex; align-items: flex-end; padding: 16px; }
+.hp-photo-item:hover .hp-photo-ov { opacity: 1; }
+.hp-photo-ov span { color: #fff; font-size: 12px; font-weight: 500; }
+
+/* Bottom bar */
+.hp-bar { border-top: 1px solid rgba(0,0,0,0.06); background: rgba(255,255,255,0.55); backdrop-filter: blur(16px); position: relative; z-index: 1; }
+.hp-bar-inner { max-width: 1600px; margin: 0 auto; padding: 22px 80px; display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; }
+.hp-bar-link { color: rgba(26,26,46,0.38); font-size: 13px; text-decoration: none; font-weight: 500; transition: color 0.2s; display: inline-flex; align-items: center; gap: 6px; }
+.hp-bar-link:hover { color: #f5576c; }
+.hp-bar-link i { font-size: 10px; }
+.hp-bar-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(26,26,46,0.15); }
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .hp-intro { padding: 110px 50px 60px; gap: 44px; }
+    .hp-projects { padding: 36px 50px; }
+    .hp-photos { padding: 0 50px 40px; }
+    .hp-bar-inner { padding: 20px 50px; }
+    .hp-shots { grid-template-columns: 1.5fr 1fr; }
+    .hp-photo-strip { height: 240px; }
+}
+@media (max-width: 900px) {
+    .hp-intro { grid-template-columns: auto 1fr; padding: 90px 36px 50px; gap: 28px; }
+    .hp-meta { display: none; }
+    .hp-avatar { width: 160px; height: 160px; }
+    .hp-name { font-size: clamp(2rem, 6vw, 3.5rem); }
+    .hp-projects { padding: 30px 36px; }
+    .hp-photos { padding: 0 36px 36px; }
+    .hp-shots { grid-template-columns: 1fr 1fr; }
+    .hp-shot.featured { grid-row: span 1; aspect-ratio: 16/10; }
+    .hp-shot.featured .hp-shot-img { font-size: 40px; }
+    .hp-photo-strip { grid-template-columns: 1fr 1fr; height: auto; }
+    .hp-photo-item { aspect-ratio: 3/2; }
+    .hp-bar-inner { padding: 18px 36px; gap: 20px; }
+}
+@media (max-width: 600px) {
+    .hp-intro { grid-template-columns: 1fr; padding: 85px 20px 40px; text-align: center; }
+    .hp-photo-col { display: flex; justify-content: center; }
+    .hp-avatar { width: 130px; height: 130px; border-radius: 22px; }
+    .hp-name-row { justify-content: center; }
+    .hp-name { font-size: 2.4rem; }
+    .hp-tagline { margin-left: auto; margin-right: auto; }
+    .hp-chips { justify-content: center; }
+    .hp-actions { justify-content: center; }
+    .hp-projects { padding: 24px 20px; }
+    .hp-photos { padding: 0 20px 30px; }
+    .hp-shots { grid-template-columns: 1fr; gap: 8px; }
+    .hp-shot.featured { grid-row: span 1; aspect-ratio: 16/10; }
+    .hp-shot-chrome { height: 20px; }
+    .hp-shot-dot { width: 6px; height: 6px; }
+    .hp-photo-strip { grid-template-columns: 1fr 1fr; height: auto; }
+    .hp-photo-item { aspect-ratio: 1; }
+    .hp-bar-inner { padding: 16px 20px; gap: 16px; }
+    .hp-mini-stats { display: none; }
+}
+</style>
+
+<div class="hp">
+
+    <div class="hp-intro">
+        <div class="hp-photo-col">
+            <div class="hp-avatar">
+                <img src="images/headshot.jpg" alt="Henok Mekuria">
+            </div>
+            <div class="hp-avatar-badge"><i class="fas fa-camera"></i></div>
+        </div>
+
+        <div class="hp-identity">
+            <div class="hp-name-row">
+                <h1 class="hp-name">Henok <span class="hp-name-last">Mekuria</span></h1>
+                <span class="hp-status"><span class="hp-status-dot"></span> Open to work</span>
+            </div>
+            <p class="hp-tagline">
+                I write code that <strong>ships products</strong> and shoot photos that <span class="hl">tell stories</span>.
+                Full-stack engineer — Java, Spring, React by day. Wildlife photographer on weekends.
+            </p>
+            <div class="hp-chips">
+                <span class="hp-chip"><i class="fab fa-java"></i> Java</span>
+                <span class="hp-chip"><i class="fas fa-leaf"></i> Spring</span>
+                <span class="hp-chip"><i class="fab fa-react"></i> React</span>
+                <span class="hp-chip"><i class="fab fa-python"></i> Python</span>
+                <span class="hp-chip"><i class="fab fa-aws"></i> AWS</span>
+                <span class="hp-chip"><i class="fab fa-docker"></i> Docker</span>
+                <span class="hp-chip"><i class="fas fa-database"></i> PostgreSQL</span>
+                <span class="hp-chip"><i class="fas fa-gamepad"></i> C++</span>
+            </div>
+            <div class="hp-actions">
+                <a href="projects.html" class="hp-cta-main"><i class="fas fa-briefcase"></i> View Projects</a>
+                <a href="contact.html" class="hp-cta-sec"><i class="fas fa-paper-plane"></i> Get In Touch</a>
+                <a href="gallery.html" class="hp-cta-sec"><i class="fas fa-camera"></i> Gallery</a>
+            </div>
+        </div>
+
+        <div class="hp-meta">
+            <div class="hp-socials">
+                <a href="https://github.com/lol0chx" target="_blank" class="hp-soc" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/henokmekuria/" target="_blank" class="hp-soc" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com" target="_blank" class="hp-soc" title="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+            <div class="hp-mini-stats">
+                <div class="hp-mini-stat"><div class="hp-mini-stat-n">5+</div><div class="hp-mini-stat-t">Years</div></div>
+                <div class="hp-mini-stat"><div class="hp-mini-stat-n">8</div><div class="hp-mini-stat-t">Projects</div></div>
+                <div class="hp-mini-stat"><div class="hp-mini-stat-n">200+</div><div class="hp-mini-stat-t">Photos</div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hp-projects">
+        <div class="hp-projects-header">
+            <h2 class="hp-projects-title">Featured Projects</h2>
+            <a href="projects.html" class="hp-see-all">View all projects <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="hp-shots">
+            <!-- Replace .hp-shot-img with: background-image:url('images/screenshot-ecommerce.jpg'); background-size:cover; -->
+            <div class="hp-shot featured" onclick="window.location.href='projects.html'">
+                <div class="hp-shot-chrome">
+                    <span class="hp-shot-dot r"></span><span class="hp-shot-dot y"></span><span class="hp-shot-dot g"></span>
+                    <div class="hp-shot-chrome-bar"></div>
+                </div>
+                <div class="hp-shot-img" style="background: linear-gradient(160deg, #667eea 0%, #764ba2 60%, #a18cd1 100%); padding-top: 26px;">🛍️</div>
+                <div class="hp-shot-placeholder">screenshot coming soon</div>
+                <div class="hp-shot-overlay">
+                    <p class="hp-shot-name">E-Commerce Platform</p>
+                    <p class="hp-shot-tech">Java · Spring Boot · MySQL · JavaScript</p>
+                    <a href="https://github.com/lol0chx" target="_blank" class="hp-shot-cta" onclick="event.stopPropagation();">
+                        <i class="fab fa-github"></i> GitHub
+                    </a>
+                </div>
+            </div>
+            <!-- Replace .hp-shot-img with: background-image:url('images/screenshot-snake.jpg'); background-size:cover; -->
+            <div class="hp-shot" onclick="window.open('snake-game.html','_blank')">
+                <div class="hp-shot-chrome">
+                    <span class="hp-shot-dot r"></span><span class="hp-shot-dot y"></span><span class="hp-shot-dot g"></span>
+                    <div class="hp-shot-chrome-bar"></div>
+                </div>
+                <div class="hp-shot-img" style="background: linear-gradient(135deg, #0f2c1f, #11998e, #38ef7d); padding-top: 26px;">🐍</div>
+                <div class="hp-shot-placeholder">screenshot coming soon</div>
+                <div class="hp-shot-overlay">
+                    <p class="hp-shot-name">Snake Game</p>
+                    <p class="hp-shot-tech">HTML5 Canvas · JavaScript</p>
+                    <a href="snake-game.html" target="_blank" class="hp-shot-cta" onclick="event.stopPropagation();" style="border-color:rgba(56,239,125,0.5);">
+                        <i class="fas fa-gamepad"></i> Play
+                    </a>
+                </div>
+            </div>
+            <!-- Replace .hp-shot-img with: background-image:url('images/screenshot-fractal.jpg'); background-size:cover; -->
+            <div class="hp-shot" onclick="window.open('binary_tree_fractal.html','_blank')">
+                <div class="hp-shot-chrome">
+                    <span class="hp-shot-dot r"></span><span class="hp-shot-dot y"></span><span class="hp-shot-dot g"></span>
+                    <div class="hp-shot-chrome-bar"></div>
+                </div>
+                <div class="hp-shot-img" style="background: linear-gradient(135deg, #3d0c02, #fa709a, #fee140); padding-top: 26px;">🌲</div>
+                <div class="hp-shot-placeholder">screenshot coming soon</div>
+                <div class="hp-shot-overlay">
+                    <p class="hp-shot-name">Fractal Visualizer</p>
+                    <p class="hp-shot-tech">HTML Canvas · JavaScript</p>
+                    <a href="binary_tree_fractal.html" target="_blank" class="hp-shot-cta" onclick="event.stopPropagation();" style="border-color:rgba(250,112,154,0.5);">
+                        <i class="fas fa-external-link-alt"></i> Demo
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="hp-photos">
+        <div class="hp-photos-header">
+            <h2 class="hp-photos-title">Through My Lens</h2>
+            <a href="gallery.html" class="hp-photos-see">Browse gallery <i class="fas fa-arrow-right"></i></a>
+        </div>
+        <div class="hp-photo-strip">
+            <a href="gallery.html" class="hp-photo-item">
+                <img src="images/01.jpg" alt="Wildlife">
+                <div class="hp-photo-ov"><span><i class="fas fa-camera"></i> Wildlife</span></div>
+            </a>
+            <a href="gallery.html" class="hp-photo-item">
+                <img src="images/02.jpg" alt="Street">
+                <div class="hp-photo-ov"><span><i class="fas fa-camera"></i> Street</span></div>
+            </a>
+            <a href="gallery.html" class="hp-photo-item">
+                <img src="images/03.jpg" alt="Duck">
+                <div class="hp-photo-ov"><span><i class="fas fa-camera"></i> Wildlife</span></div>
+            </a>
+            <a href="gallery.html" class="hp-photo-item">
+                <img src="images/04.jpg" alt="Urban">
+                <div class="hp-photo-ov"><span><i class="fas fa-camera"></i> Urban</span></div>
+            </a>
+        </div>
+    </div>
+
+    <div class="hp-bar">
+        <div class="hp-bar-inner">
+            <a href="projects.html" class="hp-bar-link">Projects <i class="fas fa-arrow-right"></i></a>
+            <span class="hp-bar-dot"></span>
+            <a href="gallery.html" class="hp-bar-link">Gallery <i class="fas fa-arrow-right"></i></a>
+            <span class="hp-bar-dot"></span>
+            <a href="about.html" class="hp-bar-link">About <i class="fas fa-arrow-right"></i></a>
+            <span class="hp-bar-dot"></span>
+            <a href="contact.html" class="hp-bar-link">Contact <i class="fas fa-arrow-right"></i></a>
+        </div>
+    </div>
+
+</div>
+</main>
+
+<footer class="apple-footer">
+    <div class="footer-content">
+        <div class="footer-sections">
+            <div class="footer-column">
+                <h6>Development</h6>
+                <ul class="footer-links">
+                    <li><a href="projects.html">Projects</a></li>
+                    <li><a href="https://github.com/lol0chx" target="_blank">Open Source</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h6>Photography</h6>
+                <ul class="footer-links">
+                    <li><a href="gallery.html">Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h6>Connect</h6>
+                <ul class="footer-links">
+                    <li><a href="about.html">About Me</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h6>Social</h6>
+                <ul class="footer-links">
+                    <li><a href="https://github.com/lol0chx" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+                    <li><a href="https://www.linkedin.com/in/henokmekuria/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
+                    <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-legal">
+            <p>© 2026 Henok Mekuria. All rights reserved.</p>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>

@@ -265,7 +265,7 @@
 }
 
 /* ══════════════════════════════════════════════════════
-   FEATURED PROJECTS — main content, visible above fold
+   FEATURED PROJECTS — screenshot gallery
 ══════════════════════════════════════════════════════ */
 .hp-projects {
     position: relative;
@@ -279,7 +279,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     flex-wrap: wrap;
     gap: 12px;
 }
@@ -306,117 +306,158 @@
 .hp-see-all i { font-size: 10px; transition: transform 0.25s ease; }
 .hp-see-all:hover i { transform: translateX(3px); }
 
-/* Bento grid — 4 cols, featured card spans 2x2 */
-.hp-bento {
+/* Screenshot grid */
+.hp-shots {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-auto-rows: minmax(0, 1fr);
-    gap: 16px;
+    grid-template-columns: 1.8fr 1fr;
+    grid-template-rows: auto auto;
+    gap: 12px;
 }
-.hp-bento-card {
-    background: rgba(255,255,255,0.82);
-    border: 1.5px solid rgba(0,0,0,0.06);
-    border-radius: 18px;
+
+/* Each shot card */
+.hp-shot {
+    position: relative;
+    border-radius: 14px;
     overflow: hidden;
-    transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
-    backdrop-filter: blur(12px);
     cursor: pointer;
-    display: flex;
-    flex-direction: column;
+    background: #e8eaf0;
+    aspect-ratio: 16/10;
 }
-.hp-bento-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
-    border-color: rgba(245,87,108,0.2);
-}
-.hp-bento-card.big {
-    grid-column: span 2;
+/* Featured card spans both rows on the left */
+.hp-shot.featured {
     grid-row: span 2;
+    aspect-ratio: unset;
 }
-.hp-bento-banner {
-    height: 110px;
+
+/* Fake browser chrome on top of each card */
+.hp-shot-chrome {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 26px;
+    background: rgba(255,255,255,0.55);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 0 10px;
+    z-index: 2;
+    border-bottom: 1px solid rgba(0,0,0,0.07);
+    flex-shrink: 0;
+}
+.hp-shot-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+}
+.hp-shot-dot.r { background: #ff5f57; }
+.hp-shot-dot.y { background: #ffbd2e; }
+.hp-shot-dot.g { background: #28ca42; }
+.hp-shot-chrome-bar {
+    flex: 1;
+    height: 14px;
+    background: rgba(0,0,0,0.07);
+    border-radius: 4px;
+    margin-left: 6px;
+}
+
+/* The placeholder "screenshot" area */
+.hp-shot-img {
+    position: absolute;
+    inset: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 36px;
-    position: relative;
-    flex-shrink: 0;
+    /* swap with: background-image: url('images/screenshot-project.jpg'); background-size: cover; */
 }
-.hp-bento-card.big .hp-bento-banner {
-    height: 200px;
-    font-size: 52px;
+.hp-shot.featured .hp-shot-img { font-size: 56px; }
+
+/* Placeholder label */
+.hp-shot-placeholder {
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    background: rgba(0,0,0,0.25);
+    padding: 3px 10px;
+    border-radius: 50px;
+    white-space: nowrap;
+    z-index: 3;
 }
-.hp-bento-body {
-    padding: 18px 20px 20px;
-    flex: 1;
+
+/* Hover overlay — slides up */
+.hp-shot-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(15,10,40,0.88) 0%, rgba(15,10,40,0.3) 60%, transparent 100%);
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
+    padding: 18px 20px;
+    opacity: 0;
+    transform: translateY(6px);
+    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    z-index: 4;
 }
-.hp-bento-card.big .hp-bento-body {
-    padding: 22px 26px 26px;
+.hp-shot:hover .hp-shot-overlay {
+    opacity: 1;
+    transform: translateY(0);
 }
-.hp-bento-title {
+.hp-shot-name {
     font-size: 1rem;
     font-weight: 700;
-    color: #1a1a2e;
-    margin: 0 0 5px;
+    color: #fff;
+    margin: 0 0 4px;
+    line-height: 1.2;
 }
-.hp-bento-card.big .hp-bento-title {
-    font-size: 1.25rem;
+.hp-shot.featured .hp-shot-name { font-size: 1.3rem; }
+.hp-shot-tech {
+    font-size: 11px;
+    color: rgba(255,255,255,0.55);
+    margin: 0 0 12px;
 }
-.hp-bento-desc {
-    font-size: 0.82rem;
-    color: #888;
-    line-height: 1.5;
-    margin: 0 0 14px;
-    flex: 1;
-}
-.hp-bento-card.big .hp-bento-desc {
-    font-size: 0.9rem;
-    line-height: 1.6;
-}
-.hp-bento-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5px;
-}
-.hp-bento-tag {
-    font-size: 10.5px;
-    font-weight: 500;
-    padding: 3px 9px;
-    border-radius: 50px;
-    background: rgba(245,87,108,0.06);
-    border: 1px solid rgba(245,87,108,0.14);
-    color: #c44058;
-}
-.hp-bento-card:nth-child(2) .hp-bento-tag {
-    background: rgba(15,32,39,0.06); border-color: rgba(15,32,39,0.14); color: #2c5364;
-}
-.hp-bento-card:nth-child(3) .hp-bento-tag {
-    background: rgba(17,153,142,0.06); border-color: rgba(17,153,142,0.14); color: #0d7d74;
-}
-.hp-bento-card:nth-child(4) .hp-bento-tag {
-    background: rgba(250,112,154,0.06); border-color: rgba(250,112,154,0.14); color: #c4547a;
-}
-.hp-bento-card:nth-child(5) .hp-bento-tag {
-    background: rgba(79,172,254,0.06); border-color: rgba(79,172,254,0.14); color: #2b7ec7;
-}
-.hp-bento-card:nth-child(6) .hp-bento-tag {
-    background: rgba(161,140,209,0.06); border-color: rgba(161,140,209,0.14); color: #7b68a8;
-}
-.hp-bento-link {
+.hp-shot-cta {
     display: inline-flex;
     align-items: center;
     gap: 6px;
     font-size: 12px;
     font-weight: 600;
-    color: #f5576c !important;
+    color: #fff !important;
     text-decoration: none !important;
-    margin-top: 10px;
-    transition: gap 0.2s ease;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 6px 14px;
+    border-radius: 50px;
+    backdrop-filter: blur(8px);
+    align-self: flex-start;
+    transition: background 0.2s;
 }
-.hp-bento-link:hover { gap: 10px; }
-.hp-bento-link i { font-size: 10px; }
+.hp-shot-cta:hover { background: rgba(255,255,255,0.28); }
+
+@media (max-width: 1200px) {
+    .hp-projects { padding: 36px 50px 36px; }
+    .hp-shots { grid-template-columns: 1.5fr 1fr; }
+}
+@media (max-width: 900px) {
+    .hp-projects { padding: 30px 36px; }
+    .hp-shots {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+    }
+    .hp-shot.featured { grid-row: span 1; aspect-ratio: 16/10; }
+    .hp-shot.featured .hp-shot-img { font-size: 40px; }
+}
+@media (max-width: 600px) {
+    .hp-projects { padding: 24px 20px; }
+    .hp-shots { grid-template-columns: 1fr; gap: 8px; }
+    .hp-shot.featured { grid-row: span 1; aspect-ratio: 16/10; }
+    .hp-shot-chrome { height: 20px; }
+    .hp-shot-dot { width: 6px; height: 6px; }
+}
 
 /* ══════════════════════════════════════════════════════
    PHOTOGRAPHY ROW — below projects
@@ -657,7 +698,7 @@
 
     </div>
 
-    <!-- ══ FEATURED PROJECTS — bento grid, visible immediately ═══════════ -->
+    <!-- ══ FEATURED PROJECTS — screenshot gallery ══════════════════════ -->
     <div class="hp-projects">
 
         <div class="hp-projects-header">
@@ -667,106 +708,63 @@
             </a>
         </div>
 
-        <div class="hp-bento">
+        <div class="hp-shots">
 
-            <!-- E-Commerce — big featured card -->
-            <div class="hp-bento-card big" onclick="showProjects()">
-                <div class="hp-bento-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+            <!-- E-Commerce — featured (tall left) -->
+            <!-- Replace .hp-shot-img background with: background-image:url('images/screenshot-ecommerce.jpg'); background-size:cover; background-position:top center; -->
+            <div class="hp-shot featured" onclick="showProjects()">
+                <div class="hp-shot-chrome">
+                    <span class="hp-shot-dot r"></span>
+                    <span class="hp-shot-dot y"></span>
+                    <span class="hp-shot-dot g"></span>
+                    <div class="hp-shot-chrome-bar"></div>
+                </div>
+                <div class="hp-shot-img" style="background: linear-gradient(160deg, #667eea 0%, #764ba2 60%, #a18cd1 100%); padding-top: 26px;">
                     🛍️
                 </div>
-                <div class="hp-bento-body">
-                    <h3 class="hp-bento-title">E-Commerce Platform</h3>
-                    <p class="hp-bento-desc">The full thing — catalog, cart, auth, orders, admin dashboard. Spring Boot backend, vanilla JS frontend. Learned that debugging payment flows at 2am builds character.</p>
-                    <div class="hp-bento-tags">
-                        <span class="hp-bento-tag">Java</span>
-                        <span class="hp-bento-tag">Spring Boot</span>
-                        <span class="hp-bento-tag">MySQL</span>
-                        <span class="hp-bento-tag">JavaScript</span>
-                    </div>
-                    <a href="https://github.com/lol0chx" target="_blank" class="hp-bento-link" onclick="event.stopPropagation();">
-                        View on GitHub <i class="fas fa-arrow-right"></i>
+                <div class="hp-shot-placeholder">screenshot coming soon</div>
+                <div class="hp-shot-overlay">
+                    <p class="hp-shot-name">E-Commerce Platform</p>
+                    <p class="hp-shot-tech">Java · Spring Boot · MySQL · JavaScript</p>
+                    <a href="https://github.com/lol0chx" target="_blank" class="hp-shot-cta" onclick="event.stopPropagation();">
+                        <i class="fab fa-github"></i> GitHub
                     </a>
                 </div>
             </div>
 
-            <!-- 2D Board Game -->
-            <div class="hp-bento-card" onclick="showProjects()">
-                <div class="hp-bento-banner" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);">
-                    🎮
-                </div>
-                <div class="hp-bento-body">
-                    <h3 class="hp-bento-title">2D Board Game</h3>
-                    <p class="hp-bento-desc">C++ and SFML — real-time rendering, game state, board mechanics. Proof I can think in pointers.</p>
-                    <div class="hp-bento-tags">
-                        <span class="hp-bento-tag">C++</span>
-                        <span class="hp-bento-tag">SFML</span>
-                    </div>
-                </div>
-            </div>
-
             <!-- Snake Game -->
-            <div class="hp-bento-card" onclick="window.open('snake-game.html','_blank')">
-                <div class="hp-bento-banner" style="background: linear-gradient(135deg, #11998e, #38ef7d);">
-                    🐍
+            <!-- Replace .hp-shot-img with: background-image:url('images/screenshot-snake.jpg'); background-size:cover; background-position:top center; -->
+            <div class="hp-shot" onclick="window.open('snake-game.html','_blank')">
+                <div class="hp-shot-chrome">
+                    <span class="hp-shot-dot r"></span><span class="hp-shot-dot y"></span><span class="hp-shot-dot g"></span>
+                    <div class="hp-shot-chrome-bar"></div>
                 </div>
-                <div class="hp-bento-body">
-                    <h3 class="hp-bento-title">Snake Game</h3>
-                    <p class="hp-bento-desc">Classic snake, zero dependencies. Canvas, local high scores, mobile swipe. Try to beat 30.</p>
-                    <div class="hp-bento-tags">
-                        <span class="hp-bento-tag">Canvas</span>
-                        <span class="hp-bento-tag">JavaScript</span>
-                    </div>
-                    <a href="snake-game.html" target="_blank" class="hp-bento-link" onclick="event.stopPropagation();" style="color:#11998e !important;">
-                        Play it <i class="fas fa-gamepad"></i>
+                <div class="hp-shot-img" style="background: linear-gradient(135deg, #0f2c1f, #11998e, #38ef7d); padding-top: 26px;">🐍</div>
+                <div class="hp-shot-placeholder">screenshot coming soon</div>
+                <div class="hp-shot-overlay">
+                    <p class="hp-shot-name">Snake Game</p>
+                    <p class="hp-shot-tech">HTML5 Canvas · JavaScript</p>
+                    <a href="snake-game.html" target="_blank" class="hp-shot-cta" onclick="event.stopPropagation();" style="border-color:rgba(56,239,125,0.5);">
+                        <i class="fas fa-gamepad"></i> Play
                     </a>
                 </div>
             </div>
 
             <!-- Fractal Visualizer -->
-            <div class="hp-bento-card" onclick="window.open('binary_tree_fractal.html','_blank')">
-                <div class="hp-bento-banner" style="background: linear-gradient(135deg, #fa709a, #fee140);">
-                    🌲
+            <!-- Replace .hp-shot-img with: background-image:url('images/screenshot-fractal.jpg'); background-size:cover; background-position:top center; -->
+            <div class="hp-shot" onclick="window.open('binary_tree_fractal.html','_blank')">
+                <div class="hp-shot-chrome">
+                    <span class="hp-shot-dot r"></span><span class="hp-shot-dot y"></span><span class="hp-shot-dot g"></span>
+                    <div class="hp-shot-chrome-bar"></div>
                 </div>
-                <div class="hp-bento-body">
-                    <h3 class="hp-bento-title">Fractal Visualizer</h3>
-                    <p class="hp-bento-desc">Recursive binary trees on Canvas. Tweak angle, depth, colors — math that looks good.</p>
-                    <div class="hp-bento-tags">
-                        <span class="hp-bento-tag">Canvas</span>
-                        <span class="hp-bento-tag">Recursion</span>
-                    </div>
-                    <a href="binary_tree_fractal.html" target="_blank" class="hp-bento-link" onclick="event.stopPropagation();" style="color:#fa709a !important;">
-                        Try demo <i class="fas fa-external-link-alt"></i>
+                <div class="hp-shot-img" style="background: linear-gradient(135deg, #3d0c02, #fa709a, #fee140); padding-top: 26px;">🌲</div>
+                <div class="hp-shot-placeholder">screenshot coming soon</div>
+                <div class="hp-shot-overlay">
+                    <p class="hp-shot-name">Fractal Visualizer</p>
+                    <p class="hp-shot-tech">HTML Canvas · JavaScript</p>
+                    <a href="binary_tree_fractal.html" target="_blank" class="hp-shot-cta" onclick="event.stopPropagation();" style="border-color:rgba(250,112,154,0.5);">
+                        <i class="fas fa-external-link-alt"></i> Demo
                     </a>
-                </div>
-            </div>
-
-            <!-- Microservices -->
-            <div class="hp-bento-card" onclick="showProjects()">
-                <div class="hp-bento-banner" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
-                    ⚙️
-                </div>
-                <div class="hp-bento-body">
-                    <h3 class="hp-bento-title">Microservices Gateway</h3>
-                    <p class="hp-bento-desc">API gateway, Eureka discovery, JWT auth, Docker Compose. Distributed systems done right.</p>
-                    <div class="hp-bento-tags">
-                        <span class="hp-bento-tag">Spring Cloud</span>
-                        <span class="hp-bento-tag">Docker</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Auth Service -->
-            <div class="hp-bento-card" onclick="showProjects()">
-                <div class="hp-bento-banner" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb);">
-                    🔐
-                </div>
-                <div class="hp-bento-body">
-                    <h3 class="hp-bento-title">Auth Service</h3>
-                    <p class="hp-bento-desc">Spring Security, JWT, OAuth2, RBAC, MFA. The auth module I reuse in everything.</p>
-                    <div class="hp-bento-tags">
-                        <span class="hp-bento-tag">Spring Security</span>
-                        <span class="hp-bento-tag">JWT</span>
-                    </div>
                 </div>
             </div>
 
