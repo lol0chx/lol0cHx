@@ -2,17 +2,12 @@
 /* ── Home Page ── scoped with .hp prefix ─────────────────────────────────── */
 
 .hp {
-    min-height: 100vh;
     background: linear-gradient(160deg, #fff5fb 0%, #f0f4ff 45%, #f0fff8 100%);
-    display: flex;
-    flex-direction: column;
-    padding-top: 80px;
-    box-sizing: border-box;
     position: relative;
     overflow: hidden;
+    min-height: 100vh;
 }
 
-/* Colorful decorative blobs */
 .hp::before {
     content: '';
     position: fixed;
@@ -27,67 +22,75 @@
 }
 
 /* ══════════════════════════════════════════════════════
-   HERO
+   INTRO — compact horizontal strip
 ══════════════════════════════════════════════════════ */
-.hp-hero {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 1fr 420px;
-    gap: 0;
-    max-width: 1360px;
-    width: 100%;
+.hp-intro {
+    position: relative;
+    z-index: 1;
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 60px 70px 50px;
+    padding: 90px 80px 0;
     box-sizing: border-box;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: 40px;
     align-items: center;
-    position: relative;
-    z-index: 1;
 }
 
-/* ─ Left column ─────────────────────────────────────── */
-.hp-left {
+/* Photo — compact circle/rounded */
+.hp-photo-col {
     position: relative;
-    z-index: 1;
-    padding-right: 60px;
 }
-
-.hp-badge {
-    display: inline-flex;
+.hp-avatar {
+    width: 140px;
+    height: 140px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow:
+        0 16px 50px rgba(245,87,108,0.15),
+        0 6px 20px rgba(0,0,0,0.08);
+}
+.hp-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+}
+.hp-avatar-badge {
+    position: absolute;
+    bottom: -6px; right: -6px;
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, #f5576c, #ff9a56);
+    border-radius: 10px;
+    display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 6px 14px;
-    background: rgba(16, 185, 129, 0.1);
-    border: 1.5px solid rgba(16, 185, 129, 0.25);
-    border-radius: 50px;
-    margin-bottom: 32px;
-}
-.hp-badge-dot {
-    width: 7px; height: 7px;
-    border-radius: 50%;
-    background: #10b981;
-    box-shadow: 0 0 0 3px rgba(16,185,129,0.2);
-    animation: hp-blink 2.5s ease-in-out infinite;
-}
-@keyframes hp-blink {
-    0%, 100% { opacity: 1; }
-    50%       { opacity: 0.4; }
-}
-.hp-badge-text {
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 1.5px;
-    text-transform: uppercase;
-    color: #059669;
+    justify-content: center;
+    color: #fff;
+    font-size: 14px;
+    box-shadow: 0 4px 12px rgba(245,87,108,0.4);
+    border: 3px solid #fff5fb;
 }
 
+/* Identity — name, tagline, chips, CTAs */
+.hp-identity {
+    min-width: 0;
+}
+.hp-name-row {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin-bottom: 6px;
+}
 .hp-name {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(3rem, 5.5vw, 5.2rem);
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
     font-weight: 700;
-    line-height: 1.0;
+    line-height: 1;
     letter-spacing: -0.02em;
-    margin: 0 0 6px;
+    margin: 0;
     color: #1a1a2e;
+    white-space: nowrap;
 }
 .hp-name-last {
     background: linear-gradient(135deg, #f5576c 0%, #ff9a56 40%, #f093fb 90%);
@@ -95,131 +98,126 @@
     -webkit-text-fill-color: transparent;
     background-clip: text;
 }
-
-.hp-role {
-    font-size: clamp(1rem, 1.6vw, 1.25rem);
-    font-weight: 400;
-    color: rgba(26,26,46,0.5);
-    letter-spacing: 0.5px;
-    margin: 0 0 28px;
-}
-.hp-role strong {
-    color: rgba(26,26,46,0.8);
+.hp-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    background: rgba(16, 185, 129, 0.1);
+    border: 1.5px solid rgba(16, 185, 129, 0.25);
+    border-radius: 50px;
+    font-size: 11px;
     font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #059669;
+    white-space: nowrap;
+}
+.hp-status-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #10b981;
+    animation: hp-blink 2.5s ease-in-out infinite;
+}
+@keyframes hp-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0.4; }
 }
 
-.hp-bio {
-    font-size: 1rem;
+.hp-tagline {
+    font-size: clamp(0.95rem, 1.3vw, 1.1rem);
     color: rgba(26,26,46,0.5);
-    line-height: 1.7;
-    max-width: 500px;
-    margin: 0 0 36px;
+    line-height: 1.55;
+    margin: 0 0 14px;
+    max-width: 600px;
 }
-.hp-bio em {
-    color: rgba(26,26,46,0.72);
-    font-style: normal;
-    font-weight: 500;
-}
+.hp-tagline strong { color: rgba(26,26,46,0.75); font-weight: 600; }
+.hp-tagline .hl { color: #f5576c; font-weight: 500; }
 
-/* tech stack */
-.hp-stack {
+.hp-chips {
     display: flex;
     flex-wrap: wrap;
-    gap: 8px;
-    margin-bottom: 40px;
+    gap: 6px;
+    margin-bottom: 16px;
 }
 .hp-chip {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
+    gap: 5px;
+    padding: 4px 12px;
     background: rgba(255,255,255,0.85);
-    border: 1.5px solid rgba(0,0,0,0.08);
+    border: 1.5px solid rgba(0,0,0,0.07);
     border-radius: 20px;
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 500;
-    color: #374151;
-    transition: all 0.25s ease;
-    backdrop-filter: blur(8px);
+    color: #555;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(6px);
 }
 .hp-chip:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
 }
-.hp-chip:nth-child(1):hover { background: rgba(255,140,40,0.1); border-color: rgba(255,140,40,0.35); color: #ea580c; }
-.hp-chip:nth-child(2):hover { background: rgba(80,200,120,0.1); border-color: rgba(80,200,120,0.35); color: #16a34a; }
-.hp-chip:nth-child(3):hover { background: rgba(56,189,248,0.12); border-color: rgba(56,189,248,0.35); color: #0284c7; }
-.hp-chip:nth-child(4):hover { background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.35); color: #2563eb; }
-.hp-chip:nth-child(5):hover { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.35); color: #d97706; }
-.hp-chip:nth-child(6):hover { background: rgba(14,165,233,0.1); border-color: rgba(14,165,233,0.35); color: #0369a1; }
-.hp-chip:nth-child(7):hover { background: rgba(99,102,241,0.1); border-color: rgba(99,102,241,0.35); color: #4f46e5; }
-.hp-chip:nth-child(8):hover { background: rgba(236,72,153,0.1); border-color: rgba(236,72,153,0.35); color: #db2777; }
-.hp-chip i { font-size: 11px; }
+.hp-chip i { font-size: 10px; }
 
-/* CTAs */
-.hp-ctas {
+.hp-actions {
     display: flex;
-    gap: 12px;
+    gap: 10px;
     align-items: center;
-    margin-bottom: 36px;
     flex-wrap: wrap;
 }
-
 .hp-cta-main {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
-    padding: 14px 28px;
+    gap: 7px;
+    padding: 10px 22px;
     background: linear-gradient(135deg, #f5576c, #ff9a56);
     color: #fff !important;
     border-radius: 50px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 600;
     text-decoration: none !important;
     transition: all 0.3s ease;
-    box-shadow: 0 8px 24px rgba(245,87,108,0.35);
+    box-shadow: 0 6px 20px rgba(245,87,108,0.3);
 }
 .hp-cta-main:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 14px 36px rgba(245,87,108,0.5);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(245,87,108,0.45);
     color: #fff !important;
 }
-
 .hp-cta-sec {
     display: inline-flex;
     align-items: center;
-    gap: 9px;
-    padding: 13px 26px;
+    gap: 7px;
+    padding: 9px 20px;
     background: rgba(255,255,255,0.8);
-    color: #374151 !important;
-    border: 1.5px solid rgba(0,0,0,0.12);
+    color: #555 !important;
+    border: 1.5px solid rgba(0,0,0,0.1);
     border-radius: 50px;
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 500;
     text-decoration: none !important;
     transition: all 0.3s ease;
-    backdrop-filter: blur(8px);
 }
 .hp-cta-sec:hover {
-    background: rgba(255,255,255,0.95);
-    border-color: rgba(0,0,0,0.2);
+    background: #fff;
+    border-color: rgba(0,0,0,0.18);
     color: #1a1a2e !important;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+    box-shadow: 0 4px 14px rgba(0,0,0,0.06);
 }
 
-/* social row */
+/* Right side — socials + stats */
+.hp-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 16px;
+}
 .hp-socials {
     display: flex;
     align-items: center;
     gap: 6px;
-}
-.hp-social-label {
-    font-size: 11px;
-    color: rgba(26,26,46,0.3);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-right: 8px;
 }
 .hp-soc {
     width: 36px; height: 36px;
@@ -233,332 +231,589 @@
     font-size: 15px;
     text-decoration: none !important;
     transition: all 0.25s ease;
-    backdrop-filter: blur(8px);
 }
 .hp-soc:hover {
     transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.1);
 }
 .hp-soc[title="LinkedIn"]:hover  { background: rgba(0,119,181,0.1); border-color: rgba(0,119,181,0.3); color: #0077b5 !important; }
 .hp-soc[title="Instagram"]:hover { background: rgba(225,48,108,0.1); border-color: rgba(225,48,108,0.3); color: #e1306c !important; }
 .hp-soc[title="GitHub"]:hover    { background: rgba(36,41,46,0.08); border-color: rgba(36,41,46,0.2);   color: #24292e !important; }
 
-/* ─ Right column — photo panel ──────────────────────── */
-.hp-right {
-    position: relative;
-    z-index: 1;
+.hp-mini-stats {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: stretch;
+    gap: 20px;
 }
-
-.hp-photo-main {
-    border-radius: 20px;
-    overflow: hidden;
-    position: relative;
-    aspect-ratio: 3/4;
-    box-shadow:
-        0 30px 80px rgba(245,87,108,0.15),
-        0 10px 30px rgba(0,0,0,0.08),
-        0 0 0 1px rgba(255,255,255,0.9) inset;
+.hp-mini-stat {
+    text-align: right;
 }
-.hp-photo-main img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    transition: transform 0.6s ease;
-}
-.hp-photo-main:hover img { transform: scale(1.04); }
-
-/* overlay label */
-.hp-photo-label {
-    position: absolute;
-    bottom: 14px; left: 14px;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    padding: 7px 12px;
-    background: rgba(255,255,255,0.88);
-    backdrop-filter: blur(12px);
-    border-radius: 10px;
-    border: 1px solid rgba(255,255,255,0.95);
-    color: #374151;
-    font-size: 11px;
-    font-weight: 500;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
-}
-.hp-photo-label i { color: #f5576c; }
-
-/* small grid below main photo */
-.hp-photo-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 10px;
-}
-.hp-photo-thumb {
-    border-radius: 12px;
-    overflow: hidden;
-    aspect-ratio: 1;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    cursor: pointer;
-    position: relative;
-}
-.hp-photo-thumb img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.4s ease;
-}
-.hp-photo-thumb:hover img { transform: scale(1.08); }
-
-/* floating stats card */
-.hp-stats-card {
-    position: absolute;
-    top: 20px; right: -18px;
-    padding: 12px 16px;
-    background: rgba(255,255,255,0.92);
-    backdrop-filter: blur(16px);
-    border: 1.5px solid rgba(255,255,255,0.95);
-    border-radius: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    box-shadow: 0 8px 30px rgba(245,87,108,0.15), 0 2px 8px rgba(0,0,0,0.06);
-}
-.hp-stats-num {
-    font-size: 22px;
+.hp-mini-stat-n {
+    font-size: 1.3rem;
     font-weight: 800;
-    background: linear-gradient(135deg, #f5576c, #ff9a56);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
     line-height: 1;
+    letter-spacing: -0.02em;
 }
-.hp-stats-lbl {
+.hp-mini-stat:nth-child(1) .hp-mini-stat-n { color: #f5576c; }
+.hp-mini-stat:nth-child(2) .hp-mini-stat-n { color: #667eea; }
+.hp-mini-stat:nth-child(3) .hp-mini-stat-n { color: #10b981; }
+.hp-mini-stat-t {
     font-size: 10px;
-    color: #9ca3af;
+    color: rgba(26,26,46,0.35);
     text-transform: uppercase;
-    letter-spacing: 0.8px;
+    letter-spacing: 0.5px;
     font-weight: 500;
 }
 
 /* ══════════════════════════════════════════════════════
-   STATS BAR
+   FEATURED PROJECTS — main content, visible above fold
+══════════════════════════════════════════════════════ */
+.hp-projects {
+    position: relative;
+    z-index: 1;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 40px 80px 40px;
+    box-sizing: border-box;
+}
+.hp-projects-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.hp-projects-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+.hp-see-all {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #f5576c !important;
+    text-decoration: none !important;
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+.hp-see-all:hover { gap: 12px; color: #e0405a !important; }
+.hp-see-all i { font-size: 10px; transition: transform 0.25s ease; }
+.hp-see-all:hover i { transform: translateX(3px); }
+
+/* Bento grid — 4 cols, featured card spans 2x2 */
+.hp-bento {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: minmax(0, 1fr);
+    gap: 16px;
+}
+.hp-bento-card {
+    background: rgba(255,255,255,0.82);
+    border: 1.5px solid rgba(0,0,0,0.06);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: all 0.35s cubic-bezier(0.4,0,0.2,1);
+    backdrop-filter: blur(12px);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+}
+.hp-bento-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+    border-color: rgba(245,87,108,0.2);
+}
+.hp-bento-card.big {
+    grid-column: span 2;
+    grid-row: span 2;
+}
+.hp-bento-banner {
+    height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 36px;
+    position: relative;
+    flex-shrink: 0;
+}
+.hp-bento-card.big .hp-bento-banner {
+    height: 200px;
+    font-size: 52px;
+}
+.hp-bento-body {
+    padding: 18px 20px 20px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+.hp-bento-card.big .hp-bento-body {
+    padding: 22px 26px 26px;
+}
+.hp-bento-title {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0 0 5px;
+}
+.hp-bento-card.big .hp-bento-title {
+    font-size: 1.25rem;
+}
+.hp-bento-desc {
+    font-size: 0.82rem;
+    color: #888;
+    line-height: 1.5;
+    margin: 0 0 14px;
+    flex: 1;
+}
+.hp-bento-card.big .hp-bento-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+.hp-bento-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+}
+.hp-bento-tag {
+    font-size: 10.5px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 50px;
+    background: rgba(245,87,108,0.06);
+    border: 1px solid rgba(245,87,108,0.14);
+    color: #c44058;
+}
+.hp-bento-card:nth-child(2) .hp-bento-tag {
+    background: rgba(15,32,39,0.06); border-color: rgba(15,32,39,0.14); color: #2c5364;
+}
+.hp-bento-card:nth-child(3) .hp-bento-tag {
+    background: rgba(17,153,142,0.06); border-color: rgba(17,153,142,0.14); color: #0d7d74;
+}
+.hp-bento-card:nth-child(4) .hp-bento-tag {
+    background: rgba(250,112,154,0.06); border-color: rgba(250,112,154,0.14); color: #c4547a;
+}
+.hp-bento-card:nth-child(5) .hp-bento-tag {
+    background: rgba(79,172,254,0.06); border-color: rgba(79,172,254,0.14); color: #2b7ec7;
+}
+.hp-bento-card:nth-child(6) .hp-bento-tag {
+    background: rgba(161,140,209,0.06); border-color: rgba(161,140,209,0.14); color: #7b68a8;
+}
+.hp-bento-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #f5576c !important;
+    text-decoration: none !important;
+    margin-top: 10px;
+    transition: gap 0.2s ease;
+}
+.hp-bento-link:hover { gap: 10px; }
+.hp-bento-link i { font-size: 10px; }
+
+/* ══════════════════════════════════════════════════════
+   PHOTOGRAPHY ROW — below projects
+══════════════════════════════════════════════════════ */
+.hp-photos {
+    position: relative;
+    z-index: 1;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 20px 80px 50px;
+    box-sizing: border-box;
+}
+.hp-photos-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+.hp-photos-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 0;
+}
+.hp-photos-see {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #10b981 !important;
+    text-decoration: none !important;
+    transition: all 0.25s ease;
+}
+.hp-photos-see:hover { gap: 12px; }
+.hp-photos-see i { font-size: 10px; }
+
+.hp-photo-strip {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 14px;
+    height: 280px;
+}
+.hp-photo-item {
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+}
+.hp-photo-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+.hp-photo-item:hover img { transform: scale(1.06); }
+.hp-photo-ov {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.45), transparent 50%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: flex-end;
+    padding: 16px;
+}
+.hp-photo-item:hover .hp-photo-ov { opacity: 1; }
+.hp-photo-ov span {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* ══════════════════════════════════════════════════════
+   BOTTOM BAR
 ══════════════════════════════════════════════════════ */
 .hp-bar {
     border-top: 1px solid rgba(0,0,0,0.06);
-    background: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.55);
     backdrop-filter: blur(16px);
     position: relative;
     z-index: 1;
 }
 .hp-bar-inner {
-    max-width: 1360px;
+    max-width: 1600px;
     margin: 0 auto;
-    padding: 24px 70px;
+    padding: 22px 80px;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 20px;
+    justify-content: center;
+    gap: 28px;
+    flex-wrap: wrap;
 }
-.hp-stat {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
+.hp-bar-link {
+    color: rgba(26,26,46,0.38);
+    font-size: 13px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
 }
-.hp-stat-n {
-    font-size: 1.8rem;
-    font-weight: 800;
-    line-height: 1;
-    letter-spacing: -0.03em;
-}
-.hp-stat:nth-child(1) .hp-stat-n { color: #f5576c; }
-.hp-stat:nth-child(3) .hp-stat-n { color: #667eea; }
-.hp-stat:nth-child(5) .hp-stat-n { color: #10b981; }
-.hp-stat-t {
-    font-size: 12px;
-    color: rgba(26,26,46,0.4);
-    font-weight: 400;
-}
-.hp-bar-divider {
-    width: 1px; height: 36px;
-    background: rgba(0,0,0,0.08);
+.hp-bar-link:hover { color: #f5576c; }
+.hp-bar-link i { font-size: 10px; }
+.hp-bar-dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: rgba(26,26,46,0.15);
 }
 
 /* ══════════════════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════════════════ */
-@media (max-width: 1100px) {
-    .hp-hero { padding: 50px 50px 40px; gap: 50px; }
-    .hp-right { max-width: 360px; }
-    .hp-left  { padding-right: 0; }
-    .hp-stats-card { right: -10px; }
-    .hp-bar-inner  { padding: 22px 50px; }
+@media (max-width: 1200px) {
+    .hp-intro { padding: 90px 50px 0; gap: 30px; }
+    .hp-projects { padding: 36px 50px 36px; }
+    .hp-photos { padding: 16px 50px 40px; }
+    .hp-bar-inner { padding: 20px 50px; }
+    .hp-bento { grid-template-columns: repeat(3, 1fr); }
+    .hp-bento-card.big { grid-column: span 2; grid-row: span 2; }
+    .hp-photo-strip { height: 240px; }
 }
 
 @media (max-width: 900px) {
-    .hp-hero {
-        grid-template-columns: 1fr;
-        padding: 40px 36px 36px;
+    .hp-intro {
+        grid-template-columns: auto 1fr;
+        padding: 85px 36px 0;
+        gap: 24px;
     }
-    .hp-right {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        max-width: 100%;
-        gap: 12px;
-    }
-    .hp-photo-main { aspect-ratio: 4/3; grid-column: span 2; }
-    .hp-photo-row  { display: contents; }
-    .hp-stats-card { top: 14px; right: 14px; }
-    .hp-bar-inner  { padding: 20px 36px; flex-wrap: wrap; gap: 16px 30px; }
-    .hp-bar-divider { display: none; }
+    .hp-meta { display: none; }
+    .hp-projects { padding: 30px 36px; }
+    .hp-photos { padding: 10px 36px 36px; }
+    .hp-bento { grid-template-columns: repeat(2, 1fr); }
+    .hp-bento-card.big { grid-column: span 2; grid-row: span 1; }
+    .hp-bento-card.big .hp-bento-banner { height: 140px; }
+    .hp-photo-strip { grid-template-columns: 1fr 1fr; height: auto; }
+    .hp-photo-item { aspect-ratio: 3/2; }
+    .hp-bar-inner { padding: 18px 36px; gap: 20px; }
 }
 
 @media (max-width: 600px) {
-    .hp { padding-top: 70px; }
-    .hp-hero { padding: 30px 20px 24px; }
-    .hp-name { font-size: 2.6rem; }
-    .hp-bio  { display: none; }
-    .hp-right { grid-template-columns: 1fr; }
-    .hp-photo-main { grid-column: span 1; aspect-ratio: 16/9; }
-    .hp-photo-row  { display: none; }
-    .hp-stats-card { display: none; }
-    .hp-bar-inner  { padding: 18px 20px; gap: 14px 24px; justify-content: flex-start; }
-    .hp-stat-n { font-size: 1.4rem; }
+    .hp-intro {
+        grid-template-columns: 1fr;
+        padding: 80px 20px 0;
+        text-align: center;
+    }
+    .hp-photo-col { display: flex; justify-content: center; }
+    .hp-avatar { width: 100px; height: 100px; border-radius: 20px; }
+    .hp-name-row { justify-content: center; }
+    .hp-name { font-size: 1.8rem; }
+    .hp-tagline { margin-left: auto; margin-right: auto; }
+    .hp-chips { justify-content: center; }
+    .hp-actions { justify-content: center; }
+    .hp-projects { padding: 24px 20px; }
+    .hp-photos { padding: 10px 20px 30px; }
+    .hp-bento { grid-template-columns: 1fr; }
+    .hp-bento-card.big { grid-column: span 1; }
+    .hp-bento-card.big .hp-bento-banner { height: 120px; }
+    .hp-photo-strip { grid-template-columns: 1fr 1fr; height: auto; }
+    .hp-photo-item { aspect-ratio: 1; }
+    .hp-bar-inner { padding: 16px 20px; gap: 16px; }
+    .hp-mini-stats { display: none; }
 }
 </style>
 
 <div class="hp">
 
-    <!-- ══ HERO ══════════════════════════════════════════════════════════ -->
-    <div class="hp-hero">
+    <!-- ══ INTRO STRIP ═══════════════════════════════════════════════════ -->
+    <div class="hp-intro">
 
-        <!-- ── Left: identity + CTAs ─────────────────────────────── -->
-        <div class="hp-left">
-
-            <div class="hp-badge">
-                <span class="hp-badge-dot"></span>
-                <span class="hp-badge-text">Open to opportunities</span>
+        <!-- Photo -->
+        <div class="hp-photo-col">
+            <div class="hp-avatar">
+                <img src="images/headshot.jpg" alt="Henok Mekuria">
             </div>
+            <div class="hp-avatar-badge"><i class="fas fa-camera"></i></div>
+        </div>
 
-            <h1 class="hp-name">
-                Henok<br>
-                <span class="hp-name-last">Mekuria</span>
-            </h1>
-
-            <p class="hp-role">
-                <strong>Full-Stack Software Engineer</strong> &nbsp;·&nbsp; Java · Spring · React
+        <!-- Identity -->
+        <div class="hp-identity">
+            <div class="hp-name-row">
+                <h1 class="hp-name">Henok <span class="hp-name-last">Mekuria</span></h1>
+                <span class="hp-status"><span class="hp-status-dot"></span> Open to work</span>
+            </div>
+            <p class="hp-tagline">
+                I write code that <strong>ships products</strong> and shoot photos that <span class="hl">tell stories</span>.
+                Full-stack engineer — Java, Spring, React by day. Wildlife photographer on weekends.
             </p>
-
-            <p class="hp-bio">
-                I build scalable backends and clean frontends — from REST APIs and microservices to
-                responsive UIs. <em>5+ years shipping production software</em>, with a creative eye
-                that comes from also being a photographer.
-            </p>
-
-            <div class="hp-stack">
+            <div class="hp-chips">
                 <span class="hp-chip"><i class="fab fa-java"></i> Java</span>
-                <span class="hp-chip"><i class="fas fa-leaf"></i> Spring Boot</span>
+                <span class="hp-chip"><i class="fas fa-leaf"></i> Spring</span>
                 <span class="hp-chip"><i class="fab fa-react"></i> React</span>
                 <span class="hp-chip"><i class="fab fa-python"></i> Python</span>
                 <span class="hp-chip"><i class="fab fa-aws"></i> AWS</span>
                 <span class="hp-chip"><i class="fab fa-docker"></i> Docker</span>
-                <span class="hp-chip"><i class="fas fa-database"></i> PostgreSQL</span>
-                <span class="hp-chip"><i class="fas fa-gamepad"></i> C++ / SFML</span>
+                <span class="hp-chip"><i class="fas fa-database"></i> SQL</span>
+                <span class="hp-chip"><i class="fas fa-gamepad"></i> C++</span>
             </div>
-
-            <div class="hp-ctas">
+            <div class="hp-actions">
                 <a href="#" class="hp-cta-main" onclick="showProjects(); return false;">
-                    <i class="fas fa-briefcase"></i> View Projects
+                    <i class="fas fa-briefcase"></i> All Projects
                 </a>
                 <a href="#" class="hp-cta-sec" onclick="showContact(); return false;">
-                    <i class="fas fa-paper-plane"></i> Get In Touch
+                    <i class="fas fa-paper-plane"></i> Let's Talk
+                </a>
+                <a href="#" class="hp-cta-sec" onclick="showGallery(); return false;">
+                    <i class="fas fa-camera"></i> Gallery
                 </a>
             </div>
-
-            <div class="hp-socials">
-                <span class="hp-social-label">Find me</span>
-                <a href="https://github.com/lol0chx" target="_blank" class="hp-soc" title="GitHub">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/henokmekuria/" target="_blank" class="hp-soc" title="LinkedIn">
-                    <i class="fab fa-linkedin"></i>
-                </a>
-                <a href="https://instagram.com" target="_blank" class="hp-soc" title="Instagram">
-                    <i class="fab fa-instagram"></i>
-                </a>
-            </div>
-
         </div>
 
-        <!-- ── Right: photography personality ───────────────────── -->
-        <div class="hp-right">
-
-            <!-- floating stats chip -->
-            <div class="hp-stats-card">
-                <span class="hp-stats-num">200+</span>
-                <span class="hp-stats-lbl">Photos Shot</span>
+        <!-- Social + stats -->
+        <div class="hp-meta">
+            <div class="hp-socials">
+                <a href="https://github.com/lol0chx" target="_blank" class="hp-soc" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://www.linkedin.com/in/henokmekuria/" target="_blank" class="hp-soc" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://instagram.com" target="_blank" class="hp-soc" title="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
-
-            <!-- headshot -->
-            <div class="hp-photo-main">
-                <img src="images/headshot.jpg" alt="Henok Mekuria">
-                <div class="hp-photo-label">
-                    <i class="fas fa-camera"></i> Nikon D7500
+            <div class="hp-mini-stats">
+                <div class="hp-mini-stat">
+                    <div class="hp-mini-stat-n">5+</div>
+                    <div class="hp-mini-stat-t">Years</div>
                 </div>
-            </div>
-
-            <!-- wildlife thumbnails -->
-            <div class="hp-photo-row">
-                <div class="hp-photo-thumb">
-                    <img src="images/01.jpg" alt="Wildlife">
+                <div class="hp-mini-stat">
+                    <div class="hp-mini-stat-n">8</div>
+                    <div class="hp-mini-stat-t">Projects</div>
                 </div>
-                <div class="hp-photo-thumb">
-                    <img src="images/03.jpg" alt="Duck">
-                </div>
-                <div class="hp-photo-thumb">
-                    <img src="images/04.jpg" alt="Urban sky">
+                <div class="hp-mini-stat">
+                    <div class="hp-mini-stat-n">200+</div>
+                    <div class="hp-mini-stat-t">Photos</div>
                 </div>
             </div>
-
         </div>
 
     </div>
 
-    <!-- ══ STATS BAR ═════════════════════════════════════════════════════ -->
+    <!-- ══ FEATURED PROJECTS — bento grid, visible immediately ═══════════ -->
+    <div class="hp-projects">
+
+        <div class="hp-projects-header">
+            <h2 class="hp-projects-title">Featured Projects</h2>
+            <a href="#" class="hp-see-all" onclick="showProjects(); return false;">
+                See all 8 projects <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <div class="hp-bento">
+
+            <!-- E-Commerce — big featured card -->
+            <div class="hp-bento-card big" onclick="showProjects()">
+                <div class="hp-bento-banner" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    🛍️
+                </div>
+                <div class="hp-bento-body">
+                    <h3 class="hp-bento-title">E-Commerce Platform</h3>
+                    <p class="hp-bento-desc">The full thing — catalog, cart, auth, orders, admin dashboard. Spring Boot backend, vanilla JS frontend. Learned that debugging payment flows at 2am builds character.</p>
+                    <div class="hp-bento-tags">
+                        <span class="hp-bento-tag">Java</span>
+                        <span class="hp-bento-tag">Spring Boot</span>
+                        <span class="hp-bento-tag">MySQL</span>
+                        <span class="hp-bento-tag">JavaScript</span>
+                    </div>
+                    <a href="https://github.com/lol0chx" target="_blank" class="hp-bento-link" onclick="event.stopPropagation();">
+                        View on GitHub <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- 2D Board Game -->
+            <div class="hp-bento-card" onclick="showProjects()">
+                <div class="hp-bento-banner" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);">
+                    🎮
+                </div>
+                <div class="hp-bento-body">
+                    <h3 class="hp-bento-title">2D Board Game</h3>
+                    <p class="hp-bento-desc">C++ and SFML — real-time rendering, game state, board mechanics. Proof I can think in pointers.</p>
+                    <div class="hp-bento-tags">
+                        <span class="hp-bento-tag">C++</span>
+                        <span class="hp-bento-tag">SFML</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Snake Game -->
+            <div class="hp-bento-card" onclick="window.open('snake-game.html','_blank')">
+                <div class="hp-bento-banner" style="background: linear-gradient(135deg, #11998e, #38ef7d);">
+                    🐍
+                </div>
+                <div class="hp-bento-body">
+                    <h3 class="hp-bento-title">Snake Game</h3>
+                    <p class="hp-bento-desc">Classic snake, zero dependencies. Canvas, local high scores, mobile swipe. Try to beat 30.</p>
+                    <div class="hp-bento-tags">
+                        <span class="hp-bento-tag">Canvas</span>
+                        <span class="hp-bento-tag">JavaScript</span>
+                    </div>
+                    <a href="snake-game.html" target="_blank" class="hp-bento-link" onclick="event.stopPropagation();" style="color:#11998e !important;">
+                        Play it <i class="fas fa-gamepad"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Fractal Visualizer -->
+            <div class="hp-bento-card" onclick="window.open('binary_tree_fractal.html','_blank')">
+                <div class="hp-bento-banner" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                    🌲
+                </div>
+                <div class="hp-bento-body">
+                    <h3 class="hp-bento-title">Fractal Visualizer</h3>
+                    <p class="hp-bento-desc">Recursive binary trees on Canvas. Tweak angle, depth, colors — math that looks good.</p>
+                    <div class="hp-bento-tags">
+                        <span class="hp-bento-tag">Canvas</span>
+                        <span class="hp-bento-tag">Recursion</span>
+                    </div>
+                    <a href="binary_tree_fractal.html" target="_blank" class="hp-bento-link" onclick="event.stopPropagation();" style="color:#fa709a !important;">
+                        Try demo <i class="fas fa-external-link-alt"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Microservices -->
+            <div class="hp-bento-card" onclick="showProjects()">
+                <div class="hp-bento-banner" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                    ⚙️
+                </div>
+                <div class="hp-bento-body">
+                    <h3 class="hp-bento-title">Microservices Gateway</h3>
+                    <p class="hp-bento-desc">API gateway, Eureka discovery, JWT auth, Docker Compose. Distributed systems done right.</p>
+                    <div class="hp-bento-tags">
+                        <span class="hp-bento-tag">Spring Cloud</span>
+                        <span class="hp-bento-tag">Docker</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Auth Service -->
+            <div class="hp-bento-card" onclick="showProjects()">
+                <div class="hp-bento-banner" style="background: linear-gradient(135deg, #a18cd1, #fbc2eb);">
+                    🔐
+                </div>
+                <div class="hp-bento-body">
+                    <h3 class="hp-bento-title">Auth Service</h3>
+                    <p class="hp-bento-desc">Spring Security, JWT, OAuth2, RBAC, MFA. The auth module I reuse in everything.</p>
+                    <div class="hp-bento-tags">
+                        <span class="hp-bento-tag">Spring Security</span>
+                        <span class="hp-bento-tag">JWT</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ══ PHOTOGRAPHY ROW ═══════════════════════════════════════════════ -->
+    <div class="hp-photos">
+
+        <div class="hp-photos-header">
+            <h2 class="hp-photos-title">Through My Lens</h2>
+            <a href="#" class="hp-photos-see" onclick="showGallery(); return false;">
+                Browse gallery <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <div class="hp-photo-strip">
+            <div class="hp-photo-item" onclick="showGallery()">
+                <img src="images/01.jpg" alt="Wildlife">
+                <div class="hp-photo-ov"><span><i class="fas fa-camera"></i> Wildlife</span></div>
+            </div>
+            <div class="hp-photo-item" onclick="showGallery()">
+                <img src="images/02.jpg" alt="Street">
+                <div class="hp-photo-ov"><span><i class="fas fa-camera"></i> Street</span></div>
+            </div>
+            <div class="hp-photo-item" onclick="showGallery()">
+                <img src="images/03.jpg" alt="Duck">
+                <div class="hp-photo-ov"><span><i class="fas fa-camera"></i> Wildlife</span></div>
+            </div>
+            <div class="hp-photo-item" onclick="showGallery()">
+                <img src="images/04.jpg" alt="Urban">
+                <div class="hp-photo-ov"><span><i class="fas fa-camera"></i> Urban</span></div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ══ BOTTOM BAR ════════════════════════════════════════════════════ -->
     <div class="hp-bar">
         <div class="hp-bar-inner">
-            <div class="hp-stat">
-                <span class="hp-stat-n">5+</span>
-                <span class="hp-stat-t">Years of experience</span>
-            </div>
-            <div class="hp-bar-divider"></div>
-            <div class="hp-stat">
-                <span class="hp-stat-n">6+</span>
-                <span class="hp-stat-t">Projects shipped</span>
-            </div>
-            <div class="hp-bar-divider"></div>
-            <div class="hp-stat">
-                <span class="hp-stat-n">200+</span>
-                <span class="hp-stat-t">Photos captured</span>
-            </div>
-            <div class="hp-bar-divider"></div>
-            <div style="margin-left:auto; display:flex; gap:12px; align-items:center; flex-wrap:wrap;">
-                <a href="#" onclick="showProjects();  return false;" style="color:rgba(26,26,46,0.4);font-size:13px;text-decoration:none;transition:color 0.2s;font-weight:500;" onmouseover="this.style.color='#f5576c'" onmouseout="this.style.color='rgba(26,26,46,0.4)'">
-                    Projects <i class="fas fa-arrow-right" style="font-size:10px;"></i>
-                </a>
-                <a href="#" onclick="showGallery();   return false;" style="color:rgba(26,26,46,0.4);font-size:13px;text-decoration:none;transition:color 0.2s;font-weight:500;" onmouseover="this.style.color='#f093fb'" onmouseout="this.style.color='rgba(26,26,46,0.4)'">
-                    Gallery <i class="fas fa-arrow-right" style="font-size:10px;"></i>
-                </a>
-                <a href="#" onclick="showAbout();     return false;" style="color:rgba(26,26,46,0.4);font-size:13px;text-decoration:none;transition:color 0.2s;font-weight:500;" onmouseover="this.style.color='#10b981'" onmouseout="this.style.color='rgba(26,26,46,0.4)'">
-                    About <i class="fas fa-arrow-right" style="font-size:10px;"></i>
-                </a>
-                <a href="#" onclick="showContact();   return false;" style="color:rgba(26,26,46,0.4);font-size:13px;text-decoration:none;transition:color 0.2s;font-weight:500;" onmouseover="this.style.color='#667eea'" onmouseout="this.style.color='rgba(26,26,46,0.4)'">
-                    Contact <i class="fas fa-arrow-right" style="font-size:10px;"></i>
-                </a>
-            </div>
+            <a href="#" class="hp-bar-link" onclick="showProjects(); return false;">Projects <i class="fas fa-arrow-right"></i></a>
+            <span class="hp-bar-dot"></span>
+            <a href="#" class="hp-bar-link" onclick="showGallery(); return false;">Gallery <i class="fas fa-arrow-right"></i></a>
+            <span class="hp-bar-dot"></span>
+            <a href="#" class="hp-bar-link" onclick="showAbout(); return false;">About <i class="fas fa-arrow-right"></i></a>
+            <span class="hp-bar-dot"></span>
+            <a href="#" class="hp-bar-link" onclick="showContact(); return false;">Contact <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
 
