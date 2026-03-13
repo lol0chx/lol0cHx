@@ -3174,9 +3174,9 @@ body {
 }
 
 .about-avatar {
-    width: 160px;
-    height: 160px;
-    border-radius: 24px;
+    width: 280px;
+    height: 370px;
+    border-radius: 16px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     display: flex;
     align-items: center;
@@ -3184,6 +3184,7 @@ body {
     font-size: 60px;
     color: white;
     box-shadow: 0 20px 50px rgba(102,126,234,0.3);
+    flex-shrink: 0;
 }
 
 .about-contact-links {

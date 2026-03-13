@@ -67,86 +67,128 @@
     z-index: 0;
 }
 
-.hp-intro {
+/* ── HERO ─────────────────────────────────────────── */
+.hp-hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
     position: relative;
     z-index: 1;
     max-width: 1600px;
     margin: 0 auto;
-    padding: 120px 80px 80px;
+    width: 100%;
+}
+
+.hp-hero-inner {
+    padding: 140px 60px 100px 80px;
     box-sizing: border-box;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 64px;
+}
+
+/* ── Stacked project cards (right column) ─────────── */
+.hp-right {
+    display: flex;
     align-items: center;
+    justify-content: center;
+    padding: 100px 60px 100px 20px;
 }
 
-.hp-photo-col { position: relative; }
-.hp-avatar {
-    width: 210px; height: 210px;
-    border-radius: 28px;
+.hp-card-stack {
+    position: relative;
+    width: 460px;
+    height: 380px;
+    flex-shrink: 0;
+}
+
+.hp-stack-card {
+    position: absolute;
+    width: 240px;
+    height: 320px;
+    border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 24px 70px rgba(245,87,108,0.2), 0 8px 28px rgba(0,0,0,0.1);
+    border: 5px solid #111;
+    cursor: pointer;
+    transition: transform 0.35s cubic-bezier(0.4,0,0.2,1), box-shadow 0.35s ease, z-index 0s;
 }
-.hp-avatar img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
-.hp-avatar-badge {
-    position: absolute; bottom: -8px; right: -8px;
-    width: 44px; height: 44px;
-    background: linear-gradient(135deg, #f5576c, #ff9a56);
-    border-radius: 14px;
+.hp-stack-card:nth-child(1) {
+    left: 0; top: 35px;
+    transform: perspective(900px) rotateY(-22deg);
+    box-shadow: -16px 24px 60px rgba(0,0,0,0.32);
+    z-index: 4;
+}
+.hp-stack-card:nth-child(2) {
+    left: 110px; top: 17px;
+    transform: perspective(900px) rotateY(-14deg);
+    box-shadow: -12px 20px 50px rgba(0,0,0,0.25);
+    z-index: 3;
+}
+.hp-stack-card:nth-child(3) {
+    left: 220px; top: 0;
+    transform: perspective(900px) rotateY(-6deg);
+    box-shadow: -8px 16px 40px rgba(0,0,0,0.18);
+    z-index: 2;
+}
+.hp-stack-card:hover {
+    transform: perspective(900px) rotateY(0deg) translateY(-14px) !important;
+    box-shadow: 0 32px 70px rgba(0,0,0,0.28) !important;
+    z-index: 10 !important;
+}
+.hp-stack-card-inner {
+    width: 100%; height: 100%;
     display: flex; align-items: center; justify-content: center;
-    color: #fff; font-size: 18px;
-    box-shadow: 0 6px 18px rgba(245,87,108,0.45);
-    border: 4px solid #fff5fb;
+    font-size: 52px;
+}
+.hp-stack-label {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 40px 14px 14px;
+    background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
 }
 
-.hp-identity { min-width: 0; }
-.hp-name-row {
-    display: flex; align-items: center; gap: 16px;
-    flex-wrap: wrap; margin-bottom: 16px;
+/* Badge */
+.hp-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 7px 16px;
+    background: rgba(16,185,129,0.1); border: 1.5px solid rgba(16,185,129,0.25);
+    border-radius: 50px; margin-bottom: 32px;
 }
+.hp-badge-dot {
+    width: 7px; height: 7px; border-radius: 50%; background: #10b981;
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.2);
+    animation: hp-blink 2.5s ease-in-out infinite;
+}
+.hp-badge-text { font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: #059669; }
+@keyframes hp-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+/* Name */
 .hp-name {
     font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(2.6rem, 4.5vw, 5rem);
-    font-weight: 700; line-height: 1;
-    letter-spacing: -0.03em; margin: 0;
-    color: #1a1a2e; white-space: nowrap;
+    font-size: clamp(3.8rem, 7vw, 7.5rem);
+    font-weight: 700; line-height: 1.0;
+    letter-spacing: -0.03em; margin: 0 0 24px; color: #1a1a2e;
 }
 .hp-name-last {
     background: linear-gradient(135deg, #f5576c 0%, #ff9a56 40%, #f093fb 90%);
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
 }
-.hp-status {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 4px 12px;
-    background: rgba(16,185,129,0.1); border: 1.5px solid rgba(16,185,129,0.25);
-    border-radius: 50px; font-size: 11px; font-weight: 600;
-    letter-spacing: 1px; text-transform: uppercase; color: #059669; white-space: nowrap;
-}
-.hp-status-dot {
-    width: 6px; height: 6px; border-radius: 50%; background: #10b981;
-    animation: hp-blink 2.5s ease-in-out infinite;
-}
-@keyframes hp-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-.hp-tagline { font-size: clamp(1rem, 1.5vw, 1.2rem); color: rgba(26,26,46,0.52); line-height: 1.65; margin: 0 0 28px; max-width: 620px; }
-.hp-tagline strong { color: rgba(26,26,46,0.78); font-weight: 600; }
-.hp-tagline .hl { color: #f5576c; font-weight: 500; }
-
-.hp-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 32px; }
-.hp-chip {
-    display: inline-flex; align-items: center; gap: 6px;
-    padding: 7px 16px;
-    background: rgba(255,255,255,0.85); border: 1.5px solid rgba(0,0,0,0.07);
-    border-radius: 20px; font-size: 13px; font-weight: 500; color: #555;
-    transition: all 0.2s ease; backdrop-filter: blur(6px);
+/* Role */
+.hp-role {
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    color: rgba(26,26,46,0.5); font-weight: 400;
+    margin: 0 0 44px; letter-spacing: 0.2px; max-width: 560px;
 }
-.hp-chip:hover { transform: translateY(-2px); box-shadow: 0 6px 16px rgba(0,0,0,0.08); }
-.hp-chip i { font-size: 11px; }
+.hp-role strong { color: rgba(26,26,46,0.78); font-weight: 600; }
 
-.hp-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+/* CTAs */
+.hp-ctas { display: flex; gap: 14px; align-items: center; margin-bottom: 48px; flex-wrap: wrap; }
 .hp-cta-main {
     display: inline-flex; align-items: center; gap: 9px;
-    padding: 14px 32px;
+    padding: 15px 36px;
     background: linear-gradient(135deg, #f5576c, #ff9a56);
     color: #fff !important; border-radius: 50px;
     font-size: 15px; font-weight: 600; text-decoration: none !important;
@@ -155,35 +197,28 @@
 .hp-cta-main:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(245,87,108,0.5); color: #fff !important; }
 .hp-cta-sec {
     display: inline-flex; align-items: center; gap: 9px;
-    padding: 13px 28px;
+    padding: 14px 30px;
     background: rgba(255,255,255,0.8); color: #555 !important;
     border: 1.5px solid rgba(0,0,0,0.1); border-radius: 50px;
-    font-size: 14px; font-weight: 500; text-decoration: none !important;
+    font-size: 15px; font-weight: 500; text-decoration: none !important;
     transition: all 0.3s ease;
 }
-.hp-cta-sec:hover { background: #fff; border-color: rgba(0,0,0,0.18); color: #1a1a2e !important; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
+.hp-cta-sec:hover { background: #fff; border-color: rgba(0,0,0,0.2); color: #1a1a2e !important; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
 
-.hp-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 28px; }
+/* Socials */
 .hp-socials { display: flex; align-items: center; gap: 8px; }
+.hp-social-label { font-size: 11px; color: rgba(26,26,46,0.3); letter-spacing: 1px; text-transform: uppercase; margin-right: 6px; }
 .hp-soc {
-    width: 46px; height: 46px; border-radius: 13px;
+    width: 42px; height: 42px; border-radius: 12px;
     background: rgba(255,255,255,0.8); border: 1.5px solid rgba(0,0,0,0.08);
     display: flex; align-items: center; justify-content: center;
-    color: #6b7280 !important; font-size: 18px; text-decoration: none !important;
+    color: #6b7280 !important; font-size: 17px; text-decoration: none !important;
     transition: all 0.25s ease;
 }
 .hp-soc:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
 .hp-soc[title="LinkedIn"]:hover  { background: rgba(0,119,181,0.1); border-color: rgba(0,119,181,0.3); color: #0077b5 !important; }
 .hp-soc[title="Instagram"]:hover { background: rgba(225,48,108,0.1); border-color: rgba(225,48,108,0.3); color: #e1306c !important; }
-.hp-soc[title="GitHub"]:hover    { background: rgba(36,41,46,0.08); border-color: rgba(36,41,46,0.2);   color: #24292e !important; }
-
-.hp-mini-stats { display: flex; gap: 28px; }
-.hp-mini-stat { text-align: right; }
-.hp-mini-stat-n { font-size: 2.2rem; font-weight: 800; line-height: 1; letter-spacing: -0.03em; }
-.hp-mini-stat:nth-child(1) .hp-mini-stat-n { color: #f5576c; }
-.hp-mini-stat:nth-child(2) .hp-mini-stat-n { color: #667eea; }
-.hp-mini-stat:nth-child(3) .hp-mini-stat-n { color: #10b981; }
-.hp-mini-stat-t { font-size: 11px; color: rgba(26,26,46,0.35); text-transform: uppercase; letter-spacing: 1px; font-weight: 500; margin-top: 2px; }
+.hp-soc[title="GitHub"]:hover    { background: rgba(36,41,46,0.08); border-color: rgba(36,41,46,0.2); color: #24292e !important; }
 
 /* Screenshot gallery */
 .hp-projects { position: relative; z-index: 1; max-width: 1600px; margin: 0 auto; padding: 40px 80px; box-sizing: border-box; }
@@ -260,20 +295,20 @@
 
 /* Responsive */
 @media (max-width: 1200px) {
-    .hp-intro { padding: 110px 50px 60px; gap: 44px; }
-    .hp-projects { padding: 36px 50px; }
-    .hp-photos { padding: 0 50px 40px; }
-    .hp-bar-inner { padding: 20px 50px; }
+    .hp-hero-inner { padding: 130px 60px 80px; }
+    .hp-projects { padding: 36px 60px; }
+    .hp-photos { padding: 0 60px 50px; }
+    .hp-bar-inner { padding: 20px 60px; }
     .hp-shots { grid-template-columns: 1.5fr 1fr; }
     .hp-photo-strip { height: 240px; }
 }
 @media (max-width: 900px) {
-    .hp-intro { grid-template-columns: auto 1fr; padding: 90px 36px 50px; gap: 28px; }
-    .hp-meta { display: none; }
-    .hp-avatar { width: 160px; height: 160px; }
-    .hp-name { font-size: clamp(2rem, 6vw, 3.5rem); }
+    .hp-hero { grid-template-columns: 1fr; }
+    .hp-right { display: none; }
+    .hp-hero-inner { padding: 110px 36px 70px; }
+    .hp-name { font-size: clamp(3rem, 8vw, 5rem); }
     .hp-projects { padding: 30px 36px; }
-    .hp-photos { padding: 0 36px 36px; }
+    .hp-photos { padding: 0 36px 40px; }
     .hp-shots { grid-template-columns: 1fr 1fr; }
     .hp-shot.featured { grid-row: span 1; aspect-ratio: 16/10; }
     .hp-shot.featured .hp-shot-img { font-size: 40px; }
@@ -282,14 +317,10 @@
     .hp-bar-inner { padding: 18px 36px; gap: 20px; }
 }
 @media (max-width: 600px) {
-    .hp-intro { grid-template-columns: 1fr; padding: 85px 20px 40px; text-align: center; }
-    .hp-photo-col { display: flex; justify-content: center; }
-    .hp-avatar { width: 130px; height: 130px; border-radius: 22px; }
-    .hp-name-row { justify-content: center; }
-    .hp-name { font-size: 2.4rem; }
-    .hp-tagline { margin-left: auto; margin-right: auto; }
-    .hp-chips { justify-content: center; }
-    .hp-actions { justify-content: center; }
+    .hp-hero-inner { padding: 90px 20px 60px; }
+    .hp-name { font-size: clamp(2.6rem, 10vw, 4rem); }
+    .hp-role { margin-bottom: 32px; }
+    .hp-ctas { gap: 10px; }
     .hp-projects { padding: 24px 20px; }
     .hp-photos { padding: 0 20px 30px; }
     .hp-shots { grid-template-columns: 1fr; gap: 8px; }
@@ -299,113 +330,56 @@
     .hp-photo-strip { grid-template-columns: 1fr 1fr; height: auto; }
     .hp-photo-item { aspect-ratio: 1; }
     .hp-bar-inner { padding: 16px 20px; gap: 16px; }
-    .hp-mini-stats { display: none; }
 }
 </style>
 
 <div class="hp">
 
-    <div class="hp-intro">
-        <div class="hp-photo-col">
-            <div class="hp-avatar">
-                <img src="images/headshot.jpg" alt="Henok Mekuria">
-            </div>
-            <div class="hp-avatar-badge"><i class="fas fa-camera"></i></div>
-        </div>
+    <div class="hp-hero">
+        <div class="hp-hero-inner">
 
-        <div class="hp-identity">
-            <div class="hp-name-row">
-                <h1 class="hp-name">Henok <span class="hp-name-last">Mekuria</span></h1>
-                <span class="hp-status"><span class="hp-status-dot"></span> Open to work</span>
+            <div class="hp-badge">
+                <span class="hp-badge-dot"></span>
+                <span class="hp-badge-text">Open to work</span>
             </div>
-            <p class="hp-tagline">
-                I write code that <strong>ships products</strong> and shoot photos that <span class="hl">tell stories</span>.
-                Full-stack engineer — Java, Spring, React by day. Wildlife photographer on weekends.
+
+            <h1 class="hp-name">
+                Henok <span class="hp-name-last">Mekuria</span>
+            </h1>
+
+            <p class="hp-role">
+                <strong>Full-Stack Software Engineer</strong> &nbsp;·&nbsp; Java · Spring · React · 5+ years building things that ship
             </p>
-            <div class="hp-chips">
-                <span class="hp-chip"><i class="fab fa-java"></i> Java</span>
-                <span class="hp-chip"><i class="fas fa-leaf"></i> Spring</span>
-                <span class="hp-chip"><i class="fab fa-react"></i> React</span>
-                <span class="hp-chip"><i class="fab fa-python"></i> Python</span>
-                <span class="hp-chip"><i class="fab fa-aws"></i> AWS</span>
-                <span class="hp-chip"><i class="fab fa-docker"></i> Docker</span>
-                <span class="hp-chip"><i class="fas fa-database"></i> PostgreSQL</span>
-                <span class="hp-chip"><i class="fas fa-gamepad"></i> C++</span>
-            </div>
-            <div class="hp-actions">
+
+            <div class="hp-ctas">
                 <a href="projects.html" class="hp-cta-main"><i class="fas fa-briefcase"></i> View Projects</a>
                 <a href="contact.html" class="hp-cta-sec"><i class="fas fa-paper-plane"></i> Get In Touch</a>
-                <a href="gallery.html" class="hp-cta-sec"><i class="fas fa-camera"></i> Gallery</a>
             </div>
-        </div>
 
-        <div class="hp-meta">
             <div class="hp-socials">
+                <span class="hp-social-label">Find me</span>
                 <a href="https://github.com/lol0chx" target="_blank" class="hp-soc" title="GitHub"><i class="fab fa-github"></i></a>
                 <a href="https://www.linkedin.com/in/henokmekuria/" target="_blank" class="hp-soc" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
                 <a href="https://instagram.com" target="_blank" class="hp-soc" title="Instagram"><i class="fab fa-instagram"></i></a>
             </div>
-            <div class="hp-mini-stats">
-                <div class="hp-mini-stat"><div class="hp-mini-stat-n">5+</div><div class="hp-mini-stat-t">Years</div></div>
-                <div class="hp-mini-stat"><div class="hp-mini-stat-n">8</div><div class="hp-mini-stat-t">Projects</div></div>
-                <div class="hp-mini-stat"><div class="hp-mini-stat-n">200+</div><div class="hp-mini-stat-t">Photos</div></div>
-            </div>
-        </div>
-    </div>
 
-    <div class="hp-projects">
-        <div class="hp-projects-header">
-            <h2 class="hp-projects-title">Featured Projects</h2>
-            <a href="projects.html" class="hp-see-all">View all projects <i class="fas fa-arrow-right"></i></a>
         </div>
-        <div class="hp-shots">
-            <!-- Replace .hp-shot-img with: background-image:url('images/screenshot-ecommerce.jpg'); background-size:cover; -->
-            <div class="hp-shot featured" onclick="window.location.href='projects.html'">
-                <div class="hp-shot-chrome">
-                    <span class="hp-shot-dot r"></span><span class="hp-shot-dot y"></span><span class="hp-shot-dot g"></span>
-                    <div class="hp-shot-chrome-bar"></div>
-                </div>
-                <div class="hp-shot-img" style="background: linear-gradient(160deg, #667eea 0%, #764ba2 60%, #a18cd1 100%); padding-top: 26px;">🛍️</div>
-                <div class="hp-shot-placeholder">screenshot coming soon</div>
-                <div class="hp-shot-overlay">
-                    <p class="hp-shot-name">E-Commerce Platform</p>
-                    <p class="hp-shot-tech">Java · Spring Boot · MySQL · JavaScript</p>
-                    <a href="https://github.com/lol0chx" target="_blank" class="hp-shot-cta" onclick="event.stopPropagation();">
-                        <i class="fab fa-github"></i> GitHub
-                    </a>
-                </div>
-            </div>
-            <!-- Replace .hp-shot-img with: background-image:url('images/screenshot-snake.jpg'); background-size:cover; -->
-            <div class="hp-shot" onclick="window.open('snake-game.html','_blank')">
-                <div class="hp-shot-chrome">
-                    <span class="hp-shot-dot r"></span><span class="hp-shot-dot y"></span><span class="hp-shot-dot g"></span>
-                    <div class="hp-shot-chrome-bar"></div>
-                </div>
-                <div class="hp-shot-img" style="background: linear-gradient(135deg, #0f2c1f, #11998e, #38ef7d); padding-top: 26px;">🐍</div>
-                <div class="hp-shot-placeholder">screenshot coming soon</div>
-                <div class="hp-shot-overlay">
-                    <p class="hp-shot-name">Snake Game</p>
-                    <p class="hp-shot-tech">HTML5 Canvas · JavaScript</p>
-                    <a href="snake-game.html" target="_blank" class="hp-shot-cta" onclick="event.stopPropagation();" style="border-color:rgba(56,239,125,0.5);">
-                        <i class="fas fa-gamepad"></i> Play
-                    </a>
-                </div>
-            </div>
-            <!-- Replace .hp-shot-img with: background-image:url('images/screenshot-fractal.jpg'); background-size:cover; -->
-            <div class="hp-shot" onclick="window.open('binary_tree_fractal.html','_blank')">
-                <div class="hp-shot-chrome">
-                    <span class="hp-shot-dot r"></span><span class="hp-shot-dot y"></span><span class="hp-shot-dot g"></span>
-                    <div class="hp-shot-chrome-bar"></div>
-                </div>
-                <div class="hp-shot-img" style="background: linear-gradient(135deg, #3d0c02, #fa709a, #fee140); padding-top: 26px;">🌲</div>
-                <div class="hp-shot-placeholder">screenshot coming soon</div>
-                <div class="hp-shot-overlay">
-                    <p class="hp-shot-name">Fractal Visualizer</p>
-                    <p class="hp-shot-tech">HTML Canvas · JavaScript</p>
-                    <a href="binary_tree_fractal.html" target="_blank" class="hp-shot-cta" onclick="event.stopPropagation();" style="border-color:rgba(250,112,154,0.5);">
-                        <i class="fas fa-external-link-alt"></i> Demo
-                    </a>
-                </div>
+
+        <!-- Right column: stacked project card previews -->
+        <div class="hp-right">
+            <div class="hp-card-stack">
+                <a href="projects.html" class="hp-stack-card">
+                    <div class="hp-stack-card-inner" style="background: linear-gradient(160deg, #667eea 0%, #764ba2 60%, #a18cd1 100%);">🛍️</div>
+                    <div class="hp-stack-label">E-Commerce Platform<br><span style="opacity:.6;font-weight:400;">Java · Spring Boot · MySQL</span></div>
+                </a>
+                <a href="snake-game.html" target="_blank" class="hp-stack-card">
+                    <div class="hp-stack-card-inner" style="background: linear-gradient(135deg, #0f2c1f, #11998e, #38ef7d);">🐍</div>
+                    <div class="hp-stack-label">Snake Game<br><span style="opacity:.6;font-weight:400;">HTML5 Canvas · JavaScript</span></div>
+                </a>
+                <a href="binary_tree_fractal.html" target="_blank" class="hp-stack-card">
+                    <div class="hp-stack-card-inner" style="background: linear-gradient(135deg, #3d0c02, #fa709a, #fee140);">🌲</div>
+                    <div class="hp-stack-label">Fractal Visualizer<br><span style="opacity:.6;font-weight:400;">HTML Canvas · JavaScript</span></div>
+                </a>
             </div>
         </div>
     </div>
