@@ -57,7 +57,7 @@
 
 .hp::before {
     content: '';
-    position: fixed;
+    position: absolute;
     inset: 0;
     background:
         radial-gradient(ellipse 600px 500px at 5% 15%, rgba(255,150,180,0.22) 0%, transparent 60%),
@@ -66,6 +66,7 @@
         radial-gradient(ellipse 350px 300px at 80% 40%, rgba(255,200,80,0.12) 0%, transparent 55%);
     pointer-events: none;
     z-index: 0;
+    will-change: transform;
 }
 
 /* ── HERO ─────────────────────────────────────────── */
@@ -392,19 +393,19 @@
         </div>
         <div class="hp-photo-strip">
             <a href="gallery.html" class="hp-photo-item">
-                <img src="images/01.jpg" alt="Wildlife">
+                <img src="images/01.jpg" alt="Wildlife" loading="lazy" width="800" height="1200" decoding="async">
                 <div class="hp-photo-ov"><span><i class="fas fa-camera"></i> Wildlife</span></div>
             </a>
             <a href="gallery.html" class="hp-photo-item">
-                <img src="images/02.jpg" alt="Street">
+                <img src="images/02.jpg" alt="Street" loading="lazy" width="800" height="1200" decoding="async">
                 <div class="hp-photo-ov"><span><i class="fas fa-camera"></i> Street</span></div>
             </a>
             <a href="gallery.html" class="hp-photo-item">
-                <img src="images/03.jpg" alt="Duck">
+                <img src="images/03.jpg" alt="Duck" loading="lazy" width="800" height="1200" decoding="async">
                 <div class="hp-photo-ov"><span><i class="fas fa-camera"></i> Wildlife</span></div>
             </a>
             <a href="gallery.html" class="hp-photo-item">
-                <img src="images/04.jpg" alt="Urban">
+                <img src="images/04.jpg" alt="Urban" loading="lazy" width="800" height="1200" decoding="async">
                 <div class="hp-photo-ov"><span><i class="fas fa-camera"></i> Urban</span></div>
             </a>
         </div>
