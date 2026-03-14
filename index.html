@@ -97,7 +97,7 @@
 
 .hp-card-stack {
     position: relative;
-    width: 580px;
+    width: 720px;
     height: 480px;
     flex-shrink: 0;
 }
@@ -129,6 +129,12 @@
     transform: perspective(900px) rotateY(-6deg);
     box-shadow: -8px 16px 40px rgba(0,0,0,0.18);
     z-index: 2;
+}
+.hp-stack-card:nth-child(4) {
+    left: 405px; top: -21px;
+    transform: perspective(900px) rotateY(2deg);
+    box-shadow: -4px 12px 30px rgba(0,0,0,0.12);
+    z-index: 1;
 }
 .hp-stack-card:hover {
     transform: perspective(900px) rotateY(0deg) translateY(-14px) !important;
@@ -381,6 +387,10 @@
                 <a href="binary_tree_fractal.html" target="_blank" class="hp-stack-card">
                     <div class="hp-stack-card-inner" style="background: linear-gradient(135deg, #3d0c02, #fa709a, #fee140);">🌲</div>
                     <div class="hp-stack-label">Fractal Visualizer<br><span style="opacity:.6;font-weight:400;">HTML Canvas · JavaScript</span></div>
+                </a>
+                <a href="https://github.com/lol0chx" target="_blank" class="hp-stack-card">
+                    <div class="hp-stack-card-inner" style="background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);">🎮</div>
+                    <div class="hp-stack-label">2D Board Game<br><span style="opacity:.6;font-weight:400;">C++ · SFML · Game Dev</span></div>
                 </a>
             </div>
         </div>
