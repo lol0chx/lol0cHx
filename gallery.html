@@ -62,19 +62,19 @@
     </div>
 
     <div class="gallery-masonry" id="gallery-grid">
-        <div class="gallery-item" data-category="wildlife">
+        <div class="gallery-item" data-category="wildlife" onclick="openLightbox(0)">
             <img src="images/01.jpg" alt="Squirrel on fence" loading="lazy">
             <div class="gallery-item-overlay"><span class="gallery-item-label">Wildlife · Nikon D7500</span></div>
         </div>
-        <div class="gallery-item" data-category="wildlife">
+        <div class="gallery-item" data-category="wildlife" onclick="openLightbox(1)">
             <img src="images/02.jpg" alt="Colorful bird" loading="lazy">
             <div class="gallery-item-overlay"><span class="gallery-item-label">Wildlife · Nikon D7500</span></div>
         </div>
-        <div class="gallery-item" data-category="wildlife">
+        <div class="gallery-item" data-category="wildlife" onclick="openLightbox(2)">
             <img src="images/03.jpg" alt="Duck in water" loading="lazy">
             <div class="gallery-item-overlay"><span class="gallery-item-label">Wildlife · Nikon D7500</span></div>
         </div>
-        <div class="gallery-item" data-category="urban">
+        <div class="gallery-item" data-category="urban" onclick="openLightbox(3)">
             <img src="images/04.jpg" alt="Airplane contrail against blue sky" loading="lazy">
             <div class="gallery-item-overlay"><span class="gallery-item-label">Urban · Nikon D7500</span></div>
         </div>
@@ -121,5 +121,126 @@
     </div>
 </footer>
 
+
+<!-- Lightbox -->
+<div id="lightbox" class="lb-overlay" onclick="closeLightbox()" aria-hidden="true">
+    <button class="lb-close" onclick="closeLightbox()" aria-label="Close">&times;</button>
+    <button class="lb-prev" onclick="event.stopPropagation(); shiftLightbox(-1)" aria-label="Previous">&#8249;</button>
+    <img id="lb-img" class="lb-img" src="" alt="" onclick="event.stopPropagation()">
+    <button class="lb-next" onclick="event.stopPropagation(); shiftLightbox(1)" aria-label="Next">&#8250;</button>
+    <div id="lb-caption" class="lb-caption"></div>
+</div>
+
+<style>
+.lb-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    cursor: zoom-out;
+}
+.lb-overlay.active { display: flex; }
+.lb-img {
+    max-width: 90vw;
+    max-height: 88vh;
+    object-fit: contain;
+    border-radius: 6px;
+    box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+    cursor: default;
+    transition: opacity 0.2s ease;
+    user-select: none;
+}
+.lb-close {
+    position: fixed;
+    top: 20px; right: 28px;
+    background: none; border: none;
+    color: #fff; font-size: 42px;
+    cursor: pointer; line-height: 1;
+    opacity: 0.75; transition: opacity 0.2s;
+    padding: 0;
+}
+.lb-close:hover { opacity: 1; }
+.lb-prev, .lb-next {
+    position: fixed;
+    top: 50%; transform: translateY(-50%);
+    background: rgba(255,255,255,0.12);
+    border: 1.5px solid rgba(255,255,255,0.2);
+    color: #fff; font-size: 38px;
+    cursor: pointer; line-height: 1;
+    padding: 8px 16px; border-radius: 8px;
+    transition: background 0.2s;
+    user-select: none;
+}
+.lb-prev { left: 20px; }
+.lb-next { right: 20px; }
+.lb-prev:hover, .lb-next:hover { background: rgba(255,255,255,0.22); }
+.lb-caption {
+    position: fixed;
+    bottom: 24px; left: 50%; transform: translateX(-50%);
+    color: rgba(255,255,255,0.65);
+    font-size: 13px; font-weight: 500;
+    letter-spacing: 0.5px;
+    background: rgba(0,0,0,0.4);
+    padding: 6px 18px; border-radius: 50px;
+    pointer-events: none;
+    white-space: nowrap;
+}
+</style>
+
+<script>
+(function() {
+    const photos = [
+        { src: 'images/01.jpg', caption: 'Wildlife · Nikon D7500' },
+        { src: 'images/02.jpg', caption: 'Wildlife · Nikon D7500' },
+        { src: 'images/03.jpg', caption: 'Wildlife · Nikon D7500' },
+        { src: 'images/04.jpg', caption: 'Urban · Nikon D7500' },
+    ];
+
+    let current = 0;
+
+    window.openLightbox = function(index) {
+        current = index;
+        const lb = document.getElementById('lightbox');
+        const img = document.getElementById('lb-img');
+        const cap = document.getElementById('lb-caption');
+        img.src = photos[current].src;
+        img.alt = photos[current].caption;
+        cap.textContent = photos[current].caption;
+        lb.classList.add('active');
+        lb.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.closeLightbox = function() {
+        document.getElementById('lightbox').classList.remove('active');
+        document.getElementById('lightbox').setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    };
+
+    window.shiftLightbox = function(dir) {
+        current = (current + dir + photos.length) % photos.length;
+        const img = document.getElementById('lb-img');
+        const cap = document.getElementById('lb-caption');
+        img.style.opacity = '0';
+        setTimeout(() => {
+            img.src = photos[current].src;
+            img.alt = photos[current].caption;
+            cap.textContent = photos[current].caption;
+            img.style.opacity = '1';
+        }, 150);
+    };
+
+    document.addEventListener('keydown', function(e) {
+        const lb = document.getElementById('lightbox');
+        if (!lb.classList.contains('active')) return;
+        if (e.key === 'Escape') closeLightbox();
+        if (e.key === 'ArrowLeft') shiftLightbox(-1);
+        if (e.key === 'ArrowRight') shiftLightbox(1);
+    });
+})();
+</script>
 </body>
 </html>
