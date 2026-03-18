@@ -35,9 +35,10 @@ function filterGallery(category, btn) {
 }
 
 // Contact form
-function handleContactSubmit() {
+async function handleContactSubmit() {
     const name    = document.getElementById('contact-name')?.value.trim();
     const email   = document.getElementById('contact-email')?.value.trim();
+    const subject = document.getElementById('contact-subject')?.value;
     const message = document.getElementById('contact-message')?.value.trim();
 
     if (!name || !email || !message) {
@@ -49,11 +50,35 @@ function handleContactSubmit() {
         return;
     }
 
-    const success = document.getElementById('contact-success');
-    if (success) success.style.display = 'flex';
-    document.getElementById('contact-name').value    = '';
-    document.getElementById('contact-email').value   = '';
-    document.getElementById('contact-message').value = '';
-    const subject = document.getElementById('contact-subject');
-    if (subject) subject.value = '';
+    const btn = document.querySelector('.form-submit-btn');
+    if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+
+    try {
+        const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                access_key: '305ad274-c750-48d3-b085-a56b50522362',
+                name,
+                email,
+                subject: subject || 'Contact Form',
+                message
+            })
+        });
+        const data = await res.json();
+        if (data.success) {
+            const success = document.getElementById('contact-success');
+            if (success) success.style.display = 'flex';
+            document.getElementById('contact-name').value    = '';
+            document.getElementById('contact-email').value   = '';
+            document.getElementById('contact-message').value = '';
+            if (document.getElementById('contact-subject')) document.getElementById('contact-subject').value = '';
+        } else {
+            alert('Something went wrong. Please try again.');
+        }
+    } catch {
+        alert('Failed to send. Check your connection and try again.');
+    } finally {
+        if (btn) { btn.disabled = false; btn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message'; }
+    }
 }
