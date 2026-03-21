@@ -90,9 +90,11 @@
 /* ── Stacked project cards (right column) ─────────── */
 .hp-right {
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
     padding: 60px 60px 100px 20px;
+    gap: 28px;
 }
 
 .hp-card-stack {
@@ -213,20 +215,6 @@
 }
 .hp-cta-sec:hover { background: #fff; border-color: rgba(0,0,0,0.2); color: #1a1a2e !important; transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,0.08); }
 
-/* Socials */
-.hp-socials { display: flex; align-items: center; gap: 8px; }
-.hp-social-label { font-size: 11px; color: rgba(26,26,46,0.3); letter-spacing: 1px; text-transform: uppercase; margin-right: 6px; }
-.hp-soc {
-    width: 42px; height: 42px; border-radius: 12px;
-    background: rgba(255,255,255,0.8); border: 1.5px solid rgba(0,0,0,0.08);
-    display: flex; align-items: center; justify-content: center;
-    color: #6b7280 !important; font-size: 17px; text-decoration: none !important;
-    transition: all 0.25s ease;
-}
-.hp-soc:hover { transform: translateY(-3px); box-shadow: 0 6px 16px rgba(0,0,0,0.1); }
-.hp-soc[title="LinkedIn"]:hover  { background: rgba(0,119,181,0.1); border-color: rgba(0,119,181,0.3); color: #0077b5 !important; }
-.hp-soc[title="Instagram"]:hover { background: rgba(225,48,108,0.1); border-color: rgba(225,48,108,0.3); color: #e1306c !important; }
-.hp-soc[title="GitHub"]:hover    { background: rgba(36,41,46,0.08); border-color: rgba(36,41,46,0.2); color: #24292e !important; }
 
 /* Screenshot gallery */
 .hp-projects { position: relative; z-index: 1; max-width: 1600px; margin: 0 auto; padding: 40px 80px; box-sizing: border-box; }
@@ -364,16 +352,9 @@
                 <a href="contact.html" class="hp-cta-sec"><i class="fas fa-paper-plane"></i> Get In Touch</a>
             </div>
 
-            <div class="hp-socials">
-                <span class="hp-social-label">Find me</span>
-                <a href="https://github.com/lol0chx" target="_blank" class="hp-soc" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://www.linkedin.com/in/henokmekuria/" target="_blank" class="hp-soc" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="https://instagram.com" target="_blank" class="hp-soc" title="Instagram"><i class="fab fa-instagram"></i></a>
-            </div>
-
         </div>
 
-        <!-- Right column: stacked project card previews -->
+        <!-- Right column: stacked project card previews + socials -->
         <div class="hp-right">
             <div class="hp-card-stack">
                 <a href="projects.html" class="hp-stack-card">
@@ -398,8 +379,7 @@
                 </a>
             </div>
         </div>
-    </div>
-
+    </div><!-- end .hp-hero -->
 
     <div class="hp-bar">
         <div class="hp-bar-inner">
