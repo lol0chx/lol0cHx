@@ -8,13 +8,13 @@ I build production-ready backend systems and clean frontends. Currently open to 
 
 ### Tech Stack
 
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat&logo=python&logoColor=white)
+![Swift](https://img.shields.io/badge/Swift-FA7343?style=flat&logo=swift&logoColor=white)
+![C++](https://img.shields.io/badge/C++-00599C?style=flat&logo=c%2B%2B&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
 ![Java](https://img.shields.io/badge/Java-ED8B00?style=flat&logo=openjdk&logoColor=white)
 ![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat&logo=spring-boot&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat&logo=mysql&logoColor=white)
 ![React](https://img.shields.io/badge/React-20232A?style=flat&logo=react&logoColor=61DAFB)
-![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=flat&logo=javascript&logoColor=black)
-![C++](https://img.shields.io/badge/C++-00599C?style=flat&logo=c%2B%2B&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=flat&logo=linux&logoColor=black)
 ![Git](https://img.shields.io/badge/Git-F05032?style=flat&logo=git&logoColor=white)
 
 ---
@@ -23,10 +23,12 @@ I build production-ready backend systems and clean frontends. Currently open to 
 
 | Project | Stack | |
 |---|---|---|
-| **E-Commerce Platform** | Java · Spring Boot · MySQL · JWT | [repo](https://github.com/lol0chx) |
+| **CloudScout** | Python · Streamlit · Claude API · NBA/MLB Analytics | [repo](https://github.com/lol0chx/cloud-scout) |
+| **2D Board Game** | C++ · SFML · 2D Graphics | [repo](https://github.com/lol0chx/testing-sfml) |
+| **RollorPick** | Swift · SwiftUI · SceneKit | [repo](https://github.com/lol0chx/RollorPick) |
+| **EagleEye** | HTML · JavaScript · Live Screen Vision | [repo](https://github.com/lol0chx/EagleEye) |
 | **Snake Game** | HTML5 Canvas · JavaScript | [live](https://lol0chx.github.io/snake-game.html) |
 | **Fractal Visualizer** | HTML Canvas · JavaScript | [live](https://lol0chx.github.io/binary_tree_fractal.html) |
-| **2D Board Game** | C++ · SFML | [repo](https://github.com/lol0chx) |
 
 ---
 
