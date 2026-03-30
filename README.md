@@ -2,7 +2,7 @@
 
 **Full-Stack Software Engineer** · Java · Spring Boot · React · 5+ years building things that ship
 
-I build production-ready backend systems and clean frontends. Currently open to new opportunities.
+I build production-ready backend systems and clean frontends.
 
 ---
 
