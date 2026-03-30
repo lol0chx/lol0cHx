@@ -27,8 +27,6 @@ I build production-ready backend systems and clean frontends.
 | **2D Board Game** | C++ · SFML · 2D Graphics | [repo](https://github.com/lol0chx/testing-sfml) |
 | **RollorPick** | Swift · SwiftUI · SceneKit | [repo](https://github.com/lol0chx/RollorPick) |
 | **EagleEye** | HTML · JavaScript · Live Screen Vision | [repo](https://github.com/lol0chx/EagleEye) |
-| **Snake Game** | HTML5 Canvas · JavaScript | [live](https://lol0chx.github.io/snake-game.html) |
-| **Fractal Visualizer** | HTML Canvas · JavaScript | [live](https://lol0chx.github.io/binary_tree_fractal.html) |
 
 ---
 
