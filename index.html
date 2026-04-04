@@ -71,10 +71,9 @@
 
 /* ── HERO ─────────────────────────────────────────── */
 .hp-hero {
-    min-height: 100vh;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    align-items: center;
+    align-items: flex-start;
     position: relative;
     z-index: 1;
     max-width: 1600px;
@@ -83,7 +82,7 @@
 }
 
 .hp-hero-inner {
-    padding: 140px 60px 100px 80px;
+    padding: 140px 60px 40px 80px;
     box-sizing: border-box;
 }
 
@@ -93,14 +92,14 @@
     flex-direction: column;
     align-items: flex-start;
     justify-content: center;
-    padding: 60px 60px 100px 20px;
+    padding: 140px 60px 40px 20px;
     gap: 28px;
 }
 
 .hp-card-stack {
     position: relative;
     width: 900px;
-    height: 380px;
+    height: 300px;
     flex-shrink: 0;
 }
 
@@ -282,6 +281,95 @@
 .hp-photo-item:hover .hp-photo-ov { opacity: 1; }
 .hp-photo-ov span { color: #fff; font-size: 12px; font-weight: 500; }
 
+/* Featured Projects */
+.hp-feat {
+    position: relative; z-index: 1;
+    padding: 80px 0 70px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+}
+.hp-feat-inner {
+    max-width: 1600px; margin: 0 auto;
+    padding: 0 80px; box-sizing: border-box;
+}
+.hp-feat-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 28px; flex-wrap: wrap; gap: 12px;
+}
+.hp-feat-eyebrow {
+    font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: #f59e0b; margin: 0 0 6px;
+    display: flex; align-items: center; gap: 6px;
+}
+.hp-feat-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 1.8rem; font-weight: 700; color: #1a1a2e;
+    margin: 0; letter-spacing: -0.01em;
+}
+.hp-feat-all {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 13px; font-weight: 500;
+    color: #f59e0b !important; text-decoration: none !important;
+    transition: gap 0.25s ease; white-space: nowrap;
+}
+.hp-feat-all:hover { gap: 11px; }
+.hp-feat-all i { font-size: 10px; }
+.hp-feat-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+}
+.hp-feat-card {
+    border-radius: 16px; overflow: hidden;
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(0,0,0,0.07);
+    backdrop-filter: blur(8px);
+    text-decoration: none !important; color: inherit !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: block;
+}
+.hp-feat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+.hp-feat-img {
+    width: 100%; height: 200px; overflow: hidden;
+}
+.hp-feat-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    transition: transform 0.5s ease;
+}
+.hp-feat-card:hover .hp-feat-img img { transform: scale(1.05); }
+.hp-feat-body { padding: 20px; }
+.hp-feat-name {
+    font-size: 1rem; font-weight: 700; color: #1a1a2e;
+    margin: 0 0 6px;
+}
+.hp-feat-desc {
+    font-size: 13px; color: rgba(26,26,46,0.55);
+    line-height: 1.55; margin: 0 0 14px;
+}
+.hp-feat-tags {
+    display: flex; flex-wrap: wrap; gap: 6px;
+}
+.hp-feat-tags span {
+    font-size: 11px; font-weight: 500; color: #555;
+    background: rgba(0,0,0,0.05); border-radius: 20px;
+    padding: 3px 10px;
+}
+
+@media (max-width: 1200px) {
+    .hp-feat-inner { padding: 0 60px; }
+}
+@media (max-width: 900px) {
+    .hp-feat { padding: 60px 0 50px; }
+    .hp-feat-inner { padding: 0 36px; }
+    .hp-feat-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+    .hp-feat { padding: 48px 0 40px; }
+    .hp-feat-inner { padding: 0 20px; }
+    .hp-feat-grid { grid-template-columns: 1fr; }
+    .hp-feat-title { font-size: 1.4rem; }
+}
+
 /* Bottom bar */
 .hp-bar { border-top: 1px solid rgba(0,0,0,0.06); background: rgba(255,255,255,0.55); backdrop-filter: blur(16px); position: relative; z-index: 1; }
 .hp-bar-inner { max-width: 1600px; margin: 0 auto; padding: 22px 80px; display: flex; align-items: center; justify-content: center; gap: 28px; flex-wrap: wrap; }
@@ -385,6 +473,61 @@
             </div>
         </div>
     </div><!-- end .hp-hero -->
+
+    <!-- ══ FEATURED PROJECTS ════════════════════════════════════════════ -->
+    <div class="hp-feat">
+        <div class="hp-feat-inner">
+            <div class="hp-feat-header">
+                <div>
+                    <p class="hp-feat-eyebrow"><i class="fas fa-briefcase"></i> Featured Work</p>
+                    <h2 class="hp-feat-title">Things I've Built</h2>
+                </div>
+                <a href="projects.html" class="hp-feat-all">All projects <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="hp-feat-grid">
+
+                <a href="https://github.com/lol0chx/testing-sfml" target="_blank" class="hp-feat-card">
+                    <div class="hp-feat-img">
+                        <img src="images/boardgame.png" alt="2D Board Game">
+                    </div>
+                    <div class="hp-feat-body">
+                        <h3 class="hp-feat-name">2D Board Game</h3>
+                        <p class="hp-feat-desc">Real-time 2D board game with interactive mechanics and game state management.</p>
+                        <div class="hp-feat-tags">
+                            <span>C++</span><span>SFML</span><span>Game Dev</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://github.com/lol0chx/capstone_3_easyshop" target="_blank" class="hp-feat-card">
+                    <div class="hp-feat-img">
+                        <img src="images/ecom.png" alt="E-Commerce Platform">
+                    </div>
+                    <div class="hp-feat-body">
+                        <h3 class="hp-feat-name">E-Commerce Platform</h3>
+                        <p class="hp-feat-desc">Full-stack shop with cart, auth, order management, and admin dashboard.</p>
+                        <div class="hp-feat-tags">
+                            <span>Java</span><span>Spring Boot</span><span>MySQL</span>
+                        </div>
+                    </div>
+                </a>
+
+                <a href="https://github.com/lol0chx/cloud-scout" target="_blank" class="hp-feat-card">
+                    <div class="hp-feat-img" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); display:flex; align-items:center; justify-content:center; font-size:64px;">
+                        📊
+                    </div>
+                    <div class="hp-feat-body">
+                        <h3 class="hp-feat-name">CloudScout</h3>
+                        <p class="hp-feat-desc">Multi-sport analytics dashboard with AI insights for NBA and MLB.</p>
+                        <div class="hp-feat-tags">
+                            <span>Python</span><span>Streamlit</span><span>Claude API</span>
+                        </div>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </div>
 
     <div class="hp-bar">
         <div class="hp-bar-inner">
