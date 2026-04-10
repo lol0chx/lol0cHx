@@ -15,8 +15,91 @@
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/portfolio.css">
     <script src="js/app.js" defer></script>
+    <style>
+        /* ── Project Modal ── */
+        .pm-overlay {
+            position: fixed; inset: 0; z-index: 9000;
+            background: rgba(10,10,20,0.75);
+            backdrop-filter: blur(8px);
+            display: flex; align-items: flex-start; justify-content: center;
+            padding: 80px 24px 24px;
+            overflow-y: auto;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        .pm-overlay.open { opacity: 1; pointer-events: all; }
+        .pm-box {
+            background: #fff; border-radius: 24px;
+            width: 100%; max-width: 780px;
+            overflow-y: visible; position: relative;
+            transform: translateY(28px) scale(0.97);
+            transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.28);
+        }
+        .pm-overlay.open .pm-box { transform: translateY(0) scale(1); }
+        .pm-banner {
+            width: 100%; height: 240px; border-radius: 24px 24px 0 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 80px; overflow: hidden; flex-shrink: 0;
+        }
+        .pm-banner img { width:100%; height:100%; object-fit:cover; display:block; }
+        .pm-close {
+            position: absolute; top: 18px; right: 18px;
+            width: 38px; height: 38px; border-radius: 50%;
+            background: rgba(255,255,255,0.9); border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; color: #1a1a2e;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+            transition: background 0.15s, transform 0.15s; z-index: 10;
+        }
+        .pm-close:hover { background: #fff; transform: scale(1.1); }
+        .pm-body { padding: 36px 40px 40px; }
+        .pm-eyebrow {
+            font-size: 11px; font-weight: 600; letter-spacing: 2px;
+            text-transform: uppercase; color: #0ea5e9;
+            margin: 0 0 10px; display: flex; align-items: center; gap: 7px;
+        }
+        .pm-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 700; color: #1a1a2e; margin: 0 0 18px; line-height: 1.15;
+        }
+        .pm-desc { font-size: 15px; color: #4b5563; line-height: 1.75; margin: 0 0 24px; }
+        .pm-features { margin: 0 0 26px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 10px; }
+        .pm-features li { display: flex; align-items: flex-start; gap: 12px; font-size: 14px; color: #374151; line-height: 1.5; }
+        .pm-features li::before { content:''; width:6px; height:6px; border-radius:50%; background:#0ea5e9; flex-shrink:0; margin-top:7px; }
+        .pm-tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 28px; }
+        .pm-tag { font-size:12px; font-weight:600; padding:5px 13px; border-radius:999px; background:rgba(14,165,233,0.08); color:#0ea5e9; border:1px solid rgba(14,165,233,0.2); }
+        .pm-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+        .pm-btn { display:inline-flex; align-items:center; gap:8px; padding:12px 24px; border-radius:12px; font-size:14px; font-weight:600; text-decoration:none; transition:all 0.2s; }
+        .pm-btn-primary { background:#1a1a2e; color:#fff; }
+        .pm-btn-primary:hover { background:#0ea5e9; color:#fff; }
+        .pm-divider { border:none; border-top:1px solid #f1f5f9; margin:26px 0; }
+        .pm-section-label { font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:#9ca3af; margin:0 0 14px; }
+        .hp-feat-card { cursor: pointer; }
+        @media (max-width:600px) { .pm-body { padding:24px 22px 28px; } .pm-banner { height:180px; } }
+    </style>
 </head>
 <body>
+
+<!-- Project Modal -->
+<div class="pm-overlay" id="pm-overlay" role="dialog" aria-modal="true">
+    <div class="pm-box" id="pm-box">
+        <button class="pm-close" id="pm-close" aria-label="Close"><i class="fas fa-times"></i></button>
+        <div class="pm-banner" id="pm-banner"></div>
+        <div class="pm-body">
+            <p class="pm-eyebrow" id="pm-eyebrow"></p>
+            <h2 class="pm-title" id="pm-title"></h2>
+            <p class="pm-desc" id="pm-desc"></p>
+            <p class="pm-section-label">Key Features</p>
+            <ul class="pm-features" id="pm-features"></ul>
+            <hr class="pm-divider">
+            <p class="pm-section-label">Tech Stack</p>
+            <div class="pm-tags" id="pm-tags"></div>
+            <div class="pm-actions" id="pm-actions"></div>
+        </div>
+    </div>
+</div>
 
 
 <nav class="portfolio-nav">
@@ -29,14 +112,14 @@
         </a>
         <div class="nav-links" id="nav-links">
             <a href="projects.html">Projects</a>
-            <a href="gallery.html">Photography</a>
+            <!-- <a href="gallery.html">Photography</a> -->
             <a href="about.html">About</a>
             <a href="contact.html">Contact</a>
         </div>
         <div class="nav-actions">
             <a href="https://github.com/lol0chx" target="_blank" class="nav-social" title="GitHub"><i class="fab fa-github"></i></a>
             <a href="https://www.linkedin.com/in/henokmekuria/" target="_blank" class="nav-social" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
-            <a href="https://instagram.com" target="_blank" class="nav-social" title="Instagram"><i class="fab fa-instagram"></i></a>
+            <!-- <a href="https://instagram.com" target="_blank" class="nav-social" title="Instagram"><i class="fab fa-instagram"></i></a> -->
             <button class="nav-hamburger" id="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
                 <span></span><span></span><span></span>
             </button>
@@ -445,28 +528,23 @@
             <div class="hp-card-stack">
                 <a href="https://github.com/lol0chx/testing-sfml" target="_blank" class="hp-stack-card">
                     <div class="hp-stack-card-inner" style="background: none; position: relative; overflow: hidden;">
-                        <img src="images/boardgame.png" alt="2D Board Game" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+                        <img src="images/boardgame.png" alt="PickORole" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
                     </div>
-                    <div class="hp-stack-label">2D Board Game<br><span style="opacity:.6;font-weight:400;">C++</span></div>
+                    <div class="hp-stack-label">PickORole<br><span style="opacity:.6;font-weight:400;">C++</span></div>
                 </a>
-                <a href="https://github.com/lol0chx" target="_blank" class="hp-stack-card">
+                <a href="https://github.com/lol0chx/capstone_3_easyshop" target="_blank" class="hp-stack-card">
                     <div class="hp-stack-card-inner" style="background: none; position: relative; overflow: hidden;">
                         <img src="images/ecom.png" alt="E-Commerce Platform" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
                     </div>
                     <div class="hp-stack-label">E-Commerce Platform<br><span style="opacity:.6;font-weight:400;">Java · Spring Boot · MySQL</span></div>
                 </a>
-                <a href="binary_tree_fractal.html" target="_blank" class="hp-stack-card">
-                    <div class="hp-stack-card-inner" style="background: linear-gradient(135deg, #3d0c02, #fa709a, #fee140);">🌲</div>
-                    <div class="hp-stack-label">Fractal Visualizer<br><span style="opacity:.6;font-weight:400;">HTML Canvas · JavaScript</span></div>
+                <a href="https://github.com/lol0chx/cloud-scout" target="_blank" class="hp-stack-card">
+                    <div class="hp-stack-card-inner" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); display:flex; align-items:center; justify-content:center; font-size:32px;">📊</div>
+                    <div class="hp-stack-label">CloudScout<br><span style="opacity:.6;font-weight:400;">Python · Streamlit · AI</span></div>
                 </a>
-                <a href="gallery.html" class="hp-stack-card">
-                    <div class="hp-stack-card-inner" style="background: none; position: relative; overflow: hidden;">
-                        <img src="images/NY_hotdog_stand" alt="Photography" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-                        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,0,0,0.25),rgba(0,0,0,0.05));"></div>
-                        <span style="position:relative;z-index:1;font-size:28px;">📷</span>
-                    </div>
-                    <div class="hp-stack-label">Photography<br><span style="opacity:.6;font-weight:400;">Wildlife · Street · Urban</span></div>
-                </a>
+                <div class="hp-stack-card">
+                    <div class="hp-stack-card-inner" style="background: rgba(0,0,0,0.04);"></div>
+                </div>
             </div>
         </div>
     </div><!-- end .hp-hero -->
@@ -483,20 +561,20 @@
             </div>
             <div class="hp-feat-grid">
 
-                <a href="https://github.com/lol0chx/testing-sfml" target="_blank" class="hp-feat-card">
+                <div class="hp-feat-card" data-project="pickorole">
                     <div class="hp-feat-img">
-                        <img src="images/boardgame.png" alt="2D Board Game">
+                        <img src="images/boardgame.png" alt="PickORole">
                     </div>
                     <div class="hp-feat-body">
-                        <h3 class="hp-feat-name">2D Board Game</h3>
-                        <p class="hp-feat-desc">Real-time 2D board game with interactive mechanics and game state management.</p>
+                        <h3 class="hp-feat-name">PickORole</h3>
+                        <p class="hp-feat-desc">7×7 race board game with animated movement, trap logic, and 2-player local multiplayer.</p>
                         <div class="hp-feat-tags">
                             <span>C++</span><span>SFML</span><span>Game Dev</span>
                         </div>
                     </div>
-                </a>
+                </div>
 
-                <a href="https://github.com/lol0chx/capstone_3_easyshop" target="_blank" class="hp-feat-card">
+                <div class="hp-feat-card" data-project="ecommerce">
                     <div class="hp-feat-img">
                         <img src="images/ecom.png" alt="E-Commerce Platform">
                     </div>
@@ -507,9 +585,9 @@
                             <span>Java</span><span>Spring Boot</span><span>MySQL</span>
                         </div>
                     </div>
-                </a>
+                </div>
 
-                <a href="https://github.com/lol0chx/cloud-scout" target="_blank" class="hp-feat-card">
+                <div class="hp-feat-card" data-project="cloudscout">
                     <div class="hp-feat-img" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); display:flex; align-items:center; justify-content:center; font-size:64px;">
                         📊
                     </div>
@@ -520,7 +598,7 @@
                             <span>Python</span><span>Streamlit</span><span>Claude API</span>
                         </div>
                     </div>
-                </a>
+                </div>
 
             </div>
         </div>
@@ -530,8 +608,8 @@
         <div class="hp-bar-inner">
             <a href="projects.html" class="hp-bar-link">Projects <i class="fas fa-arrow-right"></i></a>
             <span class="hp-bar-dot"></span>
-            <a href="gallery.html" class="hp-bar-link">Gallery <i class="fas fa-arrow-right"></i></a>
-            <span class="hp-bar-dot"></span>
+            <!-- <a href="gallery.html" class="hp-bar-link">Gallery <i class="fas fa-arrow-right"></i></a>
+            <span class="hp-bar-dot"></span> -->
             <a href="about.html" class="hp-bar-link">About <i class="fas fa-arrow-right"></i></a>
             <span class="hp-bar-dot"></span>
             <a href="contact.html" class="hp-bar-link">Contact <i class="fas fa-arrow-right"></i></a>
@@ -551,12 +629,12 @@
                     <li><a href="https://github.com/lol0chx" target="_blank">Open Source</a></li>
                 </ul>
             </div>
-            <div class="footer-column">
+            <!-- <div class="footer-column">
                 <h6>Photography</h6>
                 <ul class="footer-links">
                     <li><a href="gallery.html">Gallery</a></li>
                 </ul>
-            </div>
+            </div> -->
             <div class="footer-column">
                 <h6>Connect</h6>
                 <ul class="footer-links">
@@ -569,7 +647,7 @@
                 <ul class="footer-links">
                     <li><a href="https://github.com/lol0chx" target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
                     <li><a href="https://www.linkedin.com/in/henokmekuria/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a></li>
-                    <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+                    <!-- <li><a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li> -->
                 </ul>
             </div>
         </div>
@@ -578,6 +656,105 @@
         </div>
     </div>
 </footer>
+
+<script>
+const PROJECTS = {
+    pickorole: {
+        eyebrow: 'C++ · Game Dev',
+        title: 'PickORole',
+        desc: 'A 2-player local multiplayer race board game built entirely in C++ using the SFML graphics library. Players roll, move across a 7×7 grid, and trigger trap tiles that send them back — last to the finish loses. Packaged as a standalone Windows executable with no dependencies required.',
+        features: [
+            '7×7 race board with animated player movement and smooth tile transitions',
+            'Procedurally generated sound effects for moves, traps, and win conditions',
+            'Trap tile system — landing on certain squares sends you back to start',
+            '2-player local multiplayer on a single machine',
+            'Real-time game state management with turn logic and win detection',
+            'Packaged as a Windows .exe — no install required',
+        ],
+        tags: ['C++', 'SFML', '2D Graphics', 'Game Dev', 'OOP', 'Windows'],
+        github: 'https://github.com/lol0chx/testing-sfml',
+        banner: { type: 'img', src: 'images/boardgame.png' },
+    },
+    ecommerce: {
+        eyebrow: 'Java · Spring Boot · Full Stack',
+        title: 'E-Commerce Platform (EasyShop)',
+        desc: 'A full-stack e-commerce web application built with a Java Spring Boot backend and a JavaScript frontend. Supports full role-based authentication — customers can browse, filter, and shop, while admins get a separate dashboard for managing inventory and orders.',
+        features: [
+            'JWT-secured authentication with role-based access (admin vs customer)',
+            'Product catalog with category filtering, price range, and color search',
+            'Shopping cart with persistent state and quantity management',
+            'Order management — checkout flow, order history, and status tracking',
+            'Wishlist support — save items for later',
+            'Admin dashboard for full CRUD on products, categories, and users',
+            'RESTful API backend consumed by a vanilla JS frontend',
+        ],
+        tags: ['Java', 'Spring Boot', 'Spring Security', 'JWT', 'MySQL', 'JavaScript', 'REST API'],
+        github: 'https://github.com/lol0chx/capstone_3_easyshop',
+        banner: { type: 'img', src: 'images/ecom.png' },
+    },
+    cloudscout: {
+        eyebrow: 'Python · Streamlit · AI Analytics',
+        title: 'CloudScout',
+        desc: 'A multi-sport analytics dashboard for NBA and MLB built with Python and Streamlit. CloudScout scrapes live game data, stores it locally, and surfaces AI-generated insights via the Claude API — including win probability models, injury detection, team standings, and head-to-head breakdowns.',
+        features: [
+            'Win probability model using win%, head-to-head record, and home/away splits',
+            'Streak tracking — shows current win/loss run for every team in real time',
+            'Injury watch — flags players who missed the latest game but were active before',
+            'Season standings ranked by win%, net rating, and avg points scored/allowed',
+            'Watchlist sidebar — add any team and see their latest result and streak',
+            'Claude API integration for natural language game summaries and insights',
+            'Supports both NBA and MLB with a sidebar sport selector',
+        ],
+        tags: ['Python', 'Streamlit', 'Claude API', 'Pandas', 'SQLite', 'NBA API', 'MLB Scraper'],
+        github: 'https://github.com/lol0chx/cloud-scout',
+        banner: { type: 'gradient', style: 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)', emoji: '📊' },
+    },
+};
+
+document.addEventListener('DOMContentLoaded', function () {
+    const overlay = document.getElementById('pm-overlay');
+    const closeBtn = document.getElementById('pm-close');
+
+    function openModal(id) {
+        const p = PROJECTS[id];
+        if (!p) return;
+
+        const banner = document.getElementById('pm-banner');
+        if (p.banner.type === 'img') {
+            banner.style.cssText = '';
+            banner.innerHTML = `<img src="${p.banner.src}" alt="${p.title}">`;
+        } else {
+            banner.style.cssText = `background:${p.banner.style}; display:flex; align-items:center; justify-content:center; font-size:80px;`;
+            banner.innerHTML = p.banner.emoji;
+        }
+
+        document.getElementById('pm-eyebrow').innerHTML = `<i class="fas fa-code"></i> ${p.eyebrow}`;
+        document.getElementById('pm-title').textContent = p.title;
+        document.getElementById('pm-desc').textContent = p.desc;
+        document.getElementById('pm-features').innerHTML = p.features.map(f => `<li>${f}</li>`).join('');
+        document.getElementById('pm-tags').innerHTML = p.tags.map(t => `<span class="pm-tag">${t}</span>`).join('');
+        document.getElementById('pm-actions').innerHTML =
+            `<a href="${p.github}" target="_blank" class="pm-btn pm-btn-primary"><i class="fab fa-github"></i> View on GitHub</a>`;
+
+        overlay.scrollTop = 0;
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.hp-feat-card[data-project]').forEach(card => {
+        card.addEventListener('click', () => openModal(card.dataset.project));
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+});
+</script>
 
 </body>
 </html>
