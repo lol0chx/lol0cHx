@@ -16,13 +16,177 @@
     <link rel="stylesheet" href="css/portfolio.css">
     <script src="js/app.js" defer></script>
     <style>
-        @keyframes snake-wiggle {
-            0%, 100% { transform: rotate(-8deg) scale(1); }
-            50%       { transform: rotate(8deg) scale(1.1); }
+        /* ── Card clickable ── */
+        .project-card {
+            cursor: pointer;
+            transition: transform 0.22s ease, box-shadow 0.22s ease;
+        }
+        .project-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 48px rgba(0,0,0,0.13);
+        }
+
+        /* ── Modal overlay ── */
+        .pm-overlay {
+            position: fixed; inset: 0; z-index: 9000;
+            background: rgba(10, 10, 20, 0.75);
+            backdrop-filter: blur(8px);
+            display: flex; align-items: center; justify-content: center;
+            padding: 24px;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        .pm-overlay.open {
+            opacity: 1; pointer-events: all;
+        }
+
+        /* ── Modal box ── */
+        .pm-box {
+            background: #fff;
+            border-radius: 24px;
+            width: 100%; max-width: 780px;
+            max-height: 88vh;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(28px) scale(0.97);
+            transition: transform 0.28s cubic-bezier(0.34,1.56,0.64,1);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.28);
+        }
+        .pm-overlay.open .pm-box {
+            transform: translateY(0) scale(1);
+        }
+
+        /* ── Modal banner ── */
+        .pm-banner {
+            width: 100%; height: 240px;
+            border-radius: 24px 24px 0 0;
+            object-fit: cover;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 80px;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+        .pm-banner img {
+            width: 100%; height: 100%; object-fit: cover; display: block;
+        }
+
+        /* ── Modal close ── */
+        .pm-close {
+            position: absolute; top: 18px; right: 18px;
+            width: 38px; height: 38px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.9);
+            border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; color: #1a1a2e;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+            transition: background 0.15s, transform 0.15s;
+            z-index: 10;
+        }
+        .pm-close:hover { background: #fff; transform: scale(1.1); }
+
+        /* ── Modal body ── */
+        .pm-body { padding: 36px 40px 40px; }
+
+        .pm-eyebrow {
+            font-size: 11px; font-weight: 600; letter-spacing: 2px;
+            text-transform: uppercase; color: #0ea5e9;
+            margin: 0 0 10px; display: flex; align-items: center; gap: 7px;
+        }
+        .pm-title {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(1.6rem, 3vw, 2.2rem);
+            font-weight: 700; color: #1a1a2e;
+            margin: 0 0 18px; line-height: 1.15;
+        }
+        .pm-desc {
+            font-size: 15px; color: #4b5563; line-height: 1.75;
+            margin: 0 0 24px;
+        }
+
+        /* ── Features ── */
+        .pm-features {
+            margin: 0 0 26px;
+            padding: 0;
+            list-style: none;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .pm-features li {
+            display: flex; align-items: flex-start; gap: 12px;
+            font-size: 14px; color: #374151; line-height: 1.5;
+        }
+        .pm-features li::before {
+            content: '';
+            width: 6px; height: 6px; border-radius: 50%;
+            background: #0ea5e9;
+            flex-shrink: 0; margin-top: 7px;
+        }
+
+        /* ── Tags ── */
+        .pm-tags {
+            display: flex; flex-wrap: wrap; gap: 8px;
+            margin: 0 0 28px;
+        }
+        .pm-tag {
+            font-size: 12px; font-weight: 600;
+            padding: 5px 13px; border-radius: 999px;
+            background: rgba(14,165,233,0.08);
+            color: #0ea5e9;
+            border: 1px solid rgba(14,165,233,0.2);
+        }
+
+        /* ── Actions ── */
+        .pm-actions {
+            display: flex; gap: 12px; flex-wrap: wrap;
+        }
+        .pm-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 24px; border-radius: 12px;
+            font-size: 14px; font-weight: 600;
+            text-decoration: none; transition: all 0.2s;
+        }
+        .pm-btn-primary {
+            background: #1a1a2e; color: #fff;
+        }
+        .pm-btn-primary:hover { background: #0ea5e9; color: #fff; }
+
+        .pm-divider {
+            border: none; border-top: 1px solid #f1f5f9;
+            margin: 26px 0;
+        }
+
+        .pm-section-label {
+            font-size: 11px; font-weight: 700; letter-spacing: 1.5px;
+            text-transform: uppercase; color: #9ca3af;
+            margin: 0 0 14px;
+        }
+
+        @media (max-width: 600px) {
+            .pm-body { padding: 24px 22px 28px; }
+            .pm-banner { height: 180px; }
         }
     </style>
 </head>
 <body>
+
+<!-- ══ PROJECT MODAL ═══════════════════════════════════════════════════ -->
+<div class="pm-overlay" id="pm-overlay" role="dialog" aria-modal="true">
+    <div class="pm-box" id="pm-box">
+        <button class="pm-close" id="pm-close" aria-label="Close"><i class="fas fa-times"></i></button>
+        <div class="pm-banner" id="pm-banner"></div>
+        <div class="pm-body">
+            <p class="pm-eyebrow" id="pm-eyebrow"></p>
+            <h2 class="pm-title" id="pm-title"></h2>
+            <p class="pm-desc" id="pm-desc"></p>
+            <p class="pm-section-label">Key Features</p>
+            <ul class="pm-features" id="pm-features"></ul>
+            <hr class="pm-divider">
+            <p class="pm-section-label">Tech Stack</p>
+            <div class="pm-tags" id="pm-tags"></div>
+            <div class="pm-actions" id="pm-actions"></div>
+        </div>
+    </div>
+</div>
 
 <nav class="portfolio-nav">
     <div class="nav-inner">
@@ -61,11 +225,11 @@
 
     <div class="projects-grid">
 
-        <div class="project-card">
+        <div class="project-card" data-project="pickorole">
             <div class="project-card-banner" style="background: url('images/boardgame.png') center/cover no-repeat;"></div>
             <div class="project-card-body">
                 <h3 class="project-card-title">PickORole</h3>
-                <p class="project-card-desc">7×7 race board game built in C++ with SFML. Features animated movement, procedural SFX, trap logic, and 2-player local multiplayer. Packaged as a Windows executable.</p>
+                <p class="project-card-desc">7×7 race board game built in C++ with SFML. Animated movement, procedural SFX, trap logic, and 2-player local multiplayer.</p>
                 <div class="project-tags">
                     <span class="project-tag">C++</span>
                     <span class="project-tag">SFML</span>
@@ -73,16 +237,16 @@
                     <span class="project-tag">2D Graphics</span>
                 </div>
                 <div class="project-card-links">
-                    <a href="https://github.com/lol0chx/testing-sfml" target="_blank" class="project-link primary"><i class="fab fa-github"></i> View Code</a>
+                    <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
                 </div>
             </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-project="ecommerce">
             <div class="project-card-banner" style="background: url('images/ecom.png') center/cover no-repeat;"></div>
             <div class="project-card-body">
                 <h3 class="project-card-title">E-Commerce Platform</h3>
-                <p class="project-card-desc">Full-stack e-commerce web app with product catalog, shopping cart, user authentication, order management, wishlist, and an admin dashboard for inventory control.</p>
+                <p class="project-card-desc">Full-stack shop with product catalog, cart, auth, order management, wishlist, and admin dashboard.</p>
                 <div class="project-tags">
                     <span class="project-tag">Java</span>
                     <span class="project-tag">Spring Boot</span>
@@ -90,16 +254,16 @@
                     <span class="project-tag">MySQL</span>
                 </div>
                 <div class="project-card-links">
-                    <a href="https://github.com/lol0chx/capstone_3_easyshop" target="_blank" class="project-link primary"><i class="fab fa-github"></i> View Code</a>
+                    <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
                 </div>
             </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-project="agenteval">
             <div class="project-card-banner" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); display:flex; align-items:center; justify-content:center; font-size:64px;">🤖</div>
             <div class="project-card-body">
                 <h3 class="project-card-title">AI Agent Eval Pipeline</h3>
-                <p class="project-card-desc">Offline evaluation framework for AI agents across 500+ scenarios. Automated regression detection and per-tool reporting using Azure OpenAI and pytest.</p>
+                <p class="project-card-desc">Offline evaluation framework for AI agents across 500+ scenarios. Automated regression detection and per-tool reporting.</p>
                 <div class="project-tags">
                     <span class="project-tag">Python</span>
                     <span class="project-tag">Azure OpenAI</span>
@@ -107,16 +271,16 @@
                     <span class="project-tag">AI/ML</span>
                 </div>
                 <div class="project-card-links">
-                    <a href="https://github.com/lol0chx/AGENT-EVAL" target="_blank" class="project-link primary"><i class="fab fa-github"></i> View Code</a>
+                    <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
                 </div>
             </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-project="echo">
             <div class="project-card-banner" style="background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460); display:flex; align-items:center; justify-content:center; font-size:64px;">⚔️</div>
             <div class="project-card-body">
                 <h3 class="project-card-title">Echo Code Battle</h3>
-                <p class="project-card-desc">Real-time multiplayer coding game with a live leaderboard, 5-language support, and fullscreen lockdown enforcement. Built with Node.js and Socket.io.</p>
+                <p class="project-card-desc">Real-time multiplayer coding game with live leaderboard, 5-language support, and fullscreen lockdown enforcement.</p>
                 <div class="project-tags">
                     <span class="project-tag">Node.js</span>
                     <span class="project-tag">Socket.io</span>
@@ -124,16 +288,16 @@
                     <span class="project-tag">Real-time</span>
                 </div>
                 <div class="project-card-links">
-                    <a href="https://github.com/lol0chx/Echo" target="_blank" class="project-link primary"><i class="fab fa-github"></i> View Code</a>
+                    <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
                 </div>
             </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-project="cloudscout">
             <div class="project-card-banner" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); display:flex; align-items:center; justify-content:center; font-size:64px;">📊</div>
             <div class="project-card-body">
                 <h3 class="project-card-title">CloudScout</h3>
-                <p class="project-card-desc">Multi-sport analytics dashboard for NBA and MLB. AI-powered insights via the Claude API, with win probability models, streak tracking, injury detection, and team standings.</p>
+                <p class="project-card-desc">Multi-sport analytics dashboard for NBA and MLB with AI-powered insights, win probability models, and injury detection.</p>
                 <div class="project-tags">
                     <span class="project-tag">Python</span>
                     <span class="project-tag">Streamlit</span>
@@ -141,16 +305,16 @@
                     <span class="project-tag">NBA/MLB</span>
                 </div>
                 <div class="project-card-links">
-                    <a href="https://github.com/lol0chx/cloud-scout" target="_blank" class="project-link primary"><i class="fab fa-github"></i> View Code</a>
+                    <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
                 </div>
             </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-project="rollorpick">
             <div class="project-card-banner" style="background: linear-gradient(135deg, #1c1c1e, #2c2c2e, #3a3a3c); display:flex; align-items:center; justify-content:center; font-size:64px;">📱</div>
             <div class="project-card-body">
                 <h3 class="project-card-title">RollorPick</h3>
-                <p class="project-card-desc">iOS app built with Swift and SwiftUI featuring 3D interactive dice using SceneKit. Smooth animations, haptic feedback, and a clean native UI.</p>
+                <p class="project-card-desc">iOS app with a 37-tile 3D board game rendered in SceneKit. Smooth animations, haptic feedback, and a native SwiftUI interface.</p>
                 <div class="project-tags">
                     <span class="project-tag">Swift</span>
                     <span class="project-tag">SwiftUI</span>
@@ -158,16 +322,16 @@
                     <span class="project-tag">iOS</span>
                 </div>
                 <div class="project-card-links">
-                    <a href="https://github.com/lol0chx/RollorPick" target="_blank" class="project-link primary"><i class="fab fa-github"></i> View Code</a>
+                    <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
                 </div>
             </div>
         </div>
 
-        <div class="project-card">
+        <div class="project-card" data-project="albi">
             <div class="project-card-banner" style="background: linear-gradient(135deg, #1a1a2e, #2d1b69, #11001c); display:flex; align-items:center; justify-content:center; font-size:64px;">🖐️</div>
             <div class="project-card-body">
                 <h3 class="project-card-title">Albi — Motion Tracker</h3>
-                <p class="project-card-desc">Desktop webcam app for real-time hand and face tracking using MediaPipe and OpenCV. Detects landmarks and motion with a native macOS launcher.</p>
+                <p class="project-card-desc">Desktop webcam app for real-time hand and face tracking using MediaPipe and OpenCV with a native macOS launcher.</p>
                 <div class="project-tags">
                     <span class="project-tag">Python</span>
                     <span class="project-tag">OpenCV</span>
@@ -175,11 +339,10 @@
                     <span class="project-tag">macOS</span>
                 </div>
                 <div class="project-card-links">
-                    <a href="https://github.com/lol0chx/Alibi" target="_blank" class="project-link primary"><i class="fab fa-github"></i> View Code</a>
+                    <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
                 </div>
             </div>
         </div>
-
 
     </div>
 
@@ -205,6 +368,182 @@
         <div class="footer-legal"><p>© 2026 Henok Mekuria. All rights reserved.</p></div>
     </div>
 </footer>
+
+<script>
+const PROJECTS = {
+    pickorole: {
+        eyebrow: 'C++ · Game Dev',
+        title: 'PickORole',
+        desc: 'A 2-player local multiplayer race board game built entirely in C++ using the SFML graphics library. Players roll, move across a 7×7 grid, and trigger trap tiles that send them back — last to the finish loses. The game was packaged as a standalone Windows executable with no dependencies required.',
+        features: [
+            '7×7 race board with animated player movement and smooth tile transitions',
+            'Procedurally generated sound effects for moves, traps, and win conditions',
+            'Trap tile system — landing on certain squares sends you back to start',
+            '2-player local multiplayer on a single machine',
+            'Real-time game state management with turn logic and win detection',
+            'Packaged as a Windows .exe — no install required',
+        ],
+        tags: ['C++', 'SFML', '2D Graphics', 'Game Dev', 'OOP', 'Windows'],
+        github: 'https://github.com/lol0chx/testing-sfml',
+        banner: { type: 'img', src: 'images/boardgame.png' },
+    },
+    ecommerce: {
+        eyebrow: 'Java · Spring Boot · Full Stack',
+        title: 'E-Commerce Platform (EasyShop)',
+        desc: 'A full-stack e-commerce web application built with a Java Spring Boot backend and a JavaScript frontend. The platform supports full role-based authentication — customers can browse, filter, and shop, while admins get a separate dashboard for managing inventory and orders.',
+        features: [
+            'JWT-secured authentication with role-based access (admin vs customer)',
+            'Product catalog with category filtering, price range, and color search',
+            'Shopping cart with persistent state and quantity management',
+            'Order management — checkout flow, order history, and status tracking',
+            'Wishlist support — save items for later',
+            'Admin dashboard for full CRUD on products, categories, and users',
+            'RESTful API backend consumed by a vanilla JS frontend',
+        ],
+        tags: ['Java', 'Spring Boot', 'Spring Security', 'JWT', 'MySQL', 'JavaScript', 'REST API'],
+        github: 'https://github.com/lol0chx/capstone_3_easyshop',
+        banner: { type: 'img', src: 'images/ecom.png' },
+    },
+    agenteval: {
+        eyebrow: 'Python · AI/ML · Automation',
+        title: 'AI Agent Eval Pipeline',
+        desc: 'An end-to-end evaluation framework for Claude-powered AI agents. The pipeline runs the agent against a golden dataset of 500+ test cases, measures tool-call accuracy, output correctness, and per-request latency, then generates a structured HTML report — similar to a scorecard validation system used in production test engineering.',
+        features: [
+            'Claude-powered agentic loop with 3 callable tools: calculator, weather, knowledge base search',
+            'Golden dataset of 500+ labeled test cases with expected tool calls and output assertions',
+            'Automated regression detection — tracks which tools fail most and by how much',
+            'Latency tracking per test case to surface slow tool calls',
+            'Generates report.json and a browsable report.html after every run',
+            'pytest unit tests for each individual tool in isolation',
+            'Mirrors real test engineering workflows: golden baseline → run → compare → report',
+        ],
+        tags: ['Python', 'Claude API', 'Azure OpenAI', 'pytest', 'AI Agents', 'Automation', 'LLM Eval'],
+        github: 'https://github.com/lol0chx/AGENT-EVAL',
+        banner: { type: 'gradient', style: 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)', emoji: '🤖' },
+    },
+    echo: {
+        eyebrow: 'Node.js · Socket.io · Real-time',
+        title: 'Echo Code Battle',
+        desc: 'A real-time multiplayer coding game inspired by Kahoot and LeetCode-style interview problems. Players join a lobby, lock into fullscreen mode, and race to solve coding prompts in 3 timed rounds. The server runs submitted code locally and ranks players by correctness and solve speed.',
+        features: [
+            'Lobby system with host-controlled game start and shareable room codes',
+            'Fullscreen lockdown enforcement — switching tabs or minimizing disqualifies you',
+            'Server-side code execution in JavaScript, Python, C++, Ruby, and Swift',
+            'Round-by-round leaderboard ranked by correct answers then fastest solve time',
+            'Final standings across all 3 rounds with overall winner declaration',
+            'Prompts are locally bundled LeetCode-style problems across multiple difficulty levels',
+            'Real-time sync via Socket.io — all players see the same timer and state',
+        ],
+        tags: ['Node.js', 'Socket.io', 'JavaScript', 'Real-time', 'Game Dev', 'Code Execution'],
+        github: 'https://github.com/lol0chx/Echo',
+        banner: { type: 'gradient', style: 'linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)', emoji: '⚔️' },
+    },
+    cloudscout: {
+        eyebrow: 'Python · Streamlit · AI Analytics',
+        title: 'CloudScout',
+        desc: 'A multi-sport analytics dashboard for NBA and MLB built with Python and Streamlit. CloudScout scrapes live game data, stores it locally, and surfaces AI-generated insights via the Claude API — including win probability models, injury detection, team standings, and head-to-head breakdowns.',
+        features: [
+            'Win probability model using win%, head-to-head record, and home/away splits',
+            'Streak tracking — shows current win/loss run for every team in real time',
+            'Injury watch — flags players who appeared in recent games but missed the latest one',
+            'Season standings tab ranked by win%, net rating, and avg points scored/allowed',
+            'Watchlist sidebar — add any team and see their latest result and streak at a glance',
+            'Claude API integration for natural language game summaries and insights',
+            'Supports both NBA and MLB with a sidebar sport selector',
+        ],
+        tags: ['Python', 'Streamlit', 'Claude API', 'Pandas', 'SQLite', 'NBA API', 'MLB Scraper'],
+        github: 'https://github.com/lol0chx/cloud-scout',
+        banner: { type: 'gradient', style: 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)', emoji: '📊' },
+    },
+    rollorpick: {
+        eyebrow: 'Swift · SwiftUI · SceneKit · iOS',
+        title: 'RollorPick',
+        desc: 'An iOS board game app built with Swift, SwiftUI, and SceneKit. The game renders a 37-tile 3D board with animated player movement, tile-based events, and a full game state machine — all inside a native iOS interface with haptic feedback and a dark-themed HUD.',
+        features: [
+            '37-tile 3D board rendered with SceneKit — tiles staggered in rows with height offsets',
+            'Animated player movement across tiles with smooth SceneKit transitions',
+            'Tile flash animations and per-tile color effects on land events',
+            'Game state machine: roll → move → event → next turn → win detection',
+            'SwiftUI HUD overlay with player info, roll controls, and menu system',
+            'Haptic feedback on tile land and win events',
+            'Dark mode native interface with a menu overlay and winner screen',
+        ],
+        tags: ['Swift', 'SwiftUI', 'SceneKit', 'iOS', 'Game Dev', '3D Graphics'],
+        github: 'https://github.com/lol0chx/RollorPick',
+        banner: { type: 'gradient', style: 'linear-gradient(135deg, #1c1c1e, #2c2c2e, #3a3a3c)', emoji: '📱' },
+    },
+    albi: {
+        eyebrow: 'Python · OpenCV · MediaPipe',
+        title: 'Albi — Motion Tracker',
+        desc: 'A desktop webcam application that performs real-time hand and face tracking using Google\'s MediaPipe library and OpenCV. Albi detects and draws 21-point hand landmarks and full face mesh overlays live from your webcam feed, packaged with a native macOS double-click launcher.',
+        features: [
+            'Real-time 21-point hand landmark detection using MediaPipe Hands',
+            'Face mesh tracking with full facial landmark overlay via MediaPipe',
+            'Live webcam feed rendered with OpenCV in a desktop window',
+            'Supports multiple detection modes: hand only, face only, or combined',
+            'Native macOS .app launcher — double-click to run, no terminal needed',
+            'Minimal dependencies: OpenCV and MediaPipe only',
+        ],
+        tags: ['Python', 'OpenCV', 'MediaPipe', 'Computer Vision', 'macOS', 'Real-time'],
+        github: 'https://github.com/lol0chx/Alibi',
+        banner: { type: 'gradient', style: 'linear-gradient(135deg, #1a1a2e, #2d1b69, #11001c)', emoji: '🖐️' },
+    },
+};
+
+(function () {
+    const overlay = document.getElementById('pm-overlay');
+    const closeBtn = document.getElementById('pm-close');
+
+    function openModal(id) {
+        const p = PROJECTS[id];
+        if (!p) return;
+
+        // Banner
+        const banner = document.getElementById('pm-banner');
+        if (p.banner.type === 'img') {
+            banner.style.cssText = '';
+            banner.innerHTML = `<img src="${p.banner.src}" alt="${p.title}">`;
+        } else {
+            banner.style.cssText = `background: ${p.banner.style}; display:flex; align-items:center; justify-content:center; font-size:80px;`;
+            banner.innerHTML = p.banner.emoji;
+        }
+
+        document.getElementById('pm-eyebrow').innerHTML = `<i class="fas fa-code"></i> ${p.eyebrow}`;
+        document.getElementById('pm-title').textContent = p.title;
+        document.getElementById('pm-desc').textContent = p.desc;
+
+        document.getElementById('pm-features').innerHTML = p.features
+            .map(f => `<li>${f}</li>`).join('');
+
+        document.getElementById('pm-tags').innerHTML = p.tags
+            .map(t => `<span class="pm-tag">${t}</span>`).join('');
+
+        document.getElementById('pm-actions').innerHTML =
+            `<a href="${p.github}" target="_blank" class="pm-btn pm-btn-primary"><i class="fab fa-github"></i> View on GitHub</a>`;
+
+        // Reset scroll
+        document.getElementById('pm-box').scrollTop = 0;
+
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // Card clicks
+    document.querySelectorAll('.project-card[data-project]').forEach(card => {
+        card.addEventListener('click', () => openModal(card.dataset.project));
+    });
+
+    // Close handlers
+    closeBtn.addEventListener('click', closeModal);
+    overlay.addEventListener('click', e => { if (e.target === overlay) closeModal(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+})();
+</script>
 
 </body>
 </html>
