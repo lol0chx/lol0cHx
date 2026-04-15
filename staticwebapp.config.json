@@ -1,0 +1,12 @@
+{
+  "routes": [
+    { "route": "/projects", "rewrite": "/projects.html" },
+    { "route": "/about", "rewrite": "/about.html" },
+    { "route": "/contact", "rewrite": "/contact.html" },
+    { "route": "/gallery", "rewrite": "/gallery.html" }
+  ],
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/images/*", "/css/*", "/js/*", "/*.{png,jpg,jpeg,gif,svg,ico,webp}"]
+  }
+}
