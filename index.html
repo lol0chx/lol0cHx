@@ -475,8 +475,11 @@
 }
 @media (max-width: 900px) {
     .hp-hero { grid-template-columns: 1fr; }
-    .hp-right { display: none; }
-    .hp-hero-inner { padding: 110px 36px 70px; }
+    .hp-right { padding: 0 36px 40px; align-items: stretch; }
+    .hp-card-stack { width: 100%; height: auto; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .hp-stack-card { position: static; width: 100%; height: 160px; transform: none !important; box-shadow: 0 8px 24px rgba(0,0,0,0.15) !important; border-width: 3px; }
+    .hp-stack-card:hover { transform: translateY(-4px) !important; }
+    .hp-hero-inner { padding: 110px 36px 40px; }
     .hp-name { font-size: clamp(3rem, 8vw, 5rem); }
     .hp-projects { padding: 30px 36px; }
     .hp-photos { padding: 0 36px 40px; }
