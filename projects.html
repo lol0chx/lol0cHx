@@ -238,6 +238,7 @@
                 </div>
                 <div class="project-card-links">
                     <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
+                    <a href="https://github.com/lol0chx/AGENT-EVAL" target="_blank" rel="noopener" class="project-link secondary"><i class="fab fa-github"></i> View on GitHub</a>
                 </div>
             </div>
         </div>
@@ -257,6 +258,7 @@
                 </div>
                 <div class="project-card-links">
                     <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
+                    <a href="https://github.com/lol0chx/cloud-scout" target="_blank" rel="noopener" class="project-link secondary"><i class="fab fa-github"></i> View on GitHub</a>
                 </div>
             </div>
         </div>
@@ -276,6 +278,7 @@
                 </div>
                 <div class="project-card-links">
                     <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
+                    <a href="https://github.com/lol0chx/Echo" target="_blank" rel="noopener" class="project-link secondary"><i class="fab fa-github"></i> View on GitHub</a>
                 </div>
             </div>
         </div>
@@ -293,6 +296,7 @@
                 </div>
                 <div class="project-card-links">
                     <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
+                    <a href="https://github.com/lol0chx/capstone_3_easyshop" target="_blank" rel="noopener" class="project-link secondary"><i class="fab fa-github"></i> View on GitHub</a>
                 </div>
             </div>
         </div>
@@ -310,6 +314,7 @@
                 </div>
                 <div class="project-card-links">
                     <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
+                    <a href="https://github.com/lol0chx/testing-sfml" target="_blank" rel="noopener" class="project-link secondary"><i class="fab fa-github"></i> View on GitHub</a>
                 </div>
             </div>
         </div>
@@ -407,7 +412,7 @@ const PROJECTS = {
         ],
         tags: ['Node.js', 'Socket.io', 'JavaScript', 'Real-time', 'Game Dev', 'Code Execution'],
         github: 'https://github.com/lol0chx/Echo',
-        banner: { type: 'gradient', style: 'linear-gradient(135deg, #1a1a2e, #16213e, #0f3460)', emoji: '⚔️' },
+        banner: { type: 'img', src: 'images/EchoCodeBattle.png' },
     },
     cloudscout: {
         eyebrow: 'Python · Streamlit · AI Analytics',
@@ -424,7 +429,7 @@ const PROJECTS = {
         ],
         tags: ['Python', 'Streamlit', 'Claude API', 'Pandas', 'SQLite', 'NBA API', 'MLB Scraper'],
         github: 'https://github.com/lol0chx/cloud-scout',
-        banner: { type: 'gradient', style: 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)', emoji: '📊' },
+        banner: { type: 'img', src: 'images/CloudScout.png' },
     },
 };
 
@@ -473,7 +478,10 @@ const PROJECTS = {
 
     // Card clicks
     document.querySelectorAll('.project-card[data-project]').forEach(card => {
-        card.addEventListener('click', () => openModal(card.dataset.project));
+        card.addEventListener('click', (e) => {
+            if (e.target.closest('a')) return;
+            openModal(card.dataset.project);
+        });
     });
 
     // Close handlers
