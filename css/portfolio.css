@@ -2654,8 +2654,10 @@ body {
 .nav-links a {
     color: #2d2d2d !important;
     text-decoration: none !important;
-    font-size: 17px !important;
-    font-weight: 600 !important;
+    font-size: 21px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
     padding: 10px 22px !important;
     border-radius: 8px !important;
     transition: all 0.3s ease !important;
