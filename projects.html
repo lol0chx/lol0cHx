@@ -229,8 +229,8 @@
         <div class="project-card" data-project="agenteval">
             <div class="project-card-banner" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); display:flex; align-items:center; justify-content:center; font-size:64px;">🤖</div>
             <div class="project-card-body">
-                <h3 class="project-card-title">AI Agent Eval Pipeline</h3>
-                <p class="project-card-desc">Offline evaluation framework for AI agents across 500+ scenarios. Automated regression detection and per-tool reporting.</p>
+                <h3 class="project-card-title">AgentEval</h3>
+                <p class="project-card-desc">Multi-agent evaluation framework for Claude and Azure OpenAI agents. Evaluates SE Job Tracker and EagleEye vision agent against 100+ test fixtures with automated regression detection and interactive reports.</p>
                 <div class="project-tags">
                     <span class="project-tag">Python</span>
                     <span class="project-tag">Azure OpenAI</span>
@@ -250,12 +250,12 @@
             </div>
             <div class="project-card-body">
                 <h3 class="project-card-title">CloudScout</h3>
-                <p class="project-card-desc">Multi-sport analytics dashboard for NBA and MLB with AI-powered insights, win probability models, and injury detection.</p>
+                <p class="project-card-desc">Multi-sport analytics for NBA and MLB with web (Streamlit) and iOS app. AI-powered insights, win probability models, injury tracking, and editorial feeds.</p>
                 <div class="project-tags">
                     <span class="project-tag">Python</span>
-                    <span class="project-tag">Streamlit</span>
+                    <span class="project-tag">Swift</span>
                     <span class="project-tag">Claude API</span>
-                    <span class="project-tag">NBA/MLB</span>
+                    <span class="project-tag">iOS</span>
                 </div>
                 <div class="project-card-links">
                     <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
@@ -382,19 +382,20 @@ const PROJECTS = {
         banner: { type: 'img', src: 'images/ecom.png' },
     },
     agenteval: {
-        eyebrow: 'Python · AI/ML · Automation',
-        title: 'AI Agent Eval Pipeline',
-        desc: 'An end-to-end evaluation framework for Claude-powered AI agents. The pipeline runs the agent against a golden dataset of 500+ test cases, measures tool-call accuracy, output correctness, and per-request latency, then generates a structured HTML report — similar to a scorecard validation system used in production test engineering.',
+        eyebrow: 'Python · AI/ML · Multi-Agent Eval',
+        title: 'AgentEval',
+        desc: 'A comprehensive offline evaluation framework for real LLM agents. Evaluates two agents: the SE Job Tracker (a Claude skill that finds entry-level SE roles at Microsoft with intelligent filtering) and EagleEye (a vision agent that answers questions about screenshots). Runs both agents against 100+ deterministic test fixtures, scores decision correctness and per-field extraction, detects regressions, and generates interactive reports.',
         features: [
-            'Claude-powered agentic loop with 3 callable tools: calculator, weather, knowledge base search',
-            'Golden dataset of 500+ labeled test cases with expected tool calls and output assertions',
-            'Automated regression detection — tracks which tools fail most and by how much',
-            'Latency tracking per test case to surface slow tool calls',
-            'Generates report.json and a browsable report.html after every run',
-            'pytest unit tests for each individual tool in isolation',
-            'Mirrors real test engineering workflows: golden baseline → run → compare → report',
+            'SE Job Tracker agent — scans Microsoft careers site, applies filter rules (title, location, clearance, level), extracts ~10 fields per job, supports Excel/Word/HTML outputs',
+            'EagleEye vision agent — answers questions about screenshots (LeetCode problems, MCQs, code with bugs)',
+            '100+ deterministic test fixtures across synthetic and real-world data',
+            'Two evaluation modes: synthetic fixtures (regression gate) and real Microsoft listings (weekly correctness checks)',
+            'Live discovery mode — production-flow smoke test against live Microsoft careers API',
+            'Automated regression detection with per-run baseline diffs and CI integration',
+            'Interactive FastAPI dashboard for single-job evaluation, run history, and side-by-side comparisons',
+            'Provider-agnostic agent framework supporting Anthropic and Azure OpenAI',
         ],
-        tags: ['Python', 'Claude API', 'Azure OpenAI', 'pytest', 'AI Agents', 'Automation', 'LLM Eval'],
+        tags: ['Python', 'Claude API', 'Azure OpenAI', 'FastAPI', 'pytest', 'Vision', 'LLM Eval', 'AI Agents'],
         github: 'https://github.com/lol0chx/AGENT-EVAL',
         banner: { type: 'gradient', style: 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)', emoji: '🤖' },
     },
@@ -416,19 +417,20 @@ const PROJECTS = {
         banner: { type: 'img', src: 'images/EchoCodeBattle.png' },
     },
     cloudscout: {
-        eyebrow: 'Python · Streamlit · AI Analytics',
+        eyebrow: 'Python · Swift · AI Analytics',
         title: 'CloudScout',
-        desc: 'A multi-sport analytics dashboard for NBA and MLB built with Python and Streamlit. CloudScout scrapes live game data, stores it locally, and surfaces AI-generated insights via the Claude API — including win probability models, injury detection, team standings, and head-to-head breakdowns.',
+        desc: 'A multi-sport analytics platform for NBA and MLB with both web (Streamlit) and iOS app frontends. Scrapes live game data and surfaces AI-generated insights via the Claude API — including win probability models, injury detection, team standings, and interactive matchup analysis.',
         features: [
-            'Win probability model using win%, head-to-head record, and home/away splits',
-            'Streak tracking — shows current win/loss run for every team in real time',
-            'Injury watch — flags players who appeared in recent games but missed the latest one',
-            'Season standings tab ranked by win%, net rating, and avg points scored/allowed',
-            'Watchlist sidebar — add any team and see their latest result and streak at a glance',
+            'Win probability model using win%, head-to-head record, and home/away splits with spread predictions',
+            'Editorial feed — live games, season leaders, and injury updates in a Twitter/Instagram-style interface',
+            'Injury watch — live ESPN fetches to flag players missing recent games with DB persistence',
+            'Season standings ranked by win%, net rating, and avg points scored/allowed with team color badges',
+            'Watchlist sidebar — add any team and see their latest result and current streak at a glance',
+            'Prediction matchup picker — dive deep into any two teams with factors, head-to-head, home/away splits, and projected totals',
             'Claude API integration for natural language game summaries and insights',
-            'Supports both NBA and MLB with a sidebar sport selector',
+            'Dual platform support: Python/Streamlit web app and native Swift iOS app (Expo-compatible)',
         ],
-        tags: ['Python', 'Streamlit', 'Claude API', 'Pandas', 'SQLite', 'NBA API', 'MLB Scraper'],
+        tags: ['Python', 'Streamlit', 'Swift', 'Claude API', 'Pandas', 'SQLite', 'NBA API', 'iOS'],
         github: 'https://github.com/lol0chx/cloud-scout',
         banner: { type: 'img', src: 'images/CloudScout.png' },
     },
