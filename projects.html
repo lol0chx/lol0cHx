@@ -302,20 +302,20 @@
             </div>
         </div>
 
-        <div class="project-card" data-project="pickorole">
+        <div class="project-card" data-project="rollorpick">
             <div class="project-card-banner" style="background: url('images/boardgame.png') center/cover no-repeat;"></div>
             <div class="project-card-body">
-                <h3 class="project-card-title">PickORole</h3>
-                <p class="project-card-desc">7×7 race board game built in C++ with SFML. Animated movement, procedural SFX, trap logic, and 2-player local multiplayer.</p>
+                <h3 class="project-card-title">RollorPick</h3>
+                <p class="project-card-desc">iOS dice game built in SwiftUI with a 3D SceneKit board. Climb a tower by rolling or picking, dodge trap tiles, beat par, and climb the Game Center leaderboard.</p>
                 <div class="project-tags">
-                    <span class="project-tag">C++</span>
-                    <span class="project-tag">SFML</span>
-                    <span class="project-tag">Game Dev</span>
-                    <span class="project-tag">2D Graphics</span>
+                    <span class="project-tag">Swift</span>
+                    <span class="project-tag">SwiftUI</span>
+                    <span class="project-tag">SceneKit</span>
+                    <span class="project-tag">iOS</span>
                 </div>
                 <div class="project-card-links">
                     <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
-                    <a href="https://github.com/lol0chx/testing-sfml" target="_blank" rel="noopener" class="project-link secondary"><i class="fab fa-github"></i> View on GitHub</a>
+                    <a href="https://github.com/lol0chx/RollorPick" target="_blank" rel="noopener" class="project-link secondary"><i class="fab fa-github"></i> View on GitHub</a>
                 </div>
             </div>
         </div>
@@ -348,20 +348,23 @@
 
 <script>
 const PROJECTS = {
-    pickorole: {
-        eyebrow: 'C++ · Game Dev',
-        title: 'PickORole',
-        desc: 'A 2-player local multiplayer race board game built entirely in C++ using the SFML graphics library. Players roll, move across a 7×7 grid, and trigger trap tiles that send them back — last to the finish loses. The game was packaged as a standalone Windows executable with no dependencies required.',
+    rollorpick: {
+        eyebrow: 'Swift · SwiftUI · iOS Game',
+        title: 'RollorPick',
+        desc: 'A polished iOS dice game built in SwiftUI with a 3D SceneKit board. Climb a tower of tiles by rolling the dice — or spend one of your limited "picks" to choose an exact number. Dodge trap tiles that knock you back down, finish under par, and climb the Game Center leaderboard.',
         features: [
-            '7×7 race board with animated player movement and smooth tile transitions',
-            'Procedurally generated sound effects for moves, traps, and win conditions',
-            'Trap tile system — landing on certain squares sends you back to start',
-            '2-player local multiplayer on a single machine',
-            'Real-time game state management with turn logic and win detection',
-            'Packaged as a Windows .exe — no install required',
+            '3D animated tower board rendered in SceneKit with themed level tiles',
+            'Roll the dice or "pick" an exact number with limited pick chances — a risk-vs-control mechanic',
+            'Trap tiles knock you back down the tower, with animated hits and sound cues',
+            'Par-based scoring like golf — finish the climb in as few moves as possible',
+            'Game Center leaderboard ranking players by fewest moves to win',
+            'Stats tracking — best moves, best time, and full game history',
+            'Haptics, sound effects, background music, and a confetti win screen',
+            'Pause/resume with an accurate active-play timer, plus save & restore of in-progress games',
+            'Localized strings with VoiceOver accessibility support',
         ],
-        tags: ['C++', 'SFML', '2D Graphics', 'Game Dev', 'OOP', 'Windows'],
-        github: 'https://github.com/lol0chx/testing-sfml',
+        tags: ['Swift', 'SwiftUI', 'SceneKit', 'Game Center', 'iOS', 'Game Dev'],
+        github: 'https://github.com/lol0chx/RollorPick',
         banner: { type: 'img', src: 'images/boardgame.png' },
     },
     ecommerce: {

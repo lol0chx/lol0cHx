@@ -23,8 +23,7 @@ I build production-ready backend systems and clean frontends.
 
 | Project | Stack | |
 |---|---|---|
-| **CloudScout** | Python · Streamlit · Claude API · NBA/MLB Analytics | [repo](https://github.com/lol0chx/cloud-scout) |
-| **2D Board Game** | C++ · SFML · 2D Graphics | [repo](https://github.com/lol0chx/testing-sfml) |
+| **CloudScout** | SwiftUI · FastAPI · Claude API · NBA/MLB Analytics | [repo](https://github.com/lol0chx/cloud-scout) |
 | **RollorPick** | Swift · SwiftUI · SceneKit | [repo](https://github.com/lol0chx/RollorPick) |
 | **EagleEye** | HTML · JavaScript · Live Screen Vision | [repo](https://github.com/lol0chx/EagleEye) |
 
