@@ -36,25 +36,60 @@ I build agentic AI systems (tool calling, RAG, streaming), evaluation frameworks
 
 ---
 
-### Featured Projects
+### 🚀 Featured Projects
 
-**[Foundry Agent Playground](https://github.com/lol0chx/agent-playground)** · *Next.js · Vercel AI SDK · Claude Sonnet 4.5 · pgvector · RAG*
-A full-stack agent-building playground demonstrating the core primitives of modern AI agent platforms (Foundry, Vercel AI SDK, OpenAI Assistants) — streaming chat, tool calling, and RAG — implemented from scratch. Three Zod-validated tools (`search_docs`, `calculate`, `get_current_time`) wired into a multi-step `streamText` loop, document upload + chunking + embeddings via `text-embedding-3-small`, semantic search over pgvector in Neon Postgres, and a Next.js edge runtime for sub-100 ms TTFB streaming. Tool calls render as live expandable cards with similarity scores and execution time.
+#### [Foundry Agent Playground →](https://github.com/lol0chx/agent-playground)
+> Streaming Claude agent with tool calling + pgvector RAG, built around the Vercel AI SDK.
 
-**[AgentEval](https://github.com/lol0chx/AGENT-EVAL)** · *Python · FastAPI · Claude API · OpenAI · Azure OpenAI*
-LLM agent benchmarking framework with a live web dashboard. Evaluates two production-style agents (SE Job Tracker + EagleEye vision) across 185 test cases and three LLM providers, with parallel runs, SSE progress streaming, regression detection (PASS→FAIL diffing, latency/cost thresholds), and GitHub Actions CI/CD that posts regression diffs on every PR. Universal tool-fixture registry makes the eval deterministic and tool-agnostic.
+`Next.js 14` `TypeScript` `Vercel AI SDK` `Claude Sonnet 4.5` `pgvector` `Neon Postgres`
 
-**[CloudScout](https://github.com/lol0chx/cloud-scout)** · *SwiftUI · FastAPI · XGBoost · Postgres · Claude API*
-Production sports analytics platform for NBA & MLB. Native iOS app (8 tabs) and Streamlit web on a FastAPI backend deployed to Fly.io with Supabase Postgres. Ships **five XGBoost models in production** trained leakage-free on point-in-time data with chronological 80/20 holdouts — NBA team winner (72.2% accuracy) + total points (15.5 MAE), NBA player projections for points/assists/rebounds (beats baseline formula ~8%), MLB team winner + total runs (3.33 MAE), and MLB pitcher projections for Ks/ER/hits/walks/IP. XGB models run side-by-side with heuristic formulas (NBA 6-factor / MLB 8-pillar blended with Pythagorean expectation) and degrade gracefully when a model is missing. Also includes an AI Scout chat powered by Claude Opus 4.6 with auto-injected league context, and an in-process twice-daily scheduler with precomputed analytics for millisecond reads.
+A full-stack agent playground demonstrating the core primitives of modern AI agent platforms — streaming, tool calling, and RAG — implemented from scratch. Three Zod-validated tools (`search_docs`, `calculate`, `get_current_time`) wired into a multi-step `streamText` loop, document upload + chunking + embeddings via `text-embedding-3-small`, semantic search over pgvector, and a Next.js edge runtime for sub-100 ms TTFB. Tool calls render as live expandable cards with similarity scores and execution time.
 
-**[Transcribe](https://github.com/lol0chx/ReCall)** · *SwiftUI · iOS · Claude API · OpenAI Whisper*
-Native iOS app for voice memos with AI transcription, instant summaries, and per-recording chat. Bring-your-own-key for either OpenAI (Whisper + GPT-4o) or Claude (Apple on-device Speech + Claude). Multi-turn chat with full transcript context, persisted per recording. Everything stays on device except the model call.
+---
 
-**[RollorPick](https://github.com/lol0chx/RollorPick)** · *Swift · SwiftUI · SceneKit · Game Center*
-Polished iOS dice game with a 3D SceneKit tower board. Roll-or-pick mechanic with limited picks (risk vs control), trap tiles, par-based scoring, Game Center leaderboard, stats history, haptics, and save/restore of in-progress games.
+#### [AgentEval →](https://github.com/lol0chx/AGENT-EVAL)
+> LLM agent benchmarking framework with a live web dashboard and CI/CD regression detection.
 
-**[EasyShop](https://github.com/lol0chx/capstone_3_easyshop)** · *Java · Spring Boot · MySQL · JWT*
-Full-stack e-commerce platform with JWT-secured auth, role-based access (admin vs customer), product catalog with category/price/color filtering, shopping cart, wishlist, order management, and an admin dashboard for full CRUD on inventory.
+`Python` `FastAPI` `Anthropic` `OpenAI` `Azure OpenAI` `pytest` `GitHub Actions`
+
+Evaluates two production-style agents (SE Job Tracker + EagleEye vision) across **185 test cases** and three LLM providers, with parallel runs, SSE progress streaming, regression diffing (PASS→FAIL, latency/cost thresholds), and GitHub Actions CI/CD that posts diffs on every PR. Universal tool-fixture registry makes evals deterministic and tool-agnostic.
+
+---
+
+#### [CloudScout →](https://github.com/lol0chx/cloud-scout)
+> Production sports analytics platform — iOS + web + FastAPI, with five XGBoost models in production.
+
+`SwiftUI` `FastAPI` `XGBoost` `scikit-learn` `Postgres` `Supabase` `Claude API` `Fly.io`
+
+Native iOS app (8 tabs) and Streamlit web on a FastAPI backend deployed to Fly.io with Supabase Postgres. Ships **five XGBoost models** trained leakage-free on point-in-time data:
+
+| Model | Metric | Result |
+|---|---|---|
+| NBA team winner | accuracy | **72.2%** |
+| NBA total points | MAE | **15.5** |
+| NBA player proj (pts/ast/reb) | vs baseline | **~8% better** |
+| MLB team winner | accuracy | **51.9%** |
+| MLB pitcher proj (K/ER/H/BB/IP) | vs baseline | **3–19% better** |
+
+XGB runs side-by-side with heuristic formulas (NBA 6-factor / MLB 8-pillar Pythagorean blend) and degrades gracefully when a model is missing. Includes an AI Scout chat (Claude Opus 4.6) with auto-injected league context, and an in-process twice-daily scheduler with precomputed analytics for millisecond reads.
+
+---
+
+#### [PickORoll →](https://github.com/lol0chx/PickORoll)
+> C++ SFML race-board game with single-player par mode and local 2-player pass-and-play.
+
+`C++` `SFML` `Visual Studio` `Windows`
+
+7×7 rainbow-gradient race board (boxes 0–48) with a roll-or-pick mechanic — **5 picks per game** to choose an exact dice value instead of rolling. Six trap tiles with visual connection lines, animated pawn movement with smoothstep easing, procedurally generated sound effects (no audio assets), embedded bitmap font (no external assets), pause menu, and a game-over screen with stats. Single-player rates you against par 8 with messages like "PERFECT!" / "SO CLOSE!". Best score persisted between sessions; prebuilt Windows .exe shipped via Releases.
+
+---
+
+#### [EasyShop →](https://github.com/lol0chx/capstone_3_easyshop)
+> Full-stack Java/Spring Boot e-commerce platform.
+
+`Java` `Spring Boot` `MySQL` `JWT` `REST API`
+
+JWT-secured auth with role-based access (admin vs customer), product catalog with category/price/color filtering, shopping cart, wishlist, order management, and an admin dashboard for full CRUD on inventory.
 
 ---
 
