@@ -226,6 +226,24 @@
 
     <div class="projects-grid">
 
+        <div class="project-card" data-project="foundryagent">
+            <div class="project-card-banner" style="background: linear-gradient(135deg, #1e3a8a, #7c3aed, #ec4899); display:flex; align-items:center; justify-content:center; font-size:64px;">🧪</div>
+            <div class="project-card-body">
+                <h3 class="project-card-title">Foundry Agent Playground</h3>
+                <p class="project-card-desc">Streaming Claude agent with tool calling and pgvector RAG, built on the Vercel AI SDK. Three Zod-validated tools, multi-step streamText loop, and Next.js edge runtime for sub-100ms TTFB.</p>
+                <div class="project-tags">
+                    <span class="project-tag">Next.js</span>
+                    <span class="project-tag">TypeScript</span>
+                    <span class="project-tag">Claude Sonnet 4.5</span>
+                    <span class="project-tag">pgvector</span>
+                </div>
+                <div class="project-card-links">
+                    <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
+                    <a href="https://github.com/lol0chx/agent-playground" target="_blank" rel="noopener" class="project-link secondary"><i class="fab fa-github"></i> View on GitHub</a>
+                </div>
+            </div>
+        </div>
+
         <div class="project-card" data-project="agenteval">
             <div class="project-card-banner" style="background: linear-gradient(135deg, #0f2027, #203a43, #2c5364); display:flex; align-items:center; justify-content:center; font-size:64px;">🤖</div>
             <div class="project-card-body">
@@ -250,12 +268,12 @@
             </div>
             <div class="project-card-body">
                 <h3 class="project-card-title">CloudScout</h3>
-                <p class="project-card-desc">Production sports analytics platform for NBA & MLB. Native iOS app (8 tabs), Streamlit web, and FastAPI backend on Fly.io with Postgres. Win probability models, AI Scout chat, automated scraping, and live game predictions.</p>
+                <p class="project-card-desc">Production sports analytics platform for NBA & MLB. Native iOS app and Streamlit web on a FastAPI backend (Fly.io + Postgres). XGBoost models across four prediction categories — trained leakage-free on point-in-time data — running side-by-side with heuristic formulas, plus a Claude Opus 4.6 AI Scout chat.</p>
                 <div class="project-tags">
                     <span class="project-tag">SwiftUI</span>
                     <span class="project-tag">FastAPI</span>
+                    <span class="project-tag">XGBoost</span>
                     <span class="project-tag">Claude API</span>
-                    <span class="project-tag">Postgres</span>
                 </div>
                 <div class="project-card-links">
                     <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
@@ -302,20 +320,20 @@
             </div>
         </div>
 
-        <div class="project-card" data-project="rollorpick">
+        <div class="project-card" data-project="pickoroll">
             <div class="project-card-banner" style="background: url('images/boardgame.png') center/cover no-repeat;"></div>
             <div class="project-card-body">
-                <h3 class="project-card-title">RollorPick</h3>
-                <p class="project-card-desc">iOS dice game built in SwiftUI with a 3D SceneKit board. Climb a tower by rolling or picking, dodge trap tiles, beat par, and climb the Game Center leaderboard.</p>
+                <h3 class="project-card-title">PickORoll</h3>
+                <p class="project-card-desc">C++ SFML race-board game with single-player par mode and local 2-player pass-and-play. Roll-or-pick mechanic, six traps with visual connection lines, procedural SFX, and an embedded bitmap font — no external assets.</p>
                 <div class="project-tags">
-                    <span class="project-tag">Swift</span>
-                    <span class="project-tag">SwiftUI</span>
-                    <span class="project-tag">SceneKit</span>
-                    <span class="project-tag">iOS</span>
+                    <span class="project-tag">C++</span>
+                    <span class="project-tag">SFML</span>
+                    <span class="project-tag">Game Dev</span>
+                    <span class="project-tag">Windows</span>
                 </div>
                 <div class="project-card-links">
                     <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
-                    <a href="https://github.com/lol0chx/RollorPick" target="_blank" rel="noopener" class="project-link secondary"><i class="fab fa-github"></i> View on GitHub</a>
+                    <a href="https://github.com/lol0chx/PickORoll" target="_blank" rel="noopener" class="project-link secondary"><i class="fab fa-github"></i> View on GitHub</a>
                 </div>
             </div>
         </div>
@@ -348,23 +366,41 @@
 
 <script>
 const PROJECTS = {
-    rollorpick: {
-        eyebrow: 'Swift · SwiftUI · iOS Game',
-        title: 'RollorPick',
-        desc: 'A polished iOS dice game built in SwiftUI with a 3D SceneKit board. Climb a tower of tiles by rolling the dice — or spend one of your limited "picks" to choose an exact number. Dodge trap tiles that knock you back down, finish under par, and climb the Game Center leaderboard.',
+    foundryagent: {
+        eyebrow: 'Next.js · AI Agents · RAG',
+        title: 'Foundry Agent Playground',
+        desc: 'A full-stack agent-building playground that demonstrates the core primitives of modern AI agent platforms (Foundry, Vercel AI SDK, OpenAI Assistants) — streaming chat, tool calling, and RAG — implemented from scratch in roughly 1,500 lines of TypeScript. Three Zod-validated tools wired into a multi-step streamText loop, document upload + chunking + embeddings via text-embedding-3-small, semantic search over pgvector in Neon Postgres, and a Next.js edge runtime for sub-100ms TTFB streaming.',
         features: [
-            '3D animated tower board rendered in SceneKit with themed level tiles',
-            'Roll the dice or "pick" an exact number with limited pick chances — a risk-vs-control mechanic',
-            'Trap tiles knock you back down the tower, with animated hits and sound cues',
-            'Par-based scoring like golf — finish the climb in as few moves as possible',
-            'Game Center leaderboard ranking players by fewest moves to win',
-            'Stats tracking — best moves, best time, and full game history',
-            'Haptics, sound effects, background music, and a confetti win screen',
-            'Pause/resume with an accurate active-play timer, plus save & restore of in-progress games',
-            'Localized strings with VoiceOver accessibility support',
+            'Streaming chat via the Vercel AI SDK useChat() hook — optimistic updates, stop, retry, and clear',
+            'Three Zod-validated tools wired into a multi-step streamText loop: search_docs (RAG), calculate, get_current_time',
+            'Tool calls render as expandable cards with arguments, output (custom view for RAG hits, JSON fallback), execution time, and pending shimmer states',
+            'RAG over uploaded .pdf/.md/.txt — char-based chunking (~500 tokens, 50-token overlap), batched OpenAI text-embedding-3-small embeddings, pgvector IVFFlat cosine index, top-5 hits with similarity scores',
+            'Next.js 14 App Router with edge runtime for chat (sub-100ms TTFB streaming) and Node runtime for document parsing (pdf-parse)',
+            'Neon Postgres + pgvector chosen over Pinecone — chunk metadata and vectors live in one query, HTTP driver works on the edge',
+            'Security & cost: token-bucket rate limit (10 req/min/IP), Zod sanitization, 5MB upload cap, MIME allowlist, tagged-template SQL bindings',
+            'shadcn/ui + Tailwind with dark mode, drag-and-drop upload (react-dropzone), toast notifications (sonner), syntax-highlighted code blocks',
         ],
-        tags: ['Swift', 'SwiftUI', 'SceneKit', 'Game Center', 'iOS', 'Game Dev'],
-        github: 'https://github.com/lol0chx/RollorPick',
+        tags: ['Next.js 14', 'TypeScript', 'Vercel AI SDK', 'Claude Sonnet 4.5', 'OpenAI', 'pgvector', 'Neon', 'Tailwind'],
+        github: 'https://github.com/lol0chx/agent-playground',
+        banner: { type: 'gradient', style: 'linear-gradient(135deg, #1e3a8a, #7c3aed, #ec4899)', emoji: '🧪' },
+    },
+    pickoroll: {
+        eyebrow: 'C++ · SFML · Game Dev',
+        title: 'PickORoll',
+        desc: 'A race board game built in C++ with the SFML graphics library. Players navigate a 7×7 grid (boxes 0–48) by rolling dice, avoiding traps, and using strategic picks to reach the finish in as few moves as possible. Ships with a prebuilt Windows .exe in Releases — no install or Visual Studio needed.',
+        features: [
+            'Single-player mode rated against par 8, with best-score persistence and performance messages ("PERFECT!", "SO CLOSE!", etc.)',
+            'Local 2-player pass-and-play mode — take turns racing to the finish',
+            'Roll-or-pick mechanic — 5 picks per game let you choose an exact dice value (1–6) instead of rolling',
+            'Nine trap tiles with visual connection lines showing where each one sends you back to',
+            'Animated pawn movement with smoothstep easing across a 7×7 rainbow-gradient board',
+            'Procedurally generated sound effects for dice rolls, traps, wins, picks, and UI — no audio asset files',
+            'Embedded bitmap font — no external font files required',
+            'Pause menu with resume/restart/main-menu, plus a game-over screen with full stats (moves, picks used, par difference)',
+            'Prebuilt Windows .exe with all DLLs available in GitHub Releases',
+        ],
+        tags: ['C++', 'SFML', '2D Graphics', 'Game Dev', 'Windows', 'Visual Studio'],
+        github: 'https://github.com/lol0chx/PickORoll',
         banner: { type: 'img', src: 'images/boardgame.png' },
     },
     ecommerce: {
@@ -421,21 +457,25 @@ const PROJECTS = {
         banner: { type: 'img', src: 'images/EchoCodeBattle.png' },
     },
     cloudscout: {
-        eyebrow: 'SwiftUI · FastAPI · Sports Analytics',
+        eyebrow: 'SwiftUI · FastAPI · XGBoost · Sports Analytics',
         title: 'CloudScout',
-        desc: 'A production-deployed multi-sport analytics platform for NBA & MLB. A native SwiftUI iOS app and a Streamlit web dashboard sit on top of a FastAPI backend deployed to Fly.io with Postgres on Supabase. Includes win probability models, projected stats, AI Scout chat powered by Claude Opus 4.6, and an in-process scheduler that scrapes data twice daily — no extra infrastructure.',
+        desc: 'A production-deployed multi-sport analytics platform for NBA & MLB. A native SwiftUI iOS app and a Streamlit web dashboard sit on top of a FastAPI backend deployed to Fly.io with Postgres on Supabase. Ships a suite of XGBoost models trained leakage-free on point-in-time data, an AI Scout chat powered by Claude Opus 4.6, and an in-process scheduler that scrapes data twice daily — no extra infrastructure.',
         features: [
+            'XGBoost models across four production prediction categories: NBA team (winner classifier + total points regressor), NBA player projections (points / assists / rebounds), MLB team (winner + total runs), and MLB pitcher projections (K / ER / hits / walks / IP). Trained on 31,644 NBA player-games and 3,468 MLB pitcher starts',
+            'Leakage-free training pipeline — every prediction uses only games strictly before the target game (`games.date < g.date`), `.shift(1)` on all rolling features, evaluated on a chronological 80/20 holdout (no random splits, no future leakage)',
+            'Consistent hyperparameters across every trainer (n_estimators=400, max_depth=4, lr=0.05, subsample=0.85) with early stopping on an inner 80/20 validation split, then refit at the best iteration on the full train set',
+            'Override pattern in the API: heuristic formula (NBA 6-factor / MLB 8-pillar blended with Pythagorean expectation on projected runs) runs first, then XGBoost selectively overrides stat-by-stat where it backtests better. Missing models silently fall back to the formula',
+            'Engineering judgment baked into the design: MLB batters intentionally use the formula, not XGBoost — per-game batter outcomes were near-random for XGB, so the heuristic ships. Documented as a comment right in api.py',
+            'Shared feature-engineering modules between train and serve prevent train/serve drift; xgb_serve.py exposes a `reload()` for hot-swapping models after retraining',
             'Native iOS app (SwiftUI) with 8 tabs: Home feed, Games (3-day schedule), Standings, Predict (full matchup analysis), Players (searchable + projected stats), AI Scout chat, Form, and Update controls',
-            'NBA 6-factor win probability model (W%, point differential, H2H, home/away, recent form) + MLB 8-pillar model blended 30/70 with Pythagorean expectation on projected runs',
             '9-step NBA over/under projection adjusted for injuries and referee crew tendencies',
             'AI Scout — multi-turn Claude Opus 4.6 chat with auto-injected league context (recent games, standings, top performers)',
             'In-process scheduler: twice-daily refresh (06:00 & 14:00 UTC), DB-backed TTL lock prevents double-runs across Fly machine restarts',
             'Precomputed analytics — predictions and top-performers cached as JSON rows so hot endpoints serve in milliseconds; single-flight locking prevents thundering-herd 502s',
             'Live ESPN injury fetches with DB persistence; live game state detection that swaps in confirmed starters when a game tips off',
-            'FastAPI backend on Fly.io (SJC region next to Supabase), API-key guarded admin endpoints, /health checks, and HTTPS-enforced',
-            'Streamlit web app mirrors the iOS feature set; React Native/Expo client included for cross-platform builds',
+            'FastAPI backend on Fly.io (SJC region next to Supabase), API-key guarded admin endpoints, /health checks, HTTPS-enforced; Streamlit web app mirrors the iOS feature set',
         ],
-        tags: ['SwiftUI', 'FastAPI', 'Python', 'Claude API', 'Postgres', 'Supabase', 'Fly.io', 'SQLAlchemy', 'Streamlit', 'iOS'],
+        tags: ['SwiftUI', 'FastAPI', 'XGBoost', 'scikit-learn', 'Python', 'Claude API', 'Postgres', 'Supabase', 'Fly.io', 'iOS'],
         github: 'https://github.com/lol0chx/cloud-scout',
         banner: { type: 'img', src: 'images/CloudScout.png' },
     },

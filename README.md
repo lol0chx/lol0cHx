@@ -57,21 +57,22 @@ Evaluates two production-style agents (SE Job Tracker + EagleEye vision) across 
 ---
 
 #### [CloudScout →](https://github.com/lol0chx/cloud-scout)
-> Production sports analytics platform — iOS + web + FastAPI, with five XGBoost models in production.
+> Production sports analytics — iOS + web + FastAPI, with a suite of XGBoost models trained leakage-free on point-in-time data.
 
 `SwiftUI` `FastAPI` `XGBoost` `scikit-learn` `Postgres` `Supabase` `Claude API` `Fly.io`
 
-Native iOS app (8 tabs) and Streamlit web on a FastAPI backend deployed to Fly.io with Supabase Postgres. Ships **five XGBoost models** trained leakage-free on point-in-time data:
+Native iOS app (8 tabs) and Streamlit web on a FastAPI backend deployed to Fly.io with Supabase Postgres. **XGBoost models across four production prediction categories**:
 
-| Model | Metric | Result |
+| Category | Models | Training set |
 |---|---|---|
-| NBA team winner | accuracy | **72.2%** |
-| NBA total points | MAE | **15.5** |
-| NBA player proj (pts/ast/reb) | vs baseline | **~8% better** |
-| MLB team winner | accuracy | **51.9%** |
-| MLB pitcher proj (K/ER/H/BB/IP) | vs baseline | **3–19% better** |
+| NBA team | winner classifier + total points regressor | 1,155 games |
+| NBA player | pts / ast / reb regressors | 31,644 player-games |
+| MLB team | winner classifier + total runs regressor | 2,600 games |
+| MLB pitcher | K / ER / H / BB / IP regressors | 3,468 starts |
 
-XGB runs side-by-side with heuristic formulas (NBA 6-factor / MLB 8-pillar Pythagorean blend) and degrades gracefully when a model is missing. Includes an AI Scout chat (Claude Opus 4.6) with auto-injected league context, and an in-process twice-daily scheduler with precomputed analytics for millisecond reads.
+**Methodology** — every prediction uses only games strictly before the target (`games.date < g.date`, `.shift(1)` on all rolling features), evaluated on a chronological 80/20 holdout. Consistent hyperparams across every trainer (n_estimators=400, max_depth=4, lr=0.05) with early stopping on an inner 80/20 validation split. Shared feature modules between train and serve prevent train/serve drift.
+
+**Serving** — heuristic formula (NBA 6-factor / MLB 8-pillar Pythagorean blend) runs first, then XGBoost selectively overrides stat-by-stat where it backtests better. Missing models silently fall back to the formula. MLB batters intentionally use the formula — per-game batter outcomes were near-random for XGB. Also ships a Claude Opus 4.6 AI Scout chat with auto-injected league context, plus an in-process twice-daily scheduler with precomputed analytics for millisecond reads.
 
 ---
 
@@ -80,7 +81,7 @@ XGB runs side-by-side with heuristic formulas (NBA 6-factor / MLB 8-pillar Pytha
 
 `C++` `SFML` `Visual Studio` `Windows`
 
-7×7 rainbow-gradient race board (boxes 0–48) with a roll-or-pick mechanic — **5 picks per game** to choose an exact dice value instead of rolling. Six trap tiles with visual connection lines, animated pawn movement with smoothstep easing, procedurally generated sound effects (no audio assets), embedded bitmap font (no external assets), pause menu, and a game-over screen with stats. Single-player rates you against par 8 with messages like "PERFECT!" / "SO CLOSE!". Best score persisted between sessions; prebuilt Windows .exe shipped via Releases.
+7×7 rainbow-gradient race board (boxes 0–48) with a roll-or-pick mechanic — **5 picks per game** to choose an exact dice value instead of rolling. Nine trap tiles with visual connection lines, animated pawn movement with smoothstep easing, procedurally generated sound effects (no audio assets), embedded 5×7 bitmap font (no external assets), pause menu, and a game-over screen with stats. Single-player rates you against par 8 with messages like "PERFECT!" / "SO CLOSE!". Best score persisted between sessions; prebuilt Windows .exe shipped via Releases.
 
 ---
 
