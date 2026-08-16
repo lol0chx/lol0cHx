@@ -150,6 +150,10 @@
             background: #1a1a2e; color: #fff;
         }
         .pm-btn-primary:hover { background: #0ea5e9; color: #fff; }
+        .pm-btn-muted {
+            background: transparent; color: #94a3b8;
+            border: 1px dashed rgba(0,0,0,0.14); cursor: default; font-weight: 500;
+        }
 
         .pm-divider {
             border: none; border-top: 1px solid #f1f5f9;
@@ -230,7 +234,7 @@
             <div class="project-card-banner" style="background: linear-gradient(135deg, #1e3a8a, #7c3aed, #ec4899); display:flex; align-items:center; justify-content:center; font-size:64px;">🧪</div>
             <div class="project-card-body">
                 <h3 class="project-card-title">Foundry Agent Playground</h3>
-                <p class="project-card-desc">Streaming Claude agent with tool calling and pgvector RAG, built on the Vercel AI SDK. Three Zod-validated tools, multi-step streamText loop, and Next.js edge runtime for sub-100ms TTFB.</p>
+                <p class="project-card-desc">Streaming Claude agent with tool calling and pgvector RAG, built on the Vercel AI SDK. Three Zod-validated tools, multi-step streamText loop, image attachments, and a Next.js edge runtime for sub-100ms TTFB.</p>
                 <div class="project-tags">
                     <span class="project-tag">Next.js</span>
                     <span class="project-tag">TypeScript</span>
@@ -257,7 +261,7 @@
                 </div>
                 <div class="project-card-links">
                     <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
-                    <a href="https://github.com/lol0chx/AGENT-EVAL" target="_blank" rel="noopener" class="project-link secondary"><i class="fab fa-github"></i> View on GitHub</a>
+                    <span class="project-link locked"><i class="fas fa-lock"></i> Private repo</span>
                 </div>
             </div>
         </div>
@@ -268,16 +272,16 @@
             </div>
             <div class="project-card-body">
                 <h3 class="project-card-title">CloudScout</h3>
-                <p class="project-card-desc">Production sports analytics platform for NBA & MLB. Native iOS app and Streamlit web on a FastAPI backend (Fly.io + Postgres). XGBoost models across four prediction categories — trained leakage-free on point-in-time data — running side-by-side with heuristic formulas, plus a Claude Opus 4.6 AI Scout chat.</p>
+                <p class="project-card-desc">Production sports analytics across four leagues — soccer (2026 World Cup + Premier League), NBA, MLB, and NFL. Native iOS app and Streamlit web on a FastAPI backend (Fly.io + Supabase). XGBoost models trained leakage-free on point-in-time data, Monte-Carlo tournament simulations, a daily odds-driven picks board that grades its own results, and a Claude Opus 4.6 AI Scout chat.</p>
                 <div class="project-tags">
                     <span class="project-tag">SwiftUI</span>
                     <span class="project-tag">FastAPI</span>
                     <span class="project-tag">XGBoost</span>
-                    <span class="project-tag">Claude API</span>
+                    <span class="project-tag">Monte Carlo</span>
                 </div>
                 <div class="project-card-links">
                     <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
-                    <a href="https://github.com/lol0chx/cloud-scout" target="_blank" rel="noopener" class="project-link secondary"><i class="fab fa-github"></i> View on GitHub</a>
+                    <span class="project-link locked"><i class="fas fa-lock"></i> Private repo</span>
                 </div>
             </div>
         </div>
@@ -320,20 +324,20 @@
             </div>
         </div>
 
-        <div class="project-card" data-project="pickoroll">
-            <div class="project-card-banner" style="background: url('images/boardgame.png') center/cover no-repeat;"></div>
+        <div class="project-card" data-project="rollorpick">
+            <div class="project-card-banner" style="background: url('images/rollorpick.png') center/cover no-repeat;"></div>
             <div class="project-card-body">
-                <h3 class="project-card-title">PickORoll</h3>
-                <p class="project-card-desc">C++ SFML race-board game with single-player par mode and local 2-player pass-and-play. Roll-or-pick mechanic, six traps with visual connection lines, procedural SFX, and an embedded bitmap font — no external assets.</p>
+                <h3 class="project-card-title">RollorPick</h3>
+                <p class="project-card-desc">iOS dice-climbing game in SwiftUI with a SceneKit 3D board. Climb a 49-tile tower against par 8 — roll, or spend one of three picks to choose your exact value. Trap tiles, Game Center leaderboard, live timer, and full localization.</p>
                 <div class="project-tags">
-                    <span class="project-tag">C++</span>
-                    <span class="project-tag">SFML</span>
-                    <span class="project-tag">Game Dev</span>
-                    <span class="project-tag">Windows</span>
+                    <span class="project-tag">Swift</span>
+                    <span class="project-tag">SwiftUI</span>
+                    <span class="project-tag">SceneKit</span>
+                    <span class="project-tag">iOS</span>
                 </div>
                 <div class="project-card-links">
                     <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
-                    <a href="https://github.com/lol0chx/PickORoll" target="_blank" rel="noopener" class="project-link secondary"><i class="fab fa-github"></i> View on GitHub</a>
+                    <span class="project-link locked"><i class="fas fa-lock"></i> Private repo</span>
                 </div>
             </div>
         </div>
@@ -377,6 +381,8 @@ const PROJECTS = {
             'RAG over uploaded .pdf/.md/.txt — char-based chunking (~500 tokens, 50-token overlap), batched OpenAI text-embedding-3-small embeddings, pgvector IVFFlat cosine index, top-5 hits with similarity scores',
             'Next.js 14 App Router with edge runtime for chat (sub-100ms TTFB streaming) and Node runtime for document parsing (pdf-parse)',
             'Neon Postgres + pgvector chosen over Pinecone — chunk metadata and vectors live in one query, HTTP driver works on the edge',
+            'Image attachments in the composer — picked images become data URLs, then route through convertToCoreMessages so they reach Claude as multimodal image parts',
+            'A hand-written ~210-line recursive-descent math parser replaces mathjs: Vercel\'s edge runtime strips the dynamic Function generation mathjs relies on, so calculate() needed a pure-JS evaluator with no eval at all',
             'Security & cost: token-bucket rate limit (10 req/min/IP), Zod sanitization, 5MB upload cap, MIME allowlist, tagged-template SQL bindings',
             'shadcn/ui + Tailwind with dark mode, drag-and-drop upload (react-dropzone), toast notifications (sonner), syntax-highlighted code blocks',
         ],
@@ -384,24 +390,24 @@ const PROJECTS = {
         github: 'https://github.com/lol0chx/agent-playground',
         banner: { type: 'gradient', style: 'linear-gradient(135deg, #1e3a8a, #7c3aed, #ec4899)', emoji: '🧪' },
     },
-    pickoroll: {
-        eyebrow: 'C++ · SFML · Game Dev',
-        title: 'PickORoll',
-        desc: 'A race board game built in C++ with the SFML graphics library. Players navigate a 7×7 grid (boxes 0–48) by rolling dice, avoiding traps, and using strategic picks to reach the finish in as few moves as possible. Ships with a prebuilt Windows .exe in Releases — no install or Visual Studio needed.',
+    rollorpick: {
+        eyebrow: 'Swift · SwiftUI · SceneKit · iOS Game',
+        title: 'RollorPick',
+        desc: 'A dice-climbing board game for iOS, rebuilt from the ground up in SwiftUI around a SceneKit 3D board. You climb a 49-tile tower of stacked blocks by rolling — or by spending one of three picks to choose your exact roll — racing a par of 8 moves while trap tiles knock you all the way back to the start.',
         features: [
-            'Single-player mode rated against par 8, with best-score persistence and performance messages ("PERFECT!", "SO CLOSE!", etc.)',
-            'Local 2-player pass-and-play mode — take turns racing to the finish',
-            'Roll-or-pick mechanic — 5 picks per game let you choose an exact dice value (1–6) instead of rolling',
-            'Nine trap tiles with visual connection lines showing where each one sends you back to',
-            'Animated pawn movement with smoothstep easing across a 7×7 rainbow-gradient board',
-            'Procedurally generated sound effects for dice rolls, traps, wins, picks, and UI — no audio asset files',
-            'Embedded bitmap font — no external font files required',
-            'Pause menu with resume/restart/main-menu, plus a game-over screen with full stats (moves, picks used, par difference)',
-            'Prebuilt Windows .exe with all DLLs available in GitHub Releases',
+            '49-tile 3D tower built in SceneKit — every block sits at its own height along a switchback path, and tiles light up behind you as you climb',
+            'Roll-or-pick mechanic — three picks per game let you choose an exact dice value instead of rolling; the run is rated against par 8',
+            'Trap tiles fire a full-screen TRAP! banner and a vortex animation, then rewind you to square one while the lit tiles unwind one-by-one from the top back down',
+            'Two maps: Colored Towers (a 49-step rainbow gradient in daylight) and Lava Caves, which has its own switchback path, floor levels, and magma-cracked charcoal blocks — currently held behind a COMING SOON tease',
+            'Game Center leaderboard ranked on fewest moves (lowest score wins), authenticated at launch through the iOS 18 access-point API',
+            'Live game clock that starts on your first roll rather than on board load, pauses with the menu, and subtracts paused intervals from the recorded time',
+            'Stats screen with best moves, best time, and sort options across full game history',
+            'Fully localized — every home, HUD, tutorial, and win-screen string resolves through Localizable.strings, ready for sibling .lproj folders',
+            'Mid-game state survives backgrounding but is deliberately wiped on cold launch, so a force-quit always starts a clean run',
+            'An epoch counter orphans in-flight move animations, so restarting or quitting mid-move can never corrupt the next game',
         ],
-        tags: ['C++', 'SFML', '2D Graphics', 'Game Dev', 'Windows', 'Visual Studio'],
-        github: 'https://github.com/lol0chx/PickORoll',
-        banner: { type: 'img', src: 'images/boardgame.png' },
+        tags: ['Swift', 'SwiftUI', 'SceneKit', 'GameKit', 'iOS', 'Game Dev'],
+        banner: { type: 'img', src: 'images/rollorpick.png' },
     },
     ecommerce: {
         eyebrow: 'Java · Spring Boot · Full Stack',
@@ -428,7 +434,8 @@ const PROJECTS = {
             'Two agents under evaluation: SE Job Tracker (8 filter rules + ~10-field extraction over Microsoft job pages) and EagleEye (vision Q&A on screenshots — LeetCode, MCQs, debugging)',
             '185 test cases: 70 real Microsoft job pages + 108 synthetic specs + 7 vision scenarios, fully reproducible via fixture mocks',
             'Three execution modes: API mode (Anthropic/OpenAI/Azure), Claude Code CLI mode (no API key needed), and Live Discovery (real web search, no grading)',
-            'Live web dashboard (FastAPI + SSE) with parallel run support, real-time progress bars, and side-by-side report comparison',
+            'Live web dashboard (FastAPI + SSE) that runs evals from the browser — multiple concurrent run cards, each with a progress bar fed by streaming [N/total] markers, elapsed timer, live pass rate, and an expandable terminal log',
+            'Reports auto-route into reports/<kind>/<dataset>/<timestamp> folders with unique filenames per run, so real and synthetic datasets never overwrite each other',
             'Provider-agnostic agentic loop — Anthropic, vanilla OpenAI, and Azure OpenAI behind one interface with auto-translated tool schemas',
             'Automated regression detection — diffs each run against baseline, flags pass-rate drops, tool-accuracy regressions, p95 latency creep',
             'GitHub Actions CI/CD: PR runs post regression diffs as comments, nightly cron for trend analysis, manual workflow_dispatch with provider selection',
@@ -436,7 +443,6 @@ const PROJECTS = {
             'Docker-packaged with full async pipeline (asyncio + Pillow image preprocessing for vision)',
         ],
         tags: ['Python', 'FastAPI', 'Claude API', 'OpenAI', 'Azure OpenAI', 'pytest', 'GitHub Actions', 'Docker', 'Vision', 'LLM Eval'],
-        github: 'https://github.com/lol0chx/AGENT-EVAL',
         banner: { type: 'gradient', style: 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)', emoji: '🤖' },
     },
     echo: {
@@ -459,24 +465,24 @@ const PROJECTS = {
     cloudscout: {
         eyebrow: 'SwiftUI · FastAPI · XGBoost · Sports Analytics',
         title: 'CloudScout',
-        desc: 'A production-deployed multi-sport analytics platform for NBA & MLB. A native SwiftUI iOS app and a Streamlit web dashboard sit on top of a FastAPI backend deployed to Fly.io with Postgres on Supabase. Ships a suite of XGBoost models trained leakage-free on point-in-time data, an AI Scout chat powered by Claude Opus 4.6, and an in-process scheduler that scrapes data twice daily — no extra infrastructure.',
+        desc: 'A production-deployed analytics platform spanning four leagues — soccer (the 2026 World Cup and the Premier League), NBA, MLB, and NFL. A native SwiftUI iOS app and a Streamlit dashboard sit on a FastAPI backend deployed to Fly.io with Postgres on Supabase. Ships XGBoost models trained leakage-free on point-in-time data, Monte-Carlo tournament and season simulations, a daily odds-driven picks board that grades its own results, and an AI Scout chat on Claude Opus 4.6.',
         features: [
-            'XGBoost models across four production prediction categories: NBA team (winner classifier + total points regressor), NBA player projections (points / assists / rebounds), MLB team (winner + total runs), and MLB pitcher projections (K / ER / hits / walks / IP). Trained on 31,644 NBA player-games and 3,468 MLB pitcher starts',
-            'Leakage-free training pipeline — every prediction uses only games strictly before the target game (`games.date < g.date`), `.shift(1)` on all rolling features, evaluated on a chronological 80/20 holdout (no random splits, no future leakage)',
-            'Consistent hyperparameters across every trainer (n_estimators=400, max_depth=4, lr=0.05, subsample=0.85) with early stopping on an inner 80/20 validation split, then refit at the best iteration on the full train set',
-            'Override pattern in the API: heuristic formula (NBA 6-factor / MLB 8-pillar blended with Pythagorean expectation on projected runs) runs first, then XGBoost selectively overrides stat-by-stat where it backtests better. Missing models silently fall back to the formula',
-            'Engineering judgment baked into the design: MLB batters intentionally use the formula, not XGBoost — per-game batter outcomes were near-random for XGB, so the heuristic ships. Documented as a comment right in api.py',
-            'Shared feature-engineering modules between train and serve prevent train/serve drift; xgb_serve.py exposes a `reload()` for hot-swapping models after retraining',
-            'Native iOS app (SwiftUI) with 8 tabs: Home feed, Games (3-day schedule), Standings, Predict (full matchup analysis), Players (searchable + projected stats), AI Scout chat, Form, and Update controls',
-            '9-step NBA over/under projection adjusted for injuries and referee crew tendencies',
+            'Four leagues, each with its own scraper, feature builder, and model family — soccer (World Cup 2026 + Premier League), NBA, MLB, and NFL',
+            'Soccer: a Dixon-Coles + Elo scoreline model with a player-driven squad bridge — every player is rated on real club form, the current squad (or the actual starting XI) aggregates into attack/defense at roughly 45% weight, and injured players drop out',
+            'A 20,000-run Monte-Carlo walks the full 48-team World Cup bracket to read off each nation\'s odds of reaching every round and lifting the trophy. The group stage is vectorised across all sims in numpy; knockout probabilities are cached per ordered team pair so each Dixon-Coles matrix is built once, not once per sim',
+            'NFL modelled from first principles rather than ported from MLB: 272 games a season means training across 5+ seasons, form windows measured in weeks, and QB availability treated as a gating feature — a starting quarterback moves the line 3+ points. Player position is derived from actual usage, not a depth chart',
+            'XGBoost across every league — winner / total / margin per league, plus player props (NBA points·assists·rebounds, MLB pitcher K·ER·H·BB·IP, NFL pass yards·pass TDs·rush yards·receptions·rec yards, soccer goals·assists·shots·cards). Live accuracy: NBA winner 72.2%, NBA total MAE 15.5, MLB total MAE 3.33',
+            'Leakage-free training throughout — every prediction uses only games strictly before the target (`games.date < g.date`, `.shift(1)` on all rolling features), evaluated on a chronological 80/20 holdout with no random splits, then refit on the full set',
+            'Daily picks engine pulls live spreads, totals, and moneylines from The Odds API, discards games already underway (the API silently swaps live games to in-game totals, which would poison the edge math), joins each with the freshly refreshed XGB total, applies per-league bias adjustment, and tiers confidence against each model\'s MAE',
+            'The picks grade themselves — every pick is snapshotted into odds_history, then matched to the final box score for WIN / LOSS / PUSH (doubleheaders disambiguated by closest commence time), rolling up into all-time / 30-day / 7-day summaries by league and by tier',
+            'Split compute by design: the laptop owns raw data and heavy ML, pushing ~1,800 gzipped payloads to Supabase; Fly\'s 512 MB box only serves and scrapes twice daily, so hot endpoints read precomputed JSON in milliseconds instead of recomputing',
+            'The XGB spread chip is derived from the win probability by inverse-logistic conversion rather than from the trained margin regressor — the two models train independently and could otherwise contradict each other on screen ("62.7% to win, but favored by −1.9")',
+            'Native iOS app (SwiftUI) — Home feed, Picks, Predict, Players, and Form tabs plus a side menu, with deep links from the home feed straight into the matching picks sub-tab',
             'AI Scout — multi-turn Claude Opus 4.6 chat with auto-injected league context (recent games, standings, top performers)',
-            'In-process scheduler: twice-daily refresh (06:00 & 14:00 UTC), DB-backed TTL lock prevents double-runs across Fly machine restarts',
-            'Precomputed analytics — predictions and top-performers cached as JSON rows so hot endpoints serve in milliseconds; single-flight locking prevents thundering-herd 502s',
-            'Live ESPN injury fetches with DB persistence; live game state detection that swaps in confirmed starters when a game tips off',
-            'FastAPI backend on Fly.io (SJC region next to Supabase), API-key guarded admin endpoints, /health checks, HTTPS-enforced; Streamlit web app mirrors the iOS feature set',
+            'App Store submission hardened after review feedback: rebranded away from protected marks, projections framed as entertainment rather than wagering, and the Pro subscription surfaced on every board',
+            'HTML report dashboards for model trend, strong picks, and grading tiers — rebuilt on every refresh with date-range and outcome filters',
         ],
-        tags: ['SwiftUI', 'FastAPI', 'XGBoost', 'scikit-learn', 'Python', 'Claude API', 'Postgres', 'Supabase', 'Fly.io', 'iOS'],
-        github: 'https://github.com/lol0chx/cloud-scout',
+        tags: ['SwiftUI', 'FastAPI', 'XGBoost', 'scikit-learn', 'Python', 'Monte Carlo', 'Claude API', 'Postgres', 'Supabase', 'Fly.io', 'iOS'],
         banner: { type: 'img', src: 'images/CloudScout.png' },
     },
 };
@@ -509,8 +515,11 @@ const PROJECTS = {
         document.getElementById('pm-tags').innerHTML = p.tags
             .map(t => `<span class="pm-tag">${t}</span>`).join('');
 
-        document.getElementById('pm-actions').innerHTML =
-            `<a href="${p.github}" target="_blank" class="pm-btn pm-btn-primary"><i class="fab fa-github"></i> View on GitHub</a>`;
+        // Private projects carry no `github` field — show a static note instead of
+        // a link that would 404 for anyone who isn't me.
+        document.getElementById('pm-actions').innerHTML = p.github
+            ? `<a href="${p.github}" target="_blank" rel="noopener" class="pm-btn pm-btn-primary"><i class="fab fa-github"></i> View on GitHub</a>`
+            : `<span class="pm-btn pm-btn-muted"><i class="fas fa-lock"></i> Private repository</span>`;
 
         // Reset scroll
         overlay.scrollTop = 0;

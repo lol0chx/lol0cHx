@@ -29,6 +29,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### Claude Code ###
+.claude/
 ### Oracle JDK ###
 oracleJdk-25/
 

@@ -3166,6 +3166,15 @@ body {
 }
 .project-link.secondary:hover { background: rgba(0,0,0,0.08); }
 
+/* Private repos: same footprint as a link, but inert — no GitHub URL to point at. */
+.project-link.locked {
+    background: transparent;
+    color: #94a3b8 !important;
+    border: 1px dashed rgba(0,0,0,0.14);
+    cursor: default;
+    font-weight: 500;
+}
+
 /* ============================================================
    ABOUT PAGE
    ============================================================ */
