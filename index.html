@@ -534,17 +534,15 @@
         <!-- Right column: stacked project card previews + socials -->
         <div class="hp-right">
             <div class="hp-card-stack">
-                <div class="hp-stack-card" data-project="rollorpick">
+                <div class="hp-stack-card" data-project="pickoroll">
                     <div class="hp-stack-card-inner" style="background: none; position: relative; overflow: hidden;">
-                        <img src="images/rollorpick.png" alt="RollorPick" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
+                        <img src="images/boardgame.png" alt="PickORoll" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
                     </div>
-                    <div class="hp-stack-label">RollorPick<br><span style="opacity:.6;font-weight:400;">SwiftUI · SceneKit · iOS</span></div>
+                    <div class="hp-stack-label">PickORoll<br><span style="opacity:.6;font-weight:400;">C++ · SFML</span></div>
                 </div>
-                <div class="hp-stack-card" data-project="echo">
-                    <div class="hp-stack-card-inner" style="background: none; position: relative; overflow: hidden;">
-                        <img src="images/EchoCodeBattle.png" alt="Echo Code Battle" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;">
-                    </div>
-                    <div class="hp-stack-label">Echo Code Battle<br><span style="opacity:.6;font-weight:400;">Node.js · Socket.io</span></div>
+                <div class="hp-stack-card" data-project="tally">
+                    <div class="hp-stack-card-inner" style="background: linear-gradient(135deg, #4f46e5, #9333ea, #10b981);">💸</div>
+                    <div class="hp-stack-label">Tally<br><span style="opacity:.6;font-weight:400;">SwiftUI · SwiftData · Claude</span></div>
                 </div>
                 <div class="hp-stack-card" data-project="cloudscout">
                     <div class="hp-stack-card-inner" style="background: none; position: relative; overflow: hidden;">
@@ -574,15 +572,15 @@
             </div>
             <div class="hp-feat-grid">
 
-                <div class="hp-feat-card" data-project="rollorpick">
+                <div class="hp-feat-card" data-project="pickoroll">
                     <div class="hp-feat-img">
-                        <img src="images/rollorpick.png" alt="RollorPick">
+                        <img src="images/boardgame.png" alt="PickORoll">
                     </div>
                     <div class="hp-feat-body">
-                        <h3 class="hp-feat-name">RollorPick</h3>
-                        <p class="hp-feat-desc">iOS dice-climbing game in SwiftUI with a SceneKit 3D board — a 49-tile tower, roll-or-pick with three picks, trap tiles, and a Game Center leaderboard.</p>
+                        <h3 class="hp-feat-name">PickORoll</h3>
+                        <p class="hp-feat-desc">C++ SFML race-board game with single-player par mode and local 2-player pass-and-play — roll-or-pick, nine trap tiles, procedural sound, and no external assets.</p>
                         <div class="hp-feat-tags">
-                            <span>Swift</span><span>SceneKit</span><span>iOS</span>
+                            <span>C++</span><span>SFML</span><span>Game Dev</span>
                         </div>
                     </div>
                 </div>
@@ -672,41 +670,42 @@
 
 <script>
 const PROJECTS = {
-    rollorpick: {
-        eyebrow: 'Swift · SwiftUI · SceneKit · iOS Game',
-        title: 'RollorPick',
-        desc: 'A dice-climbing board game for iOS, rebuilt from the ground up in SwiftUI around a SceneKit 3D board. You climb a 49-tile tower of stacked blocks by rolling — or by spending one of three picks to choose your exact roll — racing a par of 8 moves while trap tiles knock you all the way back to the start.',
+    pickoroll: {
+        eyebrow: 'C++ · SFML · Game Dev',
+        title: 'PickORoll',
+        desc: 'A race board game built in C++ with the SFML graphics library. Players navigate a 7×7 grid (boxes 0–48) by rolling dice, avoiding traps, and using strategic picks to reach the finish in as few moves as possible. Ships with a prebuilt Windows .exe in Releases — no install or Visual Studio needed.',
         features: [
-            '49-tile 3D tower built in SceneKit — every block sits at its own height along a switchback path, and tiles light up behind you as you climb',
-            'Roll-or-pick mechanic — three picks per game let you choose an exact dice value instead of rolling; the run is rated against par 8',
-            'Trap tiles fire a full-screen TRAP! banner and a vortex animation, then rewind you to square one while the lit tiles unwind one-by-one from the top back down',
-            'Two maps: Colored Towers (a 49-step rainbow gradient in daylight) and Lava Caves, which has its own switchback path, floor levels, and magma-cracked charcoal blocks — currently held behind a COMING SOON tease',
-            'Game Center leaderboard ranked on fewest moves (lowest score wins), authenticated at launch through the iOS 18 access-point API',
-            'Live game clock that starts on your first roll rather than on board load, pauses with the menu, and subtracts paused intervals from the recorded time',
-            'Stats screen with best moves, best time, and sort options across full game history',
-            'Fully localized — every home, HUD, tutorial, and win-screen string resolves through Localizable.strings, ready for sibling .lproj folders',
-            'Mid-game state survives backgrounding but is deliberately wiped on cold launch, so a force-quit always starts a clean run',
-            'An epoch counter orphans in-flight move animations, so restarting or quitting mid-move can never corrupt the next game',
+            'Single-player mode rated against par 8, with best-score persistence and performance messages ("PERFECT!", "SO CLOSE!", etc.)',
+            'Local 2-player pass-and-play mode — take turns racing to the finish',
+            'Roll-or-pick mechanic — 5 picks per game let you choose an exact dice value (1–6) instead of rolling',
+            'Nine trap tiles with visual connection lines showing where each one sends you back to',
+            'Animated pawn movement with smoothstep easing across a 7×7 rainbow-gradient board',
+            'Procedurally generated sound effects for dice rolls, traps, wins, picks, and UI — no audio asset files',
+            'Embedded bitmap font — no external font files required',
+            'Pause menu with resume/restart/main-menu, plus a game-over screen with full stats (moves, picks used, par difference)',
+            'Prebuilt Windows .exe with all DLLs available in GitHub Releases',
         ],
-        tags: ['Swift', 'SwiftUI', 'SceneKit', 'GameKit', 'iOS', 'Game Dev'],
-        banner: { type: 'img', src: 'images/rollorpick.png' },
+        tags: ['C++', 'SFML', '2D Graphics', 'Game Dev', 'Windows', 'Visual Studio'],
+        github: 'https://github.com/lol0chx/PickORoll',
+        banner: { type: 'img', src: 'images/boardgame.png' },
     },
-    echo: {
-        eyebrow: 'Node.js · Socket.io · Real-time',
-        title: 'Echo Code Battle',
-        desc: 'A real-time multiplayer coding game inspired by Kahoot and LeetCode-style interview problems. Players join a lobby, lock into fullscreen mode, and race to solve coding prompts in 3 timed rounds. The server runs submitted code locally and ranks players by correctness and solve speed.',
+    tally: {
+        eyebrow: 'Swift · SwiftUI · SwiftData · iOS',
+        title: 'Tally',
+        desc: 'A fully native iOS app built around two lists: everything you owe (credit cards, rent, the car, loans, subscriptions, money owed to a person) and everything you earn (a paycheck on a schedule, or gig work logged day by day). A Food mode tracks calories and macros alongside it, and Tally AI lets you chat with Claude about what you\'ve actually logged. No third-party dependencies, and everything stays on the device apart from the one clearly disclosed AI feature.',
         features: [
-            'Lobby system with host-controlled game start and shareable room codes',
-            'Fullscreen lockdown enforcement — switching tabs or minimizing disqualifies you',
-            'Server-side code execution in JavaScript, Python, C++, Ruby, and Swift',
-            'Round-by-round leaderboard ranked by correct answers then fastest solve time',
-            'Final standings across all 3 rounds with overall winner declaration',
-            'Prompts are locally bundled LeetCode-style problems across multiple difficulty levels',
-            'Real-time sync via Socket.io — all players see the same timer and state',
+            'One model for everything you owe: a credit card, rent, and "the $300 I owe a friend" are all obligations with due dates, so they share one list, one reminder rule, and one mark-as-paid flow',
+            'Reminders that don\'t let go: a local notification 3 days before, then one every day through the due date and past it until you mark it paid, with Mark as Paid available right from the notification',
+            'Income your way: one-tap daily logging for gig work (a day you don\'t log counts as $0), scheduled paychecks that roll to the next payday, and one-off extra income. A week logged as one lump is prorated across its days for totals but listed once',
+            'Food mode: calorie ring, protein bar, optional carbs and fat, and trends over any span, with averages taken only over days you actually logged and the macro split computed by energy (4/4/9) rather than weight',
+            'Insights and Calendar: categories ranked over a chosen span (7 days through all time), a month grid of dues, income, and payments with projected future due dates, and totals asserted to match lifetime figures with no item counted twice',
+            'Tally AI: streams the Anthropic Messages API over raw HTTPS (there is no Swift SDK), with prompt caching on a data brief rebuilt from live records on every send, so an old conversation never answers from stale numbers',
+            'Photo input (downscaled to 1568px, with only the six most recent re-sent per request), a `remember` tool backed by a Memory screen you can read, edit, and delete, and a streaming-safe Markdown renderer for headings, lists, code, and tables',
+            'API key in the Keychain (this-device-only, so it never rides along in a backup), with Claude Opus 5 by default and Sonnet 5 / Haiku 4.5 as cheaper options',
+            'SwiftData persistence with CloudKit sync wired up, Face ID / Touch ID app lock, CSV export, and multi-currency support',
         ],
-        tags: ['Node.js', 'Socket.io', 'JavaScript', 'Real-time', 'Game Dev', 'Code Execution'],
-        github: 'https://github.com/lol0chx/Echo',
-        banner: { type: 'img', src: 'images/EchoCodeBattle.png' },
+        tags: ['Swift', 'SwiftUI', 'SwiftData', 'CloudKit', 'Swift Charts', 'Claude API', 'Keychain', 'iOS'],
+        banner: { type: 'gradient', style: 'linear-gradient(135deg, #4f46e5, #9333ea, #10b981)', emoji: '💸' },
     },
     ecommerce: {
         eyebrow: 'Java · Spring Boot · Full Stack',
