@@ -360,6 +360,24 @@
             </div>
         </div>
 
+        <div class="project-card" data-project="pickoroll">
+            <div class="project-card-banner" style="background: url('images/boardgame.png') center/cover no-repeat;"></div>
+            <div class="project-card-body">
+                <h3 class="project-card-title">PickORoll</h3>
+                <p class="project-card-desc">C++ SFML race-board game with single-player par mode and local 2-player pass-and-play. Roll-or-pick mechanic, nine trap tiles with visual connection lines, procedural SFX, and an embedded bitmap font — no external assets.</p>
+                <div class="project-tags">
+                    <span class="project-tag">C++</span>
+                    <span class="project-tag">SFML</span>
+                    <span class="project-tag">Game Dev</span>
+                    <span class="project-tag">Windows</span>
+                </div>
+                <div class="project-card-links">
+                    <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
+                    <a href="https://github.com/lol0chx/PickORoll" target="_blank" rel="noopener" class="project-link secondary"><i class="fab fa-github"></i> View on GitHub</a>
+                </div>
+            </div>
+        </div>
+
 
     </div>
 
@@ -426,6 +444,25 @@ const PROJECTS = {
         ],
         tags: ['Swift', 'SwiftUI', 'SceneKit', 'GameKit', 'iOS', 'Game Dev'],
         banner: { type: 'img', src: 'images/rollorpick.png' },
+    },
+    pickoroll: {
+        eyebrow: 'C++ · SFML · Game Dev',
+        title: 'PickORoll',
+        desc: 'A race board game built in C++ with the SFML graphics library. Players navigate a 7×7 grid (boxes 0–48) by rolling dice, avoiding traps, and using strategic picks to reach the finish in as few moves as possible. Ships with a prebuilt Windows .exe in Releases — no install or Visual Studio needed.',
+        features: [
+            'Single-player mode rated against par 8, with best-score persistence and performance messages ("PERFECT!", "SO CLOSE!", etc.)',
+            'Local 2-player pass-and-play mode — take turns racing to the finish',
+            'Roll-or-pick mechanic — 5 picks per game let you choose an exact dice value (1–6) instead of rolling',
+            'Nine trap tiles with visual connection lines showing where each one sends you back to',
+            'Animated pawn movement with smoothstep easing across a 7×7 rainbow-gradient board',
+            'Procedurally generated sound effects for dice rolls, traps, wins, picks, and UI — no audio asset files',
+            'Embedded bitmap font — no external font files required',
+            'Pause menu with resume/restart/main-menu, plus a game-over screen with full stats (moves, picks used, par difference)',
+            'Prebuilt Windows .exe with all DLLs available in GitHub Releases',
+        ],
+        tags: ['C++', 'SFML', '2D Graphics', 'Game Dev', 'Windows', 'Visual Studio'],
+        github: 'https://github.com/lol0chx/PickORoll',
+        banner: { type: 'img', src: 'images/boardgame.png' },
     },
     ecommerce: {
         eyebrow: 'Java · Spring Boot · Full Stack',

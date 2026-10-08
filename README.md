@@ -100,6 +100,15 @@ Climb a **49-tile 3D tower** where every block sits at its own height along a sw
 
 ---
 
+#### [PickORoll →](https://github.com/lol0chx/PickORoll)
+> C++ SFML race-board game with single-player par mode and local 2-player pass-and-play.
+
+`C++` `SFML` `Visual Studio` `Windows`
+
+7×7 rainbow-gradient race board (boxes 0–48) with a roll-or-pick mechanic — **5 picks per game** to choose an exact dice value instead of rolling. Nine trap tiles with visual connection lines, animated pawn movement with smoothstep easing, procedurally generated sound effects (no audio assets), embedded 5×7 bitmap font (no external assets), pause menu, and a game-over screen with stats. Single-player rates you against par 8 with messages like "PERFECT!" / "SO CLOSE!". Best score persisted between sessions; prebuilt Windows .exe shipped via Releases.
+
+---
+
 #### [EasyShop →](https://github.com/lol0chx/capstone_3_easyshop)
 > Full-stack Java/Spring Boot e-commerce platform.
 
