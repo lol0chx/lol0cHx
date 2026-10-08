@@ -70,15 +70,24 @@ Native iOS app and Streamlit web on a FastAPI backend deployed to Fly.io with Su
 | Soccer | Dixon-Coles + Elo, 1X2 / totals / BTTS, player props | Player-driven squad strength; 20k-run bracket sim |
 | NBA | winner + total + margin, pts / ast / reb props | 72.2% winner accuracy, 15.5 MAE on totals |
 | MLB | winner + total + margin, pitcher K / ER / H / BB / IP | 3.33 MAE on total runs |
-| NFL | winner + total + margin, five prop classifiers | 5+ seasons, QB availability as a gating feature |
+| NFL | winner + total + margin, five prop classifiers | 5+ seasons, QB availability as a gating feature; live game + prop board for 2026 |
 
 **Methodology** — every prediction uses only games strictly before the target (`games.date < g.date`, `.shift(1)` on all rolling features), evaluated on a chronological 80/20 holdout, then refit on the full set. Shared feature modules between train and serve prevent train/serve drift.
 
 **Simulation** — a 20,000-run Monte-Carlo walks the 48-team World Cup bracket for advancement and trophy odds. The group stage is vectorised across all sims in numpy; knockout probabilities are cached per ordered team pair so each Dixon-Coles matrix is built once, not once per sim.
 
-**Picks** — pulls live odds from The Odds API, drops games already underway (the API silently swaps live games to in-game totals, which would poison the edge math), joins with the refreshed XGB total, and tiers confidence against each model's MAE. Every pick is snapshotted, then graded against the final box score into rolling all-time / 30d / 7d summaries by league and tier.
+**Picks** — pulls live odds from The Odds API, drops games already underway (the API silently swaps live games to in-game totals, which would poison the edge math), joins with the refreshed XGB total, and tiers confidence against each model's MAE. Every pick is snapshotted, then graded against the final box score into rolling all-time / 30d / 7d summaries by league and tier. A logistic-regression meta-model trained on those grades estimates the chance each pick wins, and deploys only if it beats the tier baseline (MLB: 59.4% holdout vs a 56.3% strong-tier baseline).
 
 **Serving** — the laptop owns raw data and heavy ML, pushing ~1,800 gzipped payloads to Supabase; Fly's 512 MB box only serves and scrapes twice daily, so hot endpoints read precomputed JSON in milliseconds. Also ships a Claude Opus 4.6 AI Scout chat with auto-injected league context.
+
+---
+
+#### Tally 🔒
+> Native iOS app for everything you owe, earn, and eat, with a Claude chat over your own records.
+
+`Swift` `SwiftUI` `SwiftData` `CloudKit` `Swift Charts` `Claude API` `iOS`
+
+One model for everything you owe (credit cards, rent, loans, subscriptions, money owed to a person) with reminders **3 days early, then daily until marked paid**. Income comes from scheduled paychecks or day-by-day gig logging, where an unlogged day counts as $0. A Food mode tracks calories and macros, and Insights and Calendar rank spending and project due dates over any span. **Tally AI** streams the Anthropic Messages API over raw HTTPS with prompt caching on a brief rebuilt from live records on every send, and adds photo input, a `remember` tool with a user-editable Memory screen, and a streaming-safe Markdown renderer. The API key lives in the Keychain (this-device-only), and nothing else leaves the device. No third-party dependencies.
 
 ---
 

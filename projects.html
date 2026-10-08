@@ -286,6 +286,24 @@
             </div>
         </div>
 
+        <div class="project-card" data-project="tally">
+            <div class="project-card-banner" style="background: linear-gradient(135deg, #4f46e5, #9333ea, #10b981); display:flex; align-items:center; justify-content:center; font-size:64px;">💸</div>
+            <div class="project-card-body">
+                <h3 class="project-card-title">Tally</h3>
+                <p class="project-card-desc">Native SwiftUI + SwiftData iOS app for everything you owe, earn, and eat. Bills and debts that remind you daily until paid, paycheck or gig income, calorie and macro tracking, spending insights, and Tally AI, a streaming Claude chat over your own records with photos and memory.</p>
+                <div class="project-tags">
+                    <span class="project-tag">SwiftUI</span>
+                    <span class="project-tag">SwiftData</span>
+                    <span class="project-tag">CloudKit</span>
+                    <span class="project-tag">Claude API</span>
+                </div>
+                <div class="project-card-links">
+                    <span class="project-link primary" style="pointer-events:none;"><i class="fas fa-expand-alt"></i> View Details</span>
+                    <span class="project-link locked"><i class="fas fa-lock"></i> Private repo</span>
+                </div>
+            </div>
+        </div>
+
         <div class="project-card" data-project="echo">
             <div class="project-card-banner" style="background: none; position: relative; overflow: hidden;">
                 <img src="images/EchoCodeBattle.png" alt="Echo Code Battle" style="width:100%;height:100%;object-fit:cover;">
@@ -445,6 +463,24 @@ const PROJECTS = {
         tags: ['Python', 'FastAPI', 'Claude API', 'OpenAI', 'Azure OpenAI', 'pytest', 'GitHub Actions', 'Docker', 'Vision', 'LLM Eval'],
         banner: { type: 'gradient', style: 'linear-gradient(135deg, #0f2027, #203a43, #2c5364)', emoji: '🤖' },
     },
+    tally: {
+        eyebrow: 'Swift · SwiftUI · SwiftData · iOS',
+        title: 'Tally',
+        desc: 'A fully native iOS app built around two lists: everything you owe (credit cards, rent, the car, loans, subscriptions, money owed to a person) and everything you earn (a paycheck on a schedule, or gig work logged day by day). A Food mode tracks calories and macros alongside it, and Tally AI lets you chat with Claude about what you\'ve actually logged. No third-party dependencies, and everything stays on the device apart from the one clearly disclosed AI feature.',
+        features: [
+            'One model for everything you owe: a credit card, rent, and "the $300 I owe a friend" are all obligations with due dates, so they share one list, one reminder rule, and one mark-as-paid flow',
+            'Reminders that don\'t let go: a local notification 3 days before, then one every day through the due date and past it until you mark it paid, with Mark as Paid available right from the notification',
+            'Income your way: one-tap daily logging for gig work (a day you don\'t log counts as $0), scheduled paychecks that roll to the next payday, and one-off extra income. A week logged as one lump is prorated across its days for totals but listed once',
+            'Food mode: calorie ring, protein bar, optional carbs and fat, and trends over any span, with averages taken only over days you actually logged and the macro split computed by energy (4/4/9) rather than weight',
+            'Insights and Calendar: categories ranked over a chosen span (7 days through all time), a month grid of dues, income, and payments with projected future due dates, and totals asserted to match lifetime figures with no item counted twice',
+            'Tally AI: streams the Anthropic Messages API over raw HTTPS (there is no Swift SDK), with prompt caching on a data brief rebuilt from live records on every send, so an old conversation never answers from stale numbers',
+            'Photo input (downscaled to 1568px, with only the six most recent re-sent per request), a `remember` tool backed by a Memory screen you can read, edit, and delete, and a streaming-safe Markdown renderer for headings, lists, code, and tables',
+            'API key in the Keychain (this-device-only, so it never rides along in a backup), with Claude Opus 5 by default and Sonnet 5 / Haiku 4.5 as cheaper options',
+            'SwiftData persistence with CloudKit sync wired up, Face ID / Touch ID app lock, CSV export, and multi-currency support',
+        ],
+        tags: ['Swift', 'SwiftUI', 'SwiftData', 'CloudKit', 'Swift Charts', 'Claude API', 'Keychain', 'iOS'],
+        banner: { type: 'gradient', style: 'linear-gradient(135deg, #4f46e5, #9333ea, #10b981)', emoji: '💸' },
+    },
     echo: {
         eyebrow: 'Node.js · Socket.io · Real-time',
         title: 'Echo Code Battle',
@@ -470,11 +506,12 @@ const PROJECTS = {
             'Four leagues, each with its own scraper, feature builder, and model family — soccer (World Cup 2026 + Premier League), NBA, MLB, and NFL',
             'Soccer: a Dixon-Coles + Elo scoreline model with a player-driven squad bridge — every player is rated on real club form, the current squad (or the actual starting XI) aggregates into attack/defense at roughly 45% weight, and injured players drop out',
             'A 20,000-run Monte-Carlo walks the full 48-team World Cup bracket to read off each nation\'s odds of reaching every round and lifting the trophy. The group stage is vectorised across all sims in numpy; knockout probabilities are cached per ordered team pair so each Dixon-Coles matrix is built once, not once per sim',
-            'NFL modelled from first principles rather than ported from MLB: 272 games a season means training across 5+ seasons, form windows measured in weeks, and QB availability treated as a gating feature — a starting quarterback moves the line 3+ points. Player position is derived from actual usage, not a depth chart',
+            'NFL modelled from first principles rather than ported from MLB: 272 games a season means training across 5+ seasons, form windows measured in weeks, and QB availability treated as a gating feature — a starting quarterback moves the line 3+ points. Player position is derived from actual usage, not a depth chart. Live for the 2026 season with game picks and a player-prop board, gated so a player needs to be active now and have enough history overall, with a minimum-usage filter that keeps near-zero lines (and the false certainty they produce) off the board',
             'XGBoost across every league — winner / total / margin per league, plus player props (NBA points·assists·rebounds, MLB pitcher K·ER·H·BB·IP, NFL pass yards·pass TDs·rush yards·receptions·rec yards, soccer goals·assists·shots·cards). Live accuracy: NBA winner 72.2%, NBA total MAE 15.5, MLB total MAE 3.33',
             'Leakage-free training throughout — every prediction uses only games strictly before the target (`games.date < g.date`, `.shift(1)` on all rolling features), evaluated on a chronological 80/20 holdout with no random splits, then refit on the full set',
             'Daily picks engine pulls live spreads, totals, and moneylines from The Odds API, discards games already underway (the API silently swaps live games to in-game totals, which would poison the edge math), joins each with the freshly refreshed XGB total, applies per-league bias adjustment, and tiers confidence against each model\'s MAE',
             'The picks grade themselves — every pick is snapshotted into odds_history, then matched to the final box score for WIN / LOSS / PUSH (doubleheaders disambiguated by closest commence time), rolling up into all-time / 30-day / 7-day summaries by league and by tier',
+            'A logistic-regression meta-model sits on top of the board: trained on the picks\' own graded results with a chronological split, it estimates the chance each pick actually wins, and it deploys only if it beats simply trusting the strong / moderate / weak tiers. The MLB filter retrains as new grades arrive and holds 59.4% on holdout against a 56.3% strong-tier baseline',
             'Split compute by design: the laptop owns raw data and heavy ML, pushing ~1,800 gzipped payloads to Supabase; Fly\'s 512 MB box only serves and scrapes twice daily, so hot endpoints read precomputed JSON in milliseconds instead of recomputing',
             'The XGB spread chip is derived from the win probability by inverse-logistic conversion rather than from the trained margin regressor — the two models train independently and could otherwise contradict each other on screen ("62.7% to win, but favored by −1.9")',
             'Native iOS app (SwiftUI) — Home feed, Picks, Predict, Players, and Form tabs plus a side menu, with deep links from the home feed straight into the matching picks sub-tab',
